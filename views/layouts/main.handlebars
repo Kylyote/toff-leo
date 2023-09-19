@@ -13,6 +13,22 @@
     <title>Toff-leo</title>
   </head>
   <body>
+    <nav>
+      <div id="left-nav-links">
+        <h2><a href="/">Lobby</a></h2>
+        <h2><a href="/my-games">My Games</a></h2>
+        <h2><a href="/my-stats">My Stats</a></h2>
+      </div>
+      {{#if loggedId}}
+        <h2 id="login-out">Logout</h2>
+      {{else}}
+        <h2 id="login-out"><a href="/login">Login</a></h2>
+      {{/if}}
+      <h3></h3>
+    </nav>
     {{{body}}}
+    {{#if loggedId}}
+      <script src="/js/logout.js"></script>
+    {{/if}}
   </body>
 </html>

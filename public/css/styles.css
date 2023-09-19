@@ -151,10 +151,38 @@ i {
 }
 body {
   background-color: var(--neutral-200);
-  padding: 32px;
   margin: 0;
   height: 100%;
   width: 100%;
 }
 
 /* End design system style guide */
+
+nav {
+  background-color: var(--success-700);
+  height: 56px;
+  padding: 12px 32px;
+  display: flex;
+
+  & a {
+    text-decoration: none;
+    color: var(--neutral-100);
+
+    &:hover {
+      color: var(--success-100);
+    }
+  }
+
+  & #left-nav-links {
+    display: flex;
+
+    & h2 {
+      margin-right: 24px;
+      text-decoration: none;
+    }
+  }
+
+  & #login-out {
+    margin-left: auto;
+  }
+}
