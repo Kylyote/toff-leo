@@ -1,0 +1,247 @@
+/* 
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(13, minmax(0, 1fr));
+  grid-template-rows: repeat(13, minmax(0, 1fr));
+  border: 1px solid #000;
+  width: 600px; /* Adjust the width as needed 
+  height: 600px;  Adjust the height as needed 
+
+
+.game-square {
+  background-color: #fff;
+  border-style: solid;
+  position: relative;
+  display: flex;
+  align-items: center; 
+}
+
+.corner {
+
+  position: relative;
+}
+
+.corner::before,
+.corner::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background-color: #000;
+}
+
+.corner::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.corner::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.attackerSquare {
+
+  position: relative;
+}
+
+.attackerSquare::before,
+.attackerSquare::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background-color: #ff0000;
+}
+
+.attackerSquare::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.attackerSquare::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.jarlSquare {
+
+  position: relative;
+}
+
+.jarlSquare::before,
+.jarlSquare::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background-color: #001bcb;
+}
+
+.jarlSquare::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.jarlSquare::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+} */
+html, body {
+  height: 100%;
+
+}
+
+.tableHolder {
+  border: 20px solid rgb(123, 68, 32);
+  height: 80vw;
+  width: 80vw;
+  max-width: 1000px;
+  max-height: 1000px;
+  overflow: auto;
+  text-align: center;
+  position: absolute;
+ 
+  left: 50%;
+  transform: translate(-50%, 60px);
+}
+
+table {
+  border-spacing: 0;
+  border: 5px solid rgb(0, 0, 0);
+  width: 100%;
+  height: 100%;
+  table-layout: fixed
+}
+
+td {
+  position: relative;
+  background-color: rgb(189, 154, 90);
+  width: 4%;
+  height: 4%;
+  max-width: 100%;
+  max-height: 100%;
+  text-align: center;
+  border: 3px solid black;
+}
+.winSquare{
+  background-color: rgb(168, 109, 38);
+}
+
+.beserkerSquare{
+    position: relative;
+  align-items: center;
+  justify-content: center;
+    
+  }
+
+  .beserkerSquare::before,
+  .beserkerSquare::after {
+    content: "";
+    position: absolute;
+    width: 130%;
+    height: 2px;
+    background-color: black;
+  }
+
+  .beserkerSquare::before {
+    transform: translateX(-50%) rotate(45deg)
+  }
+
+  .beserkerSquare::after {
+    transform: translateX(-50%) rotate(-45deg);
+  }
+
+  .jarlsSquare{
+    background-color: #ff8000;
+  }
+  .guardSquare {
+    position: relative;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .guardSquare::before,
+  .guardSquare::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: black;
+  }
+  
+  .guardSquare::before {
+    transform: translateX(-50%) rotate(90deg);
+
+  }
+  
+  .guardSquare::after {
+    transform: translateX(-50%) 
+
+  }
+
+  .guard{
+    width: 60%;
+    height: 60%;
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgb(169, 124, 227);
+    border: 4px solid black;
+    left: 16%;
+    top: 18%;
+    z-index: 1;
+  }
+
+  .beserker{
+    width: 60%;
+    height: 60%;
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgb(196, 57, 50);
+    border: 4px solid rgb(0, 0, 0);
+    left: 16%;
+    top: 18%;
+    z-index: 1;
+  }
+
+  .jarl{
+    width: 60%;
+    height: 60%;
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgb(152, 0, 223);
+    border: 4px solid black;
+    left: 16%;
+    top: 18%;
+    z-index: 1;
+  }
+  
+
+  .howTheTurnTables{
+    position: absolute;
+    margin-top: 35px;
+    left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: xx-large;
+  }
+    .attackersTurn{
+  color: grey;
+    }
+    .guardsTurn{
+   color: grey;
+  }
+  #divider{
+  margin: 10px;
+  }
+    
+  
+
+.highlight{
+  background-color: #b93ad5;
+}
+.highlightMove{
+  background-color: #8cff3f;
+}
