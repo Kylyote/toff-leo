@@ -21,9 +21,22 @@ User.init(
         password: {
             type:DataTypes.STRING,
             allowNull: false,
+            //passwords must be 6 chars long
             validate: {
                 len: [6]
             }
+        },
+        win: {
+            type: DataTypes.INTEGER,
+            allowNull: false, 
+            //new players have zero wins
+            defaultValue: 0
+        },
+        loss: {
+            type: DataTypes.INTEGER,
+            allowNull: false, 
+            //new players have zero losses
+            defaultValue: 0
         }
     },
     {
