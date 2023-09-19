@@ -5,9 +5,12 @@ class UserGameRole extends Model {};
 
 UserGameRole.init(
     {
-        role: {
-            type: DataTypes.STRING,
-            allowNull: false
+        role_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'role',
+                key:'id'
+            }
         },
         user_id: {
             type: DataTypes.INTEGER,
@@ -19,7 +22,7 @@ UserGameRole.init(
         game_id: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'user',
+                model: 'game',
                 key: 'id'
             }
         }
