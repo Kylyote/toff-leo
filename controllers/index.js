@@ -1,5 +1,9 @@
 const router = require("express").Router();
+const apiRoutes = require("./api");
 
+router.use("/api", apiRoutes); //extends routes into api folder.
+
+// for rendering lobby on page load
 router.get("/", async (req, res) => {
   //
   // will fetch all active games
