@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Board extends Model {};
+class Game extends Model {};
 
 //initial board game state
 const initialBoardState = {
@@ -18,7 +18,7 @@ const initialBoardState = {
     k: [ null, null, null,  19,   20,   21,   22,   23, null, null,  null]
 }
 
-Board.init ({
+Game.init ({
     id:{
         type:DataTypes.INTEGER,
         allowNull: false,
