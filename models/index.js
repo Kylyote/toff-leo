@@ -4,7 +4,7 @@ const Role = require('./Role');
 const UserGameRole = require('./UserGameRole');
 
 //a single user can have many roles in many games 
-User.belongsTo(Game, {through: UserGameRole, foreignKey: 'user_id'});
+User.belongsToMany(Game, {through: UserGameRole, foreignKey: 'user_id'});
 
 //a game can have many users with various roles 
 Game.belongsToMany(User, {through: UserGameRole, foreignKey: 'game_id'});

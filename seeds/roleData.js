@@ -1,9 +1,9 @@
 const { Role } = require('../models');
 
 const roleData = [
-    { name: 'Attacker' },
-    { name: 'Defender' },
-    { name: 'Observer' }
+    { role_name: 'Attacker' },
+    { role_name: 'Defender' },
+    { role_name: 'Observer' }
 ];
 
 const seedRoles = () => Role.bulkCreate(roleData);

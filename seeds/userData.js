@@ -13,6 +13,7 @@ const userData = [
     { username: 'Olaf', password: 'olaf123', win: 6, loss: 4 },
 ];
 
-const seedUsers = () => User.bulkCreate(userData);
+//individual hooks = true will hash the seeded passwords
+const seedUsers = () => User.bulkCreate(userData, {individualHooks: true});
 
 module.exports = seedUsers;
