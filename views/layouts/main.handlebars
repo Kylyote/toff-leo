@@ -1,0 +1,34 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik&family=Skranji&display=swap"
+      rel="stylesheet"
+    />
+    <title>Toff-leo</title>
+  </head>
+  <body>
+    <nav>
+      <div id="left-nav-links">
+        <h2><a href="/">Lobby</a></h2>
+        <h2><a href="/my-games">My Games</a></h2>
+        <h2><a href="/my-stats">My Stats</a></h2>
+      </div>
+      {{#if loggedId}}
+        <h2 id="login-out">Logout</h2>
+      {{else}}
+        <h2 id="login-out"><a href="/login">Login</a></h2>
+      {{/if}}
+      <h3></h3>
+    </nav>
+    {{{body}}}
+    {{#if loggedId}}
+      <script src="/js/logout.js"></script>
+    {{/if}}
+  </body>
+</html>
