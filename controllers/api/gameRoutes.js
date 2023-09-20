@@ -4,7 +4,10 @@ const { Game, User, Role, UserGameRole } = require("../../models");
 router.get("/", async (req, res) => {
   try {
     const getAllGames = await Game.findAll({
-      include: [{ model: User }], // this should be getting the users associated with the game throught the attacker_id and defender_id.  Need to look at the model
+      include: [
+        { model: User, as: "Attacker" },
+        { model: User, as: "Defender" },
+      ],
     });
 
     res.status(200).json(getAllGames);
@@ -17,7 +20,10 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const getGameById = await Game.findByPk(req.params.id, {
-      include: [{ model: User }], // this should be getting the users associated with the game throught the attacker_id and defender_id.  Need to look at the model
+      include: [
+        { model: User, as: "Attacker" },
+        { model: User, as: "Defender" },
+      ],
     });
 
     res.status(200).json(getGameById);
