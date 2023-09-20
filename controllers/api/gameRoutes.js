@@ -1,6 +1,7 @@
 const router = require("express").Router();
-const { Game, User, Role, UserGameRole } = require("../../models");
+const { Game, User } = require("../../models");
 
+// get all games
 router.get("/", async (req, res) => {
   try {
     const getAllGames = await Game.findAll({
@@ -17,6 +18,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// get game by id
 router.get("/:id", async (req, res) => {
   try {
     const getGameById = await Game.findByPk(req.params.id, {

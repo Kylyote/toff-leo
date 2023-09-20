@@ -5,17 +5,6 @@ const sequelize = require("../config/connection");
 class User extends Model {
   //LOGIN: add check password logic with the bcrypt compareSync here...
   checkPassword(loginPW) {
-    // let unEncrypt = bcrypt.compareSync(loginPW, this.password);
-
-    // if (unEncrypt) {
-    //   return true;
-    // } else {
-    //   if (loginPW === this.password) {
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // }
     return bcrypt.compareSync(loginPW, this.password);
   }
 }
