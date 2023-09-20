@@ -58,13 +58,13 @@ router.post("/login", async (req, res) => {
 });
 
 // LOG OUT
-router.post("/logout", withAuth, async (req, res) => {
+router.post("/logout", async (req, res) => {
   req.session.destroy(() => {
     res.status(204).end();
   });
 });
 
-// Create Account
+// CREATE GAME
 router.post("/", async (req, res) => {
   try {
     // creates new user

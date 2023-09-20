@@ -1,0 +1,15 @@
+<div id="page-body">
+  {{> game-list}} <!-- pending build this will render the list on the left of active games.  To also be used for my games --> 
+  <div id="root-div">
+    <div id="root-header">
+      <h2>Lobby</h2>
+      {{#if loggedIn}}
+      <button id="create-game-btn">Start New Game</button>
+      {{/if}}
+    </div>
+  </div>
+</div>
+{{#if loggedIn}}
+{{> create-game-modal}}
+  <script src="/js/createGame.js"></script>
+{{/if}}
