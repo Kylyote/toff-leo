@@ -1,57 +1,77 @@
-const { Model, DataTypes } = require('sequelize');
-const bcrypt = require ('bcrypt');
-const sequelize = require('../config/connection');
+const { Model, DataTypes } = require("sequelize");
+const bcrypt = require("bcrypt");
+const sequelize = require("../config/connection");
 
 class User extends Model {
-    //LOGIN: add check password logic with the bcrypt compareSync here...
+  //LOGIN: add check password logic with the bcrypt compareSync here...
+  checkPassword(loginPW) {
+    // let unEncrypt = bcrypt.compareSync(loginPW, this.password);
+
+    // if (unEncrypt) {
+    //   return true;
+    // } else {
+    //   if (loginPW === this.password) {
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+    // }
+    return bcrypt.compareSync(loginPW, this.password);
+  }
 }
 
 User.init(
-    {
-        id:{
-            type:DataTypes.INTEGER,
-            allowNull: false,
-            primaryKey: true,
-            autoIncrement: true
-        },
-        username:{
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        password: {
-            type:DataTypes.STRING,
-            allowNull: false,
-            //passwords must be 6 chars long
-            validate: {
-                len: [6]
-            }
-        },
-        win: {
-            type: DataTypes.INTEGER,
-            allowNull: false, 
-            //new players have zero wins
-            defaultValue: 0
-        },
-        loss: {
-            type: DataTypes.INTEGER,
-            allowNull: false, 
-            //new players have zero losses
-            defaultValue: 0
-        }
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
     },
-    {
-        hooks: {
-            async beforeCreate(newUserData) {
-                //Password Hashing
-                newUserData.password = await bcrypt.hash(newUserData.password, 10);
-                return newUserData;
-            }
-        },
-        sequelize,
-        timestamps: false,
-        freezeTableName: true,
-        modelName: 'user'
-    }
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
+      validate: {
+        isEmail: true,
+      },
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      //passwords must be 6 chars long
+      validate: {
+        len: [6],
+      },
+    },
+    win: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      //new players have zero wins
+      defaultValue: 0,
+    },
+    loss: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      //new players have zero losses
+      defaultValue: 0,
+    },
+  },
+  {
+    hooks: {
+      async beforeCreate(newUserData) {
+        //Password Hashing
+        newUserData.password = await bcrypt.hash(newUserData.password, 10);
+        return newUserData;
+      },
+    },
+    sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    modelName: "user",
+  }
 );
 
 module.exports = User;
