@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { Op } = require("sequelize");
 const { Game, User } = require("../../models");
 
 // get all games
@@ -12,6 +13,24 @@ router.get("/", async (req, res) => {
     });
 
     res.status(200).json(getAllGames);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+});
+
+// get all active games
+router.get("/active", async (req, res) => {
+  try {
+    const getActiveGames = await Game.findAll({
+      where: { game_status: { [Op.in]: ["active", "pending"] } }, // will get all games that have a status of pending or active
+    });
+
+    const activeGames = await getActiveGames.map((game) =>
+      game.get({ plain: true })
+    );
+
+    res.status(200).json(activeGames);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
