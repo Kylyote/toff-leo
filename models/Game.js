@@ -33,7 +33,7 @@ Game.init(
       allowNull: false,
       defaultValue: initialBoardState,
     },
-    attackerTurn: {
+    attacker_turn: {
       type: DataTypes.BOOLEAN,
       defaultValue: true, // switch for whomevers turn it is.
     },
@@ -44,7 +44,7 @@ Game.init(
     end_date: {
       type: DataTypes.DATE,
     },
-    gameStatus: {
+    game_status: {
       type: DataTypes.ENUM(
         "active",
         "attackerWon",
