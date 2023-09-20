@@ -23,7 +23,11 @@ router.get("/", async (req, res) => {
 router.get("/active", async (req, res) => {
   try {
     const getActiveGames = await Game.findAll({
-      where: { game_status: { [Op.in]: ["active", "pending"] } }, // will get all games that have a status of pending or active
+      where: { game_status: { [Op.in]: ["active", "pending"] } },
+      include: [
+        { model: User, as: "Attacker" },
+        { model: User, as: "Defender" },
+      ], // will get all games that have a status of pending or active
     });
 
     const activeGames = await getActiveGames.map((game) =>

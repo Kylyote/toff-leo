@@ -1,3 +1,3 @@
-<div id="game-list">
-  <h2 style="color: red">This will be the game list</h2>
-</div>
+{{#each activeGames as |game|}}
+{{> game-list-item}}
+{{/each}}
