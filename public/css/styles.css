@@ -206,6 +206,12 @@ nav {
 
   & #login-out {
     margin-left: auto;
+    color: var(--neutral-100);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--success-100);
+    }
   }
 }
 

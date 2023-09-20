@@ -9,14 +9,15 @@ const createGame = async (event) => {
   const chosenRole =
     event.target.id == "attacker-btn" ? "attacker" : "defender";
 
-  const createNewGame = await fetch("/api/games/new-game", {
+  const createNewGame = await fetch("/api/games/create", {
     method: "POST",
     body: JSON.stringify({ chosenRole }),
     headers: { "Content-Type": "application/json" },
   });
 
   if (createNewGame.ok) {
-    console.log(createNewGame);
+    const thisNewGame = await createNewGame.json();
+    console.log(thisNewGame);
   } else {
     alert(createNewGame.statusText);
   }
@@ -32,4 +33,5 @@ const closeModal = () => {
 
 createGameBtn.addEventListener("click", openModal);
 attackerBtn.addEventListener("click", createGame);
+defenderBtn.addEventListener("click", createGame);
 cancelBtn.addEventListener("click", closeModal);

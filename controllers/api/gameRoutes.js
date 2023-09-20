@@ -35,4 +35,21 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// create new game
+router.post("/create", async (req, res) => {
+  try {
+    const createNewGame = await Game.create({
+      attacker_id:
+        req.body.chosenRole == "attacker" ? req.session.userId : null,
+      defender_id:
+        req.body.chosenRole == "defender" ? req.session.userId : null,
+    });
+
+    res.status(200).json(createNewGame);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+});
+
 module.exports = router;

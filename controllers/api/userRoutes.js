@@ -58,7 +58,8 @@ router.post("/login", async (req, res) => {
 });
 
 // LOG OUT
-router.post("/logout", withAuth, async (req, res) => {
+router.post("/logout", async (req, res) => {
+  console.log("test");
   req.session.destroy(() => {
     res.status(204).end();
   });

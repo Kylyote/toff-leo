@@ -23,13 +23,13 @@
         {{/if}}
       </div>
       {{#if loggedIn}}
-        <h2 id="login-out"><a href="/login">Logout</a></h2>
+        <h2 id="login-out">Logout</h2>
       {{else}}
         <h2 id="login-out"><a href="/login">Login</a></h2>
       {{/if}}
     </nav>
     {{{body}}}
-    {{#if loggedId}}
+    {{#if loggedIn}}
       <script src="/js/logout.js"></script>
     {{/if}}
     <script
