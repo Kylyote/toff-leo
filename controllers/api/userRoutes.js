@@ -59,13 +59,12 @@ router.post("/login", async (req, res) => {
 
 // LOG OUT
 router.post("/logout", async (req, res) => {
-  console.log("test");
   req.session.destroy(() => {
     res.status(204).end();
   });
 });
 
-// Create Account
+// CREATE GAME
 router.post("/", async (req, res) => {
   try {
     // creates new user
