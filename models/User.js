@@ -52,6 +52,18 @@ User.init(
       //new players have zero losses
       defaultValue: 0,
     },
+    draw: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      // new players have zero draws
+      defaultValue: 0,
+    },
+    games_played: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      // new players have zero games_played
+      defaultValue: 0,
+    },
   },
   {
     hooks: {

@@ -6,7 +6,12 @@ const withAuth = require("../../utils/auth");
 
 router.get("/", async (req, res) => {
   try {
-    const getAllUsers = await User.findAll({ include: [{ model: Game }] });
+    const getAllUsers = await User.findAll({
+      include: [
+        { model: Game, as: "Attacker" },
+        { model: Game, as: "Defender" },
+      ],
+    });
 
     res.status(200).json(getAllUsers);
   } catch (error) {

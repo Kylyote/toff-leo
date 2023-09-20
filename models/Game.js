@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require("sequelize");
+const { Sequelize, Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
 class Game extends Model {}
@@ -27,7 +27,6 @@ Game.init(
       primaryKey: true,
       autoIncrement: true,
     },
-
     board_state: {
       //store the board as json string
       type: DataTypes.JSON,
@@ -37,6 +36,13 @@ Game.init(
     attackerTurn: {
       type: DataTypes.BOOLEAN,
       defaultValue: true, // switch for whomevers turn it is.
+    },
+    start_date: {
+      type: DataTypes.DATE,
+      defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+    },
+    end_date: {
+      type: DataTypes.DATE,
     },
     gameStatus: {
       type: DataTypes.ENUM(
@@ -67,7 +73,6 @@ Game.init(
   },
   {
     sequelize,
-    timestamps: true,
     freezeTableName: true,
     modelName: "game",
   }
