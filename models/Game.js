@@ -46,13 +46,14 @@ Game.init(
     },
     game_status: {
       type: DataTypes.ENUM(
+        "pending",
         "active",
         "attackerWon",
         "defenderWon",
         "draw",
         "gameCancelled"
       ),
-      defaultValue: "active",
+      defaultValue: "pending",
     },
     //store the attacker
     attacker_id: {
