@@ -1,12 +1,12 @@
 const router = require("express").Router();
-const { User } = require("../../models");
+const { User, Game } = require("../../models");
 const withAuth = require("../../utils/auth");
 
 // GET ALL USERS = for testing
 
 router.get("/", async (req, res) => {
   try {
-    const getAllUsers = await User.findAll();
+    const getAllUsers = await User.findAll({ include: [{ model: Game }] });
 
     res.status(200).json(getAllUsers);
   } catch (error) {
