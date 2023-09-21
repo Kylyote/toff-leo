@@ -487,4 +487,15 @@ nav {
       }
     }
   }
+
+  & #my-games-greeting {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+
+    & h2 {
+      color: var(--neutral-600);
+    }
+  }
 }

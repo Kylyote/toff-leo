@@ -4,6 +4,8 @@ const gameItem = document.querySelectorAll(".game-list-item-view-btn"); // Check
 if (gameItem.length > 0) {
   gameItem.forEach((element) => {
     element.addEventListener("click", async (event) => {
+      document.getElementById("gamerender").style.display = "block";
+      document.getElementById("my-games-greeting").style.display = "none";
       const thisGameId = event.target.id;
 
       const getThisGame = await fetch(`/api/games/${thisGameId}`, {
