@@ -14,6 +14,13 @@ router.get("/", async (req, res) => {
     });
 
     res.status(200).json(getAllUsers);
+  } catch (error) {}
+});
+
+router.get("/username", async (req, res) => {
+  try {
+    const getThisUser = await User.findByPk(req.session.userId);
+    res.status(200).json(getThisUser);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
