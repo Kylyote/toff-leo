@@ -1,13 +1,13 @@
-import {board, gameBoard} from './board.js';
+
 //this will be outcome parameters that will iterate over ech of the peices 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const getAColumn = (arrayName, gameBoard, number) => {
+const getAColumn = (arrayName, board, number) => {
   
     arrayName = []; // Declare an empty array
 // Iterate over the keys of the game board and get the column values
-   for (const key in gameBoard) {
-       const value = gameBoard[key][number];
+   for (const key in board) {
+       const value = board[key][number];
        arrayName.push(value); // Push the value to the array
    }
 return arrayName
@@ -17,30 +17,30 @@ return arrayName
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const  runOutcomeConditions = (currentPlayer, gameBoard, pieceId) => {
-    const isTheKingHome = findPiecePosition(gameBoard, 36);
-    const aArray = gameBoard.a.slice();
+const  runOutcomeConditions = (currentPlayer, board, pieceId) => {
+    const isTheKingHome = findPiecePosition(board, 36);
+    const aArray = board.a.slice();
     // Replacing the first item with 100
   aArray.splice(0, 1, 100);
   
   // Replacing the last item with 100
   aArray.splice(aArray.length - 1, 1, 100);
   
-    const bArray = gameBoard.b.slice();
-    const cArray = gameBoard.c.slice();
-    const dArray = gameBoard.d.slice();
-    const eArray = gameBoard.e.slice();
-    const fArray = gameBoard.f.slice();
+    const bArray = board.b.slice();
+    const cArray = board.c.slice();
+    const dArray = board.d.slice();
+    const eArray = board.e.slice();
+    const fArray = board.f.slice();
 if (isTheKingHome.place != 'f5'){
     fArray.splice(5, 1, 100);
 }
 
-    const gArray = gameBoard.g.slice();
-    const hArray = gameBoard.h.slice();
-    const iArray = gameBoard.i.slice();
-    const jArray = gameBoard.j.slice();
+    const gArray = board.g.slice();
+    const hArray = board.h.slice();
+    const iArray = board.i.slice();
+    const jArray = board.j.slice();
   
-    const kArray = gameBoard.k.slice();
+    const kArray = board.k.slice();
       // Replacing the first item with 100
   kArray.splice(0, 1, 100);
   
@@ -49,28 +49,28 @@ if (isTheKingHome.place != 'f5'){
   
   
    console.log(aArray)
-   console.log(gameBoard.a)
-  const zero = getAColumn ("zeroArray", gameBoard, 0)
+   console.log(board.a)
+  const zero = getAColumn ("zeroArray", board, 0)
     // Replacing the first item with 100
     zero.splice(0, 1, 100);
   
     // Replacing the last item with 100
     zero.splice(zero.length - 1, 1, 100);
     
-  const one = getAColumn ("oneArray", gameBoard, 1)
-  const two = getAColumn ("twoArray", gameBoard, 2)
-  const three = getAColumn ("threeArray", gameBoard, 3)
-  const four = getAColumn ("fourArray", gameBoard, 4)
-  const five = getAColumn ("fiveArray", gameBoard, 5)
+  const one = getAColumn ("oneArray", board, 1)
+  const two = getAColumn ("twoArray", board, 2)
+  const three = getAColumn ("threeArray", board, 3)
+  const four = getAColumn ("fourArray", board, 4)
+  const five = getAColumn ("fiveArray", board, 5)
   if (isTheKingHome.place != 'f5'){
     five.splice(5, 1, 100);
 }
-  const six = getAColumn ("sixArray", gameBoard, 6)
-  const seven = getAColumn ("sevenArray", gameBoard, 7)
-  const eight = getAColumn ("eightArray", gameBoard, 8)
-  const nine = getAColumn ("nineArray", gameBoard, 9)
+  const six = getAColumn ("sixArray", board, 6)
+  const seven = getAColumn ("sevenArray", board, 7)
+  const eight = getAColumn ("eightArray", board, 8)
+  const nine = getAColumn ("nineArray", board, 9)
   
-  const ten = getAColumn ("tenArray", gameBoard, 10)
+  const ten = getAColumn ("tenArray", board, 10)
     // Replacing the first item with 100
     ten.splice(0, 1, 100);
   
@@ -143,7 +143,7 @@ if (isTheKingHome.place != 'f5'){
   console.log(numb);
   console.log(letter);
   
-  setToNull(gameBoard, letter, numb)
+  setToNull(board, letter, numb)
   
   });
   
@@ -177,7 +177,7 @@ if (isTheKingHome.place != 'f5'){
   };
   console.log(letter);
   console.log(numb);
-  setToNull(gameBoard, letter, numb)
+  setToNull(board, letter, numb)
   
   });
       
@@ -258,14 +258,14 @@ if (isTheKingHome.place != 'f5'){
   }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   
-  const runKingOutcomes = (currentPlayer, gameBoard, pieceId) => {
+  const runKingOutcomes = (currentPlayer, board, pieceId) => {
    
-const piece36Position = findPiecePosition(gameBoard, 36);
-    let kingRow = gameBoard[piece36Position.splitLetter].slice();
+const piece36Position = findPiecePosition(board, 36);
+    let kingRow = board[piece36Position.splitLetter].slice();
     const kingColumn = []; // Declare an empty array
       // Iterate over the keys of the game board and get the column values
-    for (const key in gameBoard) {
-        const value = gameBoard[key][piece36Position.splitNumb];
+    for (const key in board) {
+        const value = board[key][piece36Position.splitNumb];
         kingColumn.push(value); // Push the value to the array
     }
     console.log(`${piece36Position.place} is my row and column!!!!!!!!!!!!!!!!!!!!`)
@@ -357,7 +357,7 @@ let enemyCapture = false
           array[index + 1] != null && 
           array[index - 1] != null)
            {
-            colCapture = true
+            rowCapture = true
           }
             if (
               array[index - 1] == pieceId || 

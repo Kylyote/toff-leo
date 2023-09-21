@@ -127,7 +127,7 @@ function handleMyClick(event) {
   const element = event.target;
   const id = element.id;
   console.log(id);
-  handleClick(row, column, pieceId, id);
+  handleClick(board, row, column, pieceId, id);
 }
  let i = 0;
    // Add the 'highlight' class to the available spaces in the column
