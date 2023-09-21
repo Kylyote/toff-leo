@@ -76,7 +76,7 @@ router.post("/create", async (req, res) => {
 });
 
 // join a game by id
-router.get("/join/:role/:gameId", async (req, res) => {
+router.put("/join/:role/:gameId", async (req, res) => {
   try {
     const getThisGame = await Game.findByPk(req.params.gameId);
 
@@ -100,7 +100,7 @@ router.get("/join/:role/:gameId", async (req, res) => {
 
     const updatedGame = await Game.findByPk(req.params.gameId);
 
-    res.status(500).json(updatedGame);
+    res.status(200).json(updatedGame);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
