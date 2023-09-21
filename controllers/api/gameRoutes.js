@@ -75,4 +75,36 @@ router.post("/create", async (req, res) => {
   }
 });
 
+// join a game by id
+router.get("/join/:role/:gameId", async (req, res) => {
+  try {
+    const getThisGame = await Game.findByPk(req.params.gameId);
+
+    await Game.update(
+      {
+        attacker_id:
+          req.params.role == "attacker"
+            ? req.session.userId
+            : getThisGame.attacker_id,
+        defender_id:
+          req.params.role == "defender"
+            ? req.session.userId
+            : getThisGame.defender_id,
+      },
+      {
+        where: {
+          id: req.params.gameId,
+        },
+      }
+    );
+
+    const updatedGame = await Game.findByPk(req.params.gameId);
+
+    res.status(500).json(updatedGame);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+});
+
 module.exports = router;
