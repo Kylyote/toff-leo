@@ -259,6 +259,7 @@ if (isTheKingHome.place != 'f5'){
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   
   const runKingOutcomes = (currentPlayer, gameBoard, pieceId) => {
+   
 const piece36Position = findPiecePosition(gameBoard, 36);
     let kingRow = gameBoard[piece36Position.splitLetter].slice();
     const kingColumn = []; // Declare an empty array
@@ -310,6 +311,8 @@ console.log(`i am the king row ${kingRow} and i am the king column ${kingColumn}
     piece36Position.place == "a10"|| 
     piece36Position.place == "k0"||
     piece36Position.place == "k10")
+              //THE KING HAS WON THE GAME
+
         console.log('win')
     }
     if (currentPlayer == "Attacker") { 
@@ -365,6 +368,8 @@ let enemyCapture = false
       });
       console.log(rowCapture, colCapture)
       if (colCapture && rowCapture && enemyCapture) {
+              //THE KING HAS LOST THE GAME
+
         console.log('all is really lost now');
     
 }
@@ -386,6 +391,8 @@ let enemyCapture = false
                 array[index - 1] == pieceId 
               )
             ) {
+              //THE KING HAS LOST THE GAME
+
               console.log(`all is lost`);
             }
           });
@@ -405,6 +412,7 @@ let enemyCapture = false
                 array[index - 1] == pieceId 
               )
             ) {
+              //THE KING HAS LOST THE GAME
               console.log(`all is lost`);
             }
           });
@@ -415,6 +423,7 @@ let enemyCapture = false
 }
 
   const findPiecePosition = (board, piece) => {
+    
     for (const key in board) {
       const row = board[key];
       const columnIndex = row.indexOf(piece);
@@ -423,6 +432,7 @@ let enemyCapture = false
       }
     }
     return null; // Piece not found in the board
+    
   };
   
 // Usage

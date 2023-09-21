@@ -9,12 +9,12 @@ import {runOutcomeConditions, runKingOutcomes} from './outcome.js';
 //adds functionallity to move click event listener
 const handleClick = (row, column, pieceId, id) => {
   // Access variables within this function's scope
-  console
-  console.log("Event triggered!");
-  console.log("current row: " + row);
-  console.log("Current column: " + column);
-  console.log("piece ID: " + pieceId);
-  console.log("new pos ID: " + id);
+  // console
+  // console.log("Event triggered!");
+  // console.log("current row: " + row);
+  // console.log("Current column: " + column);
+  // console.log("piece ID: " + pieceId);
+  // console.log("new pos ID: " + id);
   movePiece(row, column, pieceId, id);
 };
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -23,7 +23,7 @@ const movePiece = (row, column, pieceId, id) => {
   const oldTdElement = document.getElementById(row + column);
   const newTdElement = document.getElementById(id);
   const oldDefault = newTdElement.innerHTML
-  console.log(newTdElement.innerHTML)
+  // console.log(newTdElement.innerHTML)
   
   newTdElement.innerHTML = oldTdElement.innerHTML;
   oldTdElement.innerHTML = oldDefault;
@@ -33,8 +33,8 @@ const movePiece = (row, column, pieceId, id) => {
   const result = splitID(id);
   const letter = result.letterOfId;
   const numb = result.realNumberOfId;
-  console.log(letter); // Access the letterOfId property
-  console.log(numb); // Access the realNumberOfId property
+  // console.log(letter); // Access the letterOfId property
+  // console.log(numb); // Access the realNumberOfId property
   
       // Additional checks or game logic as needed
       
@@ -63,9 +63,7 @@ runOutcomeConditions(currentPlayer, gameBoard, pieceId)
 runKingOutcomes(currentPlayer, gameBoard, pieceId)
 
 //switch turns and move to next play
-        togglePlayerTurn()
-console.log(currentPlayer)
-
+togglePlayerTurn()
 whosTurnIsItAnyway(currentPlayer)
 };
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

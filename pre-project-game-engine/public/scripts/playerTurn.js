@@ -1,5 +1,6 @@
-import {board, gameBoard} from './board.js';
+import {gameBoard} from './board.js';
 import {handleClick} from './playerMove.js';
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  // Set the initial player to 'Attacker'
 let currentPlayer = 'Attacker';
@@ -51,15 +52,25 @@ const divsOfPiece = document.querySelectorAll(`.${pieceType}`);
       console.log(`whosTurnIsItAnyway function ran for ${pieceType}`);
       console.log("handling add listeners to peices")   
 divsOfPiece.forEach(div => {
-  
+  let clicks = 0
       // Add a click event listener to each div
       div.addEventListener('click', function() {
       // Remove the 'highlight' class from all divsOfPiece
+      clicks++ 
+      console.log("these are my clicks "+clicks)
+      if (clicks != 0){
+        console.log("i should be resetting the turn")
+        
+        const table = document.getElementById("table");
+        const clonedTable = table.cloneNode(true); // Clone the table and its descendants
+
+        table.parentNode.replaceChild(clonedTable, table)
+        handleInitialClick(pieceType) 
+      }
         divsOfPiece.forEach(div => {
         div.classList.remove('highlight');
       });
       // Add the 'highlight' class to the clicked div
-      div.classList.add('highlight');
 
       const pieceId = parseFloat(div.id);
       const parentId = div.parentNode.id;
@@ -85,7 +96,6 @@ console.log("I AM THE NUMBER OF THE PARENT ID theNumberOfId: " +theNumberOfId)
 // Function to log the rows with the same array position as the selected piece
 function logRowsWithSameArrayPosition(board, row, column, pieceId, parentId) {
   console.log("adding classes to available spaces" + " " + row + " " + column + " " + pieceId)
-
     // Get the current row from the game board
   let currentRow = board[row];
   const columnArray = []; // Declare an empty array
@@ -99,17 +109,17 @@ function logRowsWithSameArrayPosition(board, row, column, pieceId, parentId) {
     tds.forEach(td => {
     td.classList.remove('highlight');
   });
-
-
-  console.log( "this is the column array "+ columnArray);
-  console.log("this is the row array "+ currentRow)
+  const parentTD = document.querySelector(`#${parentId}`);
+  parentTD.classList.add('highlight')
+  // console.log( "this is the column array "+ columnArray);
+  // console.log("this is the row array "+ currentRow)
 
     // Convert the column array and row array to valid column and row arrays
   const convertedColumnArray = convertArray(columnArray, pieceId);
   const convertedRowArray = convertArray(currentRow, pieceId);
 
-  console.log("valid column " + convertedColumnArray)
-  console.log("valid row " + convertedRowArray)
+  // console.log("valid column " + convertedColumnArray)
+  // console.log("valid row " + convertedRowArray)
 
 console.log("im the parent id "+ parentId)
 
@@ -119,8 +129,6 @@ function handleMyClick(event) {
   console.log(id);
   handleClick(row, column, pieceId, id);
 }
-
-
  let i = 0;
    // Add the 'highlight' class to the available spaces in the column
 convertedColumnArray.forEach(() => {
@@ -157,7 +165,6 @@ i++;
   avail.addEventListener("click", handleMyClick);
 });
 
-
 i=0
   convertedRowArray.forEach(() => {
       const columnArrayId = row + convertedRowArray[i];
@@ -190,8 +197,8 @@ i=0
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //converts arrays to valid spaces only
 function convertArray(array, chosenID) {
-  console.log(array +" is being tested"); // Log the array being tested
-  console.log(chosenID +" is my piece"); // Log the chosenID
+  // console.log(array +" is being tested"); // Log the array being tested
+  // console.log(chosenID +" is my piece"); // Log the chosenID
   const indicesOfNull = []; // Create an array to store the indices of null values
   // Loop through the array to find indices of null values
   
@@ -201,9 +208,9 @@ for (let i = 0; i < array.length; i++) {
       indicesOfNull.push(i); // Push the index of null value to indicesOfNull array
     }
   }
-  console.log("i of null " + indicesOfNull); // Log the indices of null values
+  // console.log("i of null " + indicesOfNull); // Log the indices of null values
   let indexOfMyNumb = array.indexOf(chosenID); // Get the index of chosenID in the array
-  console.log("my piece is at "+ indexOfMyNumb); // Log the index of chosenID
+  // console.log("my piece is at "+ indexOfMyNumb); // Log the index of chosenID
   // Filter the indicesOfNull array to get the indices before and after indexOfMyNumb
   const beforeNullArray = indicesOfNull.filter((index) => index < array.indexOf(chosenID));
   const afterNullArray = indicesOfNull.filter((index) => index > array.indexOf(chosenID));
@@ -233,7 +240,7 @@ for (let i = 0; i < array.length; i++) {
     }
   });
 
-  console.log("Valid numbers:", validNumbers); // Log the valid numbers
+  // console.log("Valid numbers:", validNumbers); // Log the valid numbers
   return validNumbers; // Return the valid numbers
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
