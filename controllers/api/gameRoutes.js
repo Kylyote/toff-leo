@@ -108,4 +108,29 @@ router.put("/join/:role/:gameId", async (req, res) => {
   }
 });
 
+router.get("/my-games", async (req, res) => {
+  try {
+    const getMyGames = await Game.findAll({
+      where: {
+        [Op.and]: [
+          { game_status: { [Op.in]: ["active", "pending"] } },
+          { attacker_id: req.session.userId },
+          { defender_id: req.session.userId },
+        ],
+      },
+      include: [
+        { model: User, as: "Attacker" },
+        { model: User, as: "Defender" },
+      ],
+    });
+
+    const myGames = await getMyGames.map((game) => game.get({ plain: true }));
+
+    res.status(200).json(myGames);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+});
+
 module.exports = router;

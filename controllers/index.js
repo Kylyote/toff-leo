@@ -19,12 +19,10 @@ router.get("/", async (req, res) => {
       ], // will get all games that have a status of pending or active
     });
 
-    const activeGames = await getActiveGames.map((game) =>
-      game.get({ plain: true })
-    );
+    const games = await getActiveGames.map((game) => game.get({ plain: true }));
 
     res.render("lobby", {
-      activeGames,
+      games,
       loggedIn: req.session.loggedIn, // if user is logged in passed into handlebar
     });
   } catch (error) {
@@ -38,6 +36,31 @@ router.get("/", async (req, res) => {
 // renders log in form
 router.get("/login", async (req, res) => {
   res.render("login");
+});
+
+// renders my-games
+router.get("/my-games", async (req, res) => {
+  try {
+    const getMyGames = await Game.findAll({
+      where: {
+        [Op.or]: [
+          { attacker_id: req.session.userId },
+          { defender_id: req.session.userId },
+        ],
+      },
+      include: [
+        { model: User, as: "Attacker" },
+        { model: User, as: "Defender" },
+      ],
+    });
+
+    const games = await getMyGames.map((game) => game.get({ plain: true }));
+
+    res.render("my-games", { games, loggedIn: req.session.loggedIn });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
 });
 
 // was throwing error without the Router() middleware being passed into server.js

@@ -1,42 +1,44 @@
-const isNoAttacker = document.querySelectorAll(".join-as-attacker");
-const isNoDefender = document.querySelectorAll(".join-as-defender");
+const isAttacker = document.querySelectorAll(".join-as-attacker");
+const isDefender = document.querySelectorAll(".join-as-defender");
 
-if (isNoAttacker.length > 0) {
-  const joinAttackerBtn = document.querySelector(".join-as-attacker");
+if (isAttacker.length > 0) {
+  isAttacker.forEach((element) => {
+    element.addEventListener("click", async (event) => {
+      const thisGameId = event.target.id;
 
-  const joinAsAttacker = async (event) => {
-    const thisGameId = event.target.id;
+      const joinThisGame = await fetch(
+        `/api/games/join/attacker/${thisGameId}`,
+        {
+          method: "PUT",
+        }
+      );
 
-    const joinThisGame = await fetch(`/api/games/join/attacker/${thisGameId}`, {
-      method: "PUT",
+      if (joinThisGame.ok) {
+        document.location.replace("/my-games");
+      } else {
+        alert(`There was an error joining this game`);
+      }
     });
-
-    if (joinThisGame.ok) {
-      document.location.replace("/my-games");
-    } else {
-      alert(`There was an error joining this game`);
-    }
-  };
-
-  joinAttackerBtn.addEventListener("click", joinAsAttacker);
+  });
 }
 
-if (isNoDefender.length > 0) {
-  const joinDefenderBtn = document.querySelector(".join-as-defender");
+if (isDefender.length > 0) {
+  isDefender.forEach((element) => {
+    element.addEventListener("click", async (event) => {
+      const thisGameId = event.target.id;
 
-  const joinAsDefender = async (event) => {
-    const thisGameId = event.target.id;
+      const joinThisGame = await fetch(
+        `/api/games/join/defender/${thisGameId}`,
+        {
+          method: "PUT",
+        }
+      );
 
-    const joinThisGame = await fetch(`/api/games/join/defender/${thisGameId}`, {
-      method: "PUT",
+      if (joinThisGame.ok) {
+        document.location.replace("/my-games");
+      } else {
+        alert(`There was an error joining this game`);
+      }
     });
-
-    if (joinThisGame.ok) {
-      document.location.replace("/my-games");
-    } else {
-      alert(`There was an error joining this game`);
-    }
-  };
-
-  joinDefenderBtn.addEventListener("click", joinAsDefender);
+  });
 }

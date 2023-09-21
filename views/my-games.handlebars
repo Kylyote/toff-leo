@@ -1,15 +1,15 @@
 <div id="page-body">
-  <!-- pending build this will render the list on the left of active games.  To also be used for my games --> 
   {{> game-list}} 
   <div id="root-div">
     <div id="root-header">
       <h2>My Games</h2>
       <button id="create-game-btn">Start New Game</button>
     </div>
-    <div id="game-root">
-        
+    <div id="game-area">
+      {{> game-area}}
     </div>
   </div>
 </div>
 {{> create-game-modal}}
-  <script src="/js/game.js"></script>
+  <script src="/js/myGames.js"></script>
+    <script src="/js/createGame.js"></script>
