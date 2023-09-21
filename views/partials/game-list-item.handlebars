@@ -3,13 +3,17 @@
     {{#if Attacker}}
       <h4 class="game-list-item-attacker">{{Attacker.username}}</h4>
     {{else}}
-      <button class="mini-button join-as-attacker">Join Game</button>
+      <a class="join-as-attacker" href="/api/games/join/attacker/{{id}}"><button
+          class="mini-button"
+        >Join Game</button></a>
     {{/if}}
     <h4 class="vs">vs.</h4>
     {{#if Defender}}
       <h4 class="game-list-item-defender">{{Defender.username}}</h4>
     {{else}}
-      <button class="mini-button join-as-defender">Join Game</button>
+      <a class="join-as-defender" href="/api/games/join/defender/{{id}}"><button
+          class="mini-button"
+        >Join Game</button></a>
     {{/if}}
   </div>
   <p class="small-text start-date">Started on:
