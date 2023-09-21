@@ -21,6 +21,8 @@ const createGame = async (event) => {
   } else {
     alert(createNewGame.statusText);
   }
+
+  closeModal();
 };
 
 const openModal = () => {
