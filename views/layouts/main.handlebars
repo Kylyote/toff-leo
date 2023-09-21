@@ -17,6 +17,7 @@
     <nav>
       <div id="left-nav-links">
         <h2><a href="/">Lobby</a></h2>
+        <!-- Checks if user is logged in so they have access to their active games and stats -->
         {{#if loggedIn}}
           <h2><a href="/my-games">My Games</a></h2>
           <h2><a href="/my-stats">My Stats</a></h2>

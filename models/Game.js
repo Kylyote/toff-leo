@@ -3,7 +3,7 @@ const sequelize = require("../config/connection");
 
 class Game extends Model {}
 
-//initial board game state
+//initial board game state. This is the starting pattern for an 11x11 Hnefatafl game
 // prettier-ignore
 const initialBoardState = {
   a: [null, null, null, 0   , 1   , 2   , 3   , 4   , null, null, null],
@@ -19,6 +19,7 @@ const initialBoardState = {
   k: [null, null, null, 19  , 20  , 21  , 22  , 23  , null, null, null],
 };
 
+// DB model for the current game state, players in game, current turn. Is used to track current board state that will connect with socket.io to update gamestate for both players in real time without having to create a looping code that updates game once every second or so. 
 Game.init(
   {
     id: {
