@@ -290,12 +290,79 @@ nav {
 }
 
 /* GAME LIST PARTIAL */
-#game-list {
+#left-panel {
   width: 272px;
   background-color: var(--neutral-100);
   background-image: url("../images/texture.png");
   height: 100vh;
   box-shadow: var(--overlay-shadow);
+  overflow: scroll;
+
+  & #left-panel-header {
+    display: flex;
+    padding: 8px 16px;
+    border-bottom: 1px solid var(--neutral-300);
+
+    & h3 {
+      color: var(--danger-700);
+    }
+
+    & #left-panel-defender {
+      color: var(--secondary-700);
+      margin-left: auto;
+    }
+  }
+
+  & #game-list {
+    flex-direction: column;
+
+    & .game-list-item {
+      padding: 16px;
+      border-bottom: 1px solid var(--neutral-300);
+
+      & .combatants {
+        display: flex;
+        border-bottom: 1px solid var(--neutral-300);
+        padding-bottom: 8px;
+        margin-bottom: 8px;
+
+        & .join-as-attacker {
+          margin-right: auto;
+        }
+
+        & .join-as-defender {
+          margin-left: auto;
+        }
+
+        & .game-list-item-attacker {
+          margin-right: auto;
+        }
+
+        & .game-list-item-defender {
+          margin-left: auto;
+        }
+      }
+
+      & .start-date {
+        color: var(--neutral-600);
+      }
+
+      & .mini-button {
+        background-color: var(--primary-500);
+        font-family: var(--font-family-default);
+        font-weight: var(--font-weight-regular);
+        font-size: var(--font-small-text-size);
+        line-height: var(--font-small-text-line-height);
+        color: var(--neutral-100);
+        height: 16px;
+        padding: 1px 8px;
+
+        &:hover {
+          background-color: var(--primary-700);
+        }
+      }
+    }
+  }
 }
 
 /* LOBBY */
