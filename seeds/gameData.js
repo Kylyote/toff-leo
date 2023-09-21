@@ -28,8 +28,24 @@ const gameData = [
     defender_id: 2,
     game_status: "attackerWon",
   },
-  { board_state: initialBoardState, attacker_id: 3, defender_id: 4 },
-  { board_state: initialBoardState, attacker_id: 5, defender_id: 6 },
+  {
+    board_state: initialBoardState,
+    attacker_id: 3,
+    defender_id: 4,
+    game_status: "active",
+  },
+  {
+    board_state: initialBoardState,
+    attacker_id: 5,
+    defender_id: null,
+    game_status: "pending",
+  },
+  {
+    board_state: initialBoardState,
+    attacker_id: null,
+    defender_id: 6,
+    game_status: "pending",
+  },
 ];
 
 const seedGames = () => Game.bulkCreate(gameData);

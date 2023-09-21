@@ -1,1 +1,19 @@
-<p>{{Attacker.username}} vs. {{Defender.username}}</p>
+<div class="game-list-item">
+  <div class="combatants">
+    {{#if Attacker}}
+      <h4 class="game-list-item-attacker">{{Attacker.username}}</h4>
+    {{else}}
+      <button class="mini-button join-as-attacker">Join Game</button>
+    {{/if}}
+    <h4 class="vs">vs.</h4>
+    {{#if Defender}}
+      <h4 class="game-list-item-defender">{{Defender.username}}</h4>
+    {{else}}
+      <button class="mini-button join-as-defender">Join Game</button>
+    {{/if}}
+  </div>
+  <p class="small-text start-date">Started on:
+    {{format_date start_date}}
+    @
+    {{format_time start_date}}</p>
+</div>
