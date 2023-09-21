@@ -8,13 +8,13 @@ import {
 } from "./scripts/board.js";
 import { currentPlayer, whosTurnIsItAnyway } from "./scripts/playerTurn.js";
 
-// const container = document.getElementById("table");
+const container = document.getElementById("table");
 // // togglePlayerTurn()
 
 // // generates board and adds visual elements
 // //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-// container.innerHTML = generateBoard(gameBoard);
+container.innerHTML = generateBoard(gameBoard);
 
 addClassToCells(guardCell, "guardSquare");
 addClassToCells(jarlCell, "jarlsSquare");
@@ -29,5 +29,3 @@ if (playerTeam == currentPlayer) {
   console.log("waiting on opponent");
 }
 //then maybe an if not then have a banner display(or whatever) waiting on opponent
-
-module.exports = { generateBoard };

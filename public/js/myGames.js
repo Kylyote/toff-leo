@@ -1,5 +1,3 @@
-const { generateBoard } = require("../gameEngine/scripts/board.js");
-
 const gameItem = document.querySelectorAll(".game-list-item-view-btn"); // Checks dom to see if games are rendered in that game list
 
 // clicking to view a game will render it in the game area
@@ -14,6 +12,8 @@ if (gameItem.length > 0) {
       const getThisGame = await fetch(`/api/games/${thisGameId}`, {
         method: "GET",
       });
+
+      const thisGame = await getThisGame.json();
 
       if (getThisGame.ok) {
         // gets current user details to extract name for labels
@@ -65,11 +65,11 @@ if (gameItem.length > 0) {
         defenderName.textContent = defenderLabel;
 
         // renders the game board based on the state from the data base
-        const thisGame = await getThisGame.json();
+        // const thisGame = await getThisGame.json();
 
-        const container = document.getElementById("table");
+        // const container = document.getElementById("table");
 
-        container.innerHTML = generateBoard(thisGame.board_state);
+        // container.innerHTML = generateBoard(thisGame.board_state);
       } else {
         alert("there was an error getting this game");
       }
