@@ -295,8 +295,9 @@ nav {
   background-color: var(--neutral-100);
   background-image: url("../images/texture.png");
   height: 100vh;
+  overflow-x: scroll;
   box-shadow: var(--overlay-shadow);
-  overflow: scroll;
+  padding-right: 0;
 
   & #left-panel-header {
     display: flex;

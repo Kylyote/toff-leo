@@ -90,6 +90,7 @@ router.put("/join/:role/:gameId", async (req, res) => {
           req.params.role == "defender"
             ? req.session.userId
             : getThisGame.defender_id,
+        game_status: "active",
       },
       {
         where: {
