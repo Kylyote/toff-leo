@@ -71,6 +71,13 @@ const userData = [
     email: "olaf@asgard.com",
     loss: 4,
   },
+  {
+    username: "john",
+    password: "password",
+    win: 3,
+    email: "john@john.com",
+    loss: 3,
+  }
 ];
 
 //individual hooks = true will hash the seeded passwords
