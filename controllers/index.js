@@ -63,5 +63,26 @@ router.get("/my-games", async (req, res) => {
   }
 });
 
+router.get("/my-games/:id", async (req, res) => {
+  try {
+    const getMyGames = await Game.findOne({
+      where: {
+        id: req.params.id,
+      },
+      include: [
+        { model: User, as: "Attacker" },
+        { model: User, as: "Defender" },
+      ],
+    });
+
+    const game = await getMyGames.get({ plain: true });
+
+    res.render("game", { game, loggedIn: req.session.loggedIn });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+});
+
 // was throwing error without the Router() middleware being passed into server.js
 module.exports = router;

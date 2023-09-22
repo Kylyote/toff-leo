@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { Op } = require("sequelize");
 const { Game, User } = require("../../models");
+const { route } = require("./userRoutes");
 
 // get all games
 router.get("/", async (req, res) => {
@@ -108,6 +109,7 @@ router.put("/join/:role/:gameId", async (req, res) => {
   }
 });
 
+// gets all of my games
 router.get("/my-games", async (req, res) => {
   try {
     const getMyGames = await Game.findAll({
@@ -127,6 +129,29 @@ router.get("/my-games", async (req, res) => {
     const myGames = await getMyGames.map((game) => game.get({ plain: true }));
 
     res.status(200).json(myGames);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+});
+
+router.put("/turn/:id", async (req, res) => {
+  try {
+    const updateTurn = await Game.update(
+      {
+        board_state: req.body.board,
+        attacker_turn: req.body.turn,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+
+    const getThisUpdatedGame = await Game.findByPk(req.params.id);
+
+    res.status(200).json(getThisUpdatedGame);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);

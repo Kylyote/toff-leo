@@ -457,13 +457,14 @@ nav {
 
 /* MY GAMES */
 #game-area {
-  width: 640px;
-  margin-top: 80px;
+  width: 50vw;
+  height: 100%;
   margin-left: 50%;
   transform: translateX(-50%);
 
   & #combatants-header {
     display: flex;
+    margin-bottom: 24px;
 
     & h3 {
       margin-top: 6px;
