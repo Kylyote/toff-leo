@@ -96,4 +96,16 @@ router.post("/", async (req, res) => {
   }
 });
 
+// Get my session id
+router.get("/my-id", async (req, res) => {
+  try {
+    const myId = req.session.userId;
+
+    res.status(200).json(myId);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+});
+
 module.exports = router;

@@ -18,8 +18,8 @@ const initialBoardState = {
 const gameData = [
   {
     board_state: initialBoardState,
-    attacker_id: 1,
-    defender_id: 2,
+    attacker_id: 2,
+    defender_id: 1,
     game_status: "active",
   },
   {

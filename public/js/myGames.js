@@ -8,6 +8,7 @@ if (gameItem.length > 0) {
       document.getElementById("my-games-greeting").style.display = "none";
 
       const thisGameId = event.target.id;
+      console.log(thisGameId);
 
       const getThisGame = await fetch(`/api/games/${thisGameId}`, {
         method: "GET",
@@ -65,11 +66,7 @@ if (gameItem.length > 0) {
         defenderName.textContent = defenderLabel;
 
         // renders the game board based on the state from the data base
-        // const thisGame = await getThisGame.json();
 
-        // const container = document.getElementById("table");
-
-        // container.innerHTML = generateBoard(thisGame.board_state);
       } else {
         alert("there was an error getting this game");
       }
