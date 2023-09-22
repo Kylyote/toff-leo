@@ -40,29 +40,93 @@ const generateBoard = (board) => {
       const value = currentArray[i];
       let className = '';
       const cellId = `${key}${i}`; // Define the ID for each <td> element
+
       if (value === null && cellId != "a0" && cellId != "a10" && cellId != "k0" && cellId != "k10") {
         html += `<td id='${cellId}'></td>`; // Add the ID to the <td> element
+
       } else if (value === null && cellId == "a0" || cellId === "a10" || cellId === "k0" || cellId === "k10") {
         className = 'winSquare';
         html += `<td id='${cellId}' class='${className}'></td>`;
+
       } else if (value < 24) {
-        className = 'beserkerSquare';
-        html += `<td id='${cellId}' class='${className}'><div class='beserker' id='${value}'>${value}</div></td>`;
+        html += `<td id='${cellId}'><div class='beserker' id='${value}'></div></td>`;
+
       } else if (value > 23 && value < 36) {
-        className = 'guardSquare';
-        html += `<td id='${cellId}' class='${className}'><div class='guard' id='${value}'>${value}</div></td>`;
+        html += `<td id='${cellId}'><div class='guard' id='${value}'></div></td>`;
+        
       } else if (value === 36) {
-        className = 'jarlsSquare';
-        html += `<td id='${cellId}' class='${className}'><div class='jarl' id='${value}'>${value}</div></td>`;
+        html += `<td id='${cellId}'><div class='jarl' id='${value}'></div></td>`;
       }
+
     }
 
     html += '</tr>';
   }
 // console.log(html)
   return html;
+ 
 };
 
-export { board, gameBoard, generateBoard };
+
+const beserkerCell = {
+  cell1: 'a3',
+  cell2: 'a4',
+  cell3: 'a5',
+  cell4: 'a6',
+  cell5: 'a7',
+  cell6: 'b5',
+  cell7: 'd0',
+  cell8: 'd10',
+  cell9: 'e0',
+  cell10: 'e10',
+  cell11: 'f0',
+  cell12: 'f1',
+  cell13: 'f9',
+  cell14: 'f10',
+  cell15: 'g0',
+  cell16: 'g10',
+  cell17: 'h0',
+  cell18: 'h10',
+  cell19: 'j5',
+  cell20: 'k3',
+  cell21: 'k4',
+  cell22: 'k5',
+  cell23: 'k6',
+  cell24: 'k7',
+};
+
+const guardCell = {
+  cell1: 'd5',
+  cell2: 'e4',
+  cell3: 'e5',
+  cell4: 'e6',
+  cell5: 'f3',
+  cell6: 'f4',
+  cell7: 'f6',
+  cell8: 'f7',
+  cell9: 'g4',
+  cell10: 'g5',
+  cell11: 'g6',
+  cell12: 'h5',
+};
+
+const jarlCell = {
+  cell1 :'f5',
+};
+
+
+
+function addClassToCells(cellsToModify, className) {
+  // Iterate over the object keys using Object.keys()
+  Object.keys(cellsToModify).forEach((key) => {
+    // Get the specific value from the object
+    const value = cellsToModify[key];
+    const cell = document.getElementById(value);
+  
+    // Add the class to the <td> element
+    cell.classList.add(className);
+  });
+}
+export { board, gameBoard, generateBoard, addClassToCells, guardCell, jarlCell,beserkerCell };
 //if the found item is less than, than anything less thatn is discarded and same thing with greater than
 

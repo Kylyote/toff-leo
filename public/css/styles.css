@@ -295,8 +295,9 @@ nav {
   background-color: var(--neutral-100);
   background-image: url("../images/texture.png");
   height: 100vh;
+  overflow-x: scroll;
   box-shadow: var(--overlay-shadow);
-  overflow: scroll;
+  padding-right: 0;
 
   & #left-panel-header {
     display: flex;
@@ -359,6 +360,18 @@ nav {
 
         &:hover {
           background-color: var(--primary-700);
+        }
+      }
+
+      & .game-list-item-view-btn {
+        width: 100%;
+        background-color: var(--opacity-success);
+        color: var(--success-700);
+        margin-top: 8px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--success-100);
         }
       }
     }
@@ -438,6 +451,51 @@ nav {
       &:hover {
         background-color: var(--warning-300);
       }
+    }
+  }
+}
+
+/* MY GAMES */
+#game-area {
+  width: 640px;
+  margin-top: 80px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+
+  & #combatants-header {
+    display: flex;
+
+    & h3 {
+      margin-top: 6px;
+    }
+
+    & #combatants-header-attacker-div {
+      display: flex;
+      margin-right: auto;
+
+      & img {
+        margin-right: 8px;
+      }
+    }
+
+    & #combatants-header-defender-div {
+      display: flex;
+      margin-left: auto;
+
+      & h3 {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  & #my-games-greeting {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+
+    & h2 {
+      color: var(--neutral-600);
     }
   }
 }
