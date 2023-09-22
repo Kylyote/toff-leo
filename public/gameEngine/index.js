@@ -1,3 +1,17 @@
+//Socket.io 
+let socketServerUrl;
+
+//For Local Development 
+if (window.location.hostname === "localhost") {
+  socketServerUrl = "http://localhost:3001";
+} else {
+  //For Hosted URL ... 
+  socketServerUrl = window.location.origin;
+}
+
+const socket = io(socketServerUrl);
+
+
 import {
   gameBoard,
   generateBoard,
@@ -183,8 +197,12 @@ const renderGameArea = async () => {
   //////// updates combatants header ///////////
 };
 
-const refreshBtn = document.getElementById("refresh-btn");
-
-refreshBtn.addEventListener("click", renderGameArea);
+//Update from Socket
+socket.on('game-updated', (data) => {
+  renderGameArea();
+});
 
 export { renderGameArea };
+
+//Exporting Socket so it can be used elsewhere client side... 
+export {socket};
