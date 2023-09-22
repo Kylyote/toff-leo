@@ -6,7 +6,9 @@ if (gameItem.length > 0) {
     element.addEventListener("click", async (event) => {
       document.getElementById("gamerender").style.display = "block";
       document.getElementById("my-games-greeting").style.display = "none";
+
       const thisGameId = event.target.id;
+      console.log(thisGameId);
 
       const getThisGame = await fetch(`/api/games/${thisGameId}`, {
         method: "GET",
@@ -62,6 +64,9 @@ if (gameItem.length > 0) {
           ? whosTurnAttacker
           : whosTurnDefender;
         defenderName.textContent = defenderLabel;
+
+        // renders the game board based on the state from the data base
+
       } else {
         alert("there was an error getting this game");
       }

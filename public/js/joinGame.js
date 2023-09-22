@@ -7,7 +7,7 @@ if (isAttacker.length > 0) {
       const thisGameId = event.target.id;
 
       const joinThisGame = await fetch(
-        `/api/games/join/attacker/${thisGameId}`,
+        `/api/games/join/attacker/${thisGameId}/`,
         {
           method: "PUT",
         }
