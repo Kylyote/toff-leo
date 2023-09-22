@@ -1,6 +1,20 @@
 const isAttacker = document.querySelectorAll(".join-as-attacker");
 const isDefender = document.querySelectorAll(".join-as-defender");
 
+
+//Socket.io 
+let socketServerUrl;
+
+//For Local Development 
+if (window.location.hostname === "localhost") {
+  socketServerUrl = "http://localhost:3001";
+} else {
+  //For Hosted URL ... 
+  socketServerUrl = window.location.origin;
+}
+
+const socket = io(socketServerUrl);
+
 if (isAttacker.length > 0) {
   isAttacker.forEach((element) => {
     element.addEventListener("click", async (event) => {
@@ -14,6 +28,10 @@ if (isAttacker.length > 0) {
       );
 
       if (joinThisGame.ok) {
+          //Socket Emit  
+
+        socket.emit('game-updated', { gameId: thisGameId });
+  
         document.location.replace("/my-games");
       } else {
         alert(`There was an error joining this game`);
@@ -35,6 +53,7 @@ if (isDefender.length > 0) {
       );
 
       if (joinThisGame.ok) {
+        socket.emit('game-updated', { gameId: thisGameId });
         document.location.replace("/my-games");
       } else {
         alert(`There was an error joining this game`);
