@@ -1,4 +1,6 @@
 import { renderGameArea } from "../index.js";
+//Socket 
+import {socket} from "../index.js";
 
 import {
   togglePlayerTurn,
@@ -89,6 +91,13 @@ const movePiece = async (board, row, column, pieceId, id) => {
     body: JSON.stringify({ board, turn }),
     headers: { "Content-Type": "application/json" },
   });
+
+  //Socket Emit  
+  if (updateGame.ok) {
+    socket.emit('game-updated', { gameId: domId.id });
+  }
+
+  //-----------
 
   // console.log(updateGame);
 
