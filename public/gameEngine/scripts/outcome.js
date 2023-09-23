@@ -17,7 +17,7 @@ return arrayName
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const  runOutcomeConditions = (currentPlayer, board, pieceId) => {
+const  runOutcomeConditions = (board, pieceId) => {
     const isTheKingHome = findPiecePosition(board, 36);
     const aArray = board.a.slice();
     // Replacing the first item with 100
@@ -107,8 +107,8 @@ if (isTheKingHome.place != 'f5'){
   
     ]
     
-    const rowConditioned = checkEachThing(brokenRows, currentPlayer, pieceId);
-    const columnConditioned = checkEachThing(brokenColumns, currentPlayer, pieceId);
+    const rowConditioned = checkEachThing(brokenRows, pieceId);
+    const columnConditioned = checkEachThing(brokenColumns, pieceId);
     
     console.log(rowConditioned);
   
@@ -140,8 +140,8 @@ if (isTheKingHome.place != 'f5'){
     letter = 'k';
   };
   
-  console.log(numb);
-  console.log(letter);
+  // console.log(numb);
+  // console.log(letter);
   
   setToNull(board, letter, numb)
   
@@ -196,15 +196,14 @@ if (isTheKingHome.place != 'f5'){
   
   
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   const checkEachThing = (brokenRows, currentPlayer, pieceId) => {
+   const checkEachThing = (brokenRows, pieceId) => {
   
     const keyCondition = [];
   
-    console.log(currentPlayer)
     for (const key in brokenRows) {
       const array = brokenRows[key];
   
-     if (currentPlayer === "Defender") { 
+     if (pieceId > 23) { 
       for (let i = 0; i < array.length; i++) {
         if (
           array[i] < 24 && 
@@ -226,7 +225,7 @@ if (isTheKingHome.place != 'f5'){
       }
     }
   
-    if (currentPlayer === "Attacker") { 
+    if (pieceId <24) { 
       for (let i = 0; i < array.length; i++) {
         if (
           array[i] > 23 && 
@@ -258,7 +257,7 @@ if (isTheKingHome.place != 'f5'){
   }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   
-  const runKingOutcomes = (currentPlayer, board, pieceId) => {
+  const runKingOutcomes = (board, pieceId) => {
    
 const piece36Position = findPiecePosition(board, 36);
     let kingRow = board[piece36Position.splitLetter].slice();
@@ -304,7 +303,7 @@ if (kingRow[5] != 36){
 
 console.log(`i am the king row ${kingRow} and i am the king column ${kingColumn}`)
 
-    if (currentPlayer == "Defender") {
+    if (pieceId >23) {
   console.log(piece36Position.place)
   if (
     piece36Position.place == "a0"|| 
@@ -315,7 +314,7 @@ console.log(`i am the king row ${kingRow} and i am the king column ${kingColumn}
 
         console.log('win')
     }
-    if (currentPlayer == "Attacker") { 
+    if (pieceId < 24) { 
    console.log(piece36Position.place)
   if (
     piece36Position.place == "e5"|| 
