@@ -56,13 +56,13 @@ const generateBoard = (board) => {
         cellId === "k10"
       ) {
         className = "winSquare";
-        html += `<td id='${cellId}' class='${className}'></td>`;
+        html += `<td id='${cellId}' class='${className}'><img src="/images/board-cells/corner-cell.png"></td>`;
       } else if (value < 24) {
-        html += `<td id='${cellId}'><div class='beserker' id='${value}'></div></td>`;
+        html += `<td id='${cellId}'><img src="/images/berserker-piece.png" class='game-piece' id='${value}'></img></td>`;
       } else if (value > 23 && value < 36) {
-        html += `<td id='${cellId}'><div class='guard' id='${value}'></div></td>`;
+        html += `<td id='${cellId}'><img src="/images/guard-piece.png" class='game-piece' id='${value}'></img></td>`;
       } else if (value === 36) {
-        html += `<td id='${cellId}'><div class='jarl' id='${value}'></div></td>`;
+        html += `<td id='${cellId}'><img src="/images/jarl-piece.png" class='game-piece' id='${value}'></img></td>`;
       }
     }
 
