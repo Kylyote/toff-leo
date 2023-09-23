@@ -258,6 +258,8 @@ if (isTheKingHome.place != 'f5'){
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   
   const runKingOutcomes = (board, pieceId) => {
+    let defendersWon = false;
+let attackersWon = false;
    
 const piece36Position = findPiecePosition(board, 36);
     let kingRow = board[piece36Position.splitLetter].slice();
@@ -267,9 +269,7 @@ const piece36Position = findPiecePosition(board, 36);
         const value = board[key][piece36Position.splitNumb];
         kingColumn.push(value); // Push the value to the array
     }
-    console.log(`${piece36Position.place} is my row and column!!!!!!!!!!!!!!!!!!!!`)
-    console.log(`${kingColumn} is my column!!!!!!!!!!!!!!!!!!!!`)
-    console.log(`${kingRow} is my row!!!!!!!!!!!!!!!!!!!!`)
+  
 
 if(piece36Position.splitLetter == 'a' || piece36Position.splitLetter == 'k'){
     kingRow.splice(0, 1, 100);
@@ -301,17 +301,17 @@ if (kingRow[5] != 36){
   }
 
 
-console.log(`i am the king row ${kingRow} and i am the king column ${kingColumn}`)
+// console.log(`i am the king row ${kingRow} and i am the king column ${kingColumn}`)
 
     if (pieceId >23) {
-  console.log(piece36Position.place)
+  // console.log(piece36Position.place)
   if (
     piece36Position.place == "a0"|| 
     piece36Position.place == "a10"|| 
     piece36Position.place == "k0"||
     piece36Position.place == "k10")
               //THE KING HAS WON THE GAME
-
+              defendersWon = true
         console.log('win')
     }
     if (pieceId < 24) { 
@@ -368,8 +368,8 @@ let enemyCapture = false
       console.log(rowCapture, colCapture)
       if (colCapture && rowCapture && enemyCapture) {
               //THE KING HAS LOST THE GAME
-
-        console.log('all is really lost now');
+              attackersWon = true
+        console.log('all is lost ');
     
 }
 
@@ -391,7 +391,7 @@ let enemyCapture = false
               )
             ) {
               //THE KING HAS LOST THE GAME
-
+              attackersWon = true
               console.log(`all is lost`);
             }
           });
@@ -413,12 +413,14 @@ let enemyCapture = false
             ) {
               //THE KING HAS LOST THE GAME
               console.log(`all is lost`);
+              attackersWon = true
             }
           });
           
       console.log('the king is vulnerable outside of his castle')
     }      
   }
+  return {attackersWon, defendersWon}
 }
 
   const findPiecePosition = (board, piece) => {
