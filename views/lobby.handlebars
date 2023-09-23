@@ -8,9 +8,17 @@
       <button id="create-game-btn">Start New Game</button>
       {{/if}}
     </div>
-  </div>
+      <div id="game-area">
+      {{> game-area}}
+    </div>
+  </div>    
+
 </div>
+
 {{#if loggedIn}}
 {{> create-game-modal}}
   <script src="/js/createGame.js"></script>
 {{/if}}
+
+
+<script type="module" src="/js/gameList.js"></script>

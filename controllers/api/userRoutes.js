@@ -108,4 +108,15 @@ router.get("/my-id", async (req, res) => {
   }
 });
 
+router.get("/logged-in", async (req, res) => {
+  try {
+    const loggedIn = (await req.session.loggedIn) ? true : false;
+
+    res.status(200).json(loggedIn);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+});
+
 module.exports = router;
