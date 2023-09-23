@@ -225,4 +225,27 @@ router.put("/turn/:id", async (req, res) => {
   }
 });
 
+router.put("/gameover/:id", async (req, res) => {
+  try {
+    const gameover = await Game.update(
+      {
+        game_status: req.body.gameStatus,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+
+    const thisGameIsOver = await Game.findByPk(req.params.id);
+console.log("i think the update was successful")
+    res.status(200).json(thisGameIsOver);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+});
+
+
 module.exports = router;

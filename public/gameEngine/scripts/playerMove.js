@@ -65,15 +65,50 @@ const movePiece = async (board, row, column, pieceId, id) => {
 
   table.parentNode.replaceChild(clonedTable, table);
 
-  runOutcomeConditions(board, pieceId);
-  runKingOutcomes(board, pieceId);
 
+  const domId = document.getElementById("table").closest("div");
+  runOutcomeConditions(board, pieceId);
+  let didSomeoneWin = runKingOutcomes( board, pieceId);
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  if (didSomeoneWin.attackersWon == true) {
+    let gameStatus = 'attackerWon'
+    console.log('THE ATTACKERS HAVE WON!!!')
+    const gameover = await fetch(`/api/games/gameover/${domId.id}`, {
+      method: "PUT",
+      body: JSON.stringify({ gameStatus }),
+      headers: { "Content-Type": "application/json" },
+    });
+  
+    //Socket Emit  
+    if (gameover.ok) {
+      socket.emit('gameover', { gameId: domId.id });
+    }
+  } 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  else  if (didSomeoneWin.defendersWon === true) {
+
+    console.log('THE DEFENDERS HAVE WON!!!')
+let gameStatus = 'defenderWon'
+    const gameover = await fetch(`/api/games/gameover/${domId.id}`, {
+      method: "PUT",
+      body: JSON.stringify({ gameStatus }),
+    headers: { "Content-Type": "application/json" },
+    });
+  
+    //Socket Emit  
+    if (gameover.ok) {
+      socket.emit('gameover', { gameId: domId.id });
+    }
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+} else {
+  console.log('GAMEIS STILL IN PROGRESS...')
+   }
   //switch turns
   // togglePlayerTurn();
   //add code here to post gameboard
   // console.log(board);
 
-  const domId = document.getElementById("table").closest("div");
+
 
   // const getThisGame = await fetch(`/api/games/${domId.id}`, {
   //   method: "GET",
