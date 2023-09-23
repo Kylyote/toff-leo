@@ -56,13 +56,13 @@ const generateBoard = (board) => {
         cellId === "k10"
       ) {
         className = "winSquare";
-        html += `<td id='${cellId}' class='${className}'><img src="/images/board-cells/corner-cell.png"></td>`;
+        html += `<td id='${cellId}' class='${className}'></td>`;
       } else if (value < 24) {
-        html += `<td id='${cellId}'><img src="/images/berserker-piece.png" class='game-piece' id='${value}'></img></td>`;
+        html += `<td id='${cellId}'><img src="/images/berserker-piece.png" class='beserker game-piece' id='${value}'></img></td>`;
       } else if (value > 23 && value < 36) {
-        html += `<td id='${cellId}'><img src="/images/guard-piece.png" class='game-piece' id='${value}'></img></td>`;
+        html += `<td id='${cellId}'><img src="/images/guard-piece.png" class='guard game-piece' id='${value}'></img></td>`;
       } else if (value === 36) {
-        html += `<td id='${cellId}'><img src="/images/jarl-piece.png" class='game-piece' id='${value}'></img></td>`;
+        html += `<td id='${cellId}'><img src="/images/jarl-piece.png" class='jarl game-piece' id='${value}'></img></td>`;
       }
     }
 
