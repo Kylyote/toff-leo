@@ -1,15 +1,14 @@
 const isAttacker = document.querySelectorAll(".join-as-attacker");
 const isDefender = document.querySelectorAll(".join-as-defender");
 
-
-//Socket.io 
+//Socket.io
 let socketServerUrl;
 
-//For Local Development 
+//For Local Development
 if (window.location.hostname === "localhost") {
   socketServerUrl = "http://localhost:3001";
 } else {
-  //For Hosted URL ... 
+  //For Hosted URL ...
   socketServerUrl = window.location.origin;
 }
 
@@ -28,11 +27,11 @@ if (isAttacker.length > 0) {
       );
 
       if (joinThisGame.ok) {
-          //Socket Emit  
+        //Socket Emit
 
-        socket.emit('game-updated', { gameId: thisGameId });
-  
-        document.location.replace("/my-games");
+        socket.emit("game-updated", { gameId: thisGameId });
+
+        document.location.replace(`/api/games/play/${thisGameId}`);
       } else {
         alert(`There was an error joining this game`);
       }
@@ -53,8 +52,8 @@ if (isDefender.length > 0) {
       );
 
       if (joinThisGame.ok) {
-        socket.emit('game-updated', { gameId: thisGameId });
-        document.location.replace("/my-games");
+        socket.emit("game-updated", { gameId: thisGameId });
+        document.location.replace(`/api/games/play/${thisGameId}`);
       } else {
         alert(`There was an error joining this game`);
       }

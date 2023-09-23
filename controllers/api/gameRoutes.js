@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { Op } = require("sequelize");
 const { Game, User } = require("../../models");
-const { route } = require("./userRoutes");
+const { withAuth, redirectToWatch } = require("../../utils/auth");
 
 // get all games
 router.get("/", async (req, res) => {
@@ -129,6 +129,73 @@ router.get("/my-games", async (req, res) => {
     const myGames = await getMyGames.map((game) => game.get({ plain: true }));
 
     res.status(200).json(myGames);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+});
+
+// mygames and id when the user is logged in
+router.get("/play/:id", redirectToWatch, withAuth, async (req, res) => {
+  try {
+    const getMyGames = await Game.findAll({
+      where: {
+        [Op.or]: [
+          { attacker_id: req.session.userId },
+          { defender_id: req.session.userId },
+        ],
+      },
+      include: [
+        { model: User, as: "Attacker" },
+        { model: User, as: "Defender" },
+      ],
+    });
+
+    const games = await getMyGames.map((game) => game.get({ plain: true }));
+
+    const getThisGameByID = await Game.findByPk(req.params.id, {
+      include: [
+        { model: User, as: "Attacker" },
+        { model: User, as: "Defender" },
+      ],
+    });
+
+    console.log(`these are the games ${games}`);
+
+    const thisGame = getThisGameByID.get({ plain: true });
+
+    res.render("my-games", { games, thisGame, loggedIn: req.session.loggedIn });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+});
+
+//gets the game when the user is not logged in
+
+router.get("/watch/:id", async (req, res) => {
+  const isLoggedIn = req.session.loggedIn ? ["active", "pending"] : ["active"];
+  try {
+    const getActiveGames = await Game.findAll({
+      where: { game_status: { [Op.in]: isLoggedIn } },
+      include: [
+        { model: User, as: "Attacker" },
+        { model: User, as: "Defender" },
+      ], // will get all games that have a status of pending or active
+    });
+
+    const games = await getActiveGames.map((game) => game.get({ plain: true }));
+
+    const getGameById = await Game.findByPk(req.params.id, {
+      include: [
+        { model: User, as: "Attacker" },
+        { model: User, as: "Defender" },
+      ],
+    });
+
+    const thisGame = await getGameById.get({ plain: true });
+
+    res.render("lobby", { games, thisGame, loggedIn: req.session.loggedIn });
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
