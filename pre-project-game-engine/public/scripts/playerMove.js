@@ -59,8 +59,8 @@ const movePiece = (board, row, column, pieceId, id) => {
 
             table.parentNode.replaceChild(clonedTable, table);
 
-runOutcomeConditions(currentPlayer, board, pieceId)
-runKingOutcomes(currentPlayer, board, pieceId)
+runOutcomeConditions(board, pieceId)
+runKingOutcomes(board, pieceId)
 
 //switch turns
 togglePlayerTurn()

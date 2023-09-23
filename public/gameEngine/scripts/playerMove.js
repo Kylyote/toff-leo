@@ -3,10 +3,9 @@ import { renderGameArea } from "../index.js";
 import {socket} from "../index.js";
 
 import {
-  togglePlayerTurn,
+  // togglePlayerTurn,
   splitID,
-  currentPlayer,
-  whosTurnIsItAnyway,
+  // whosTurnIsItAnyway,
 } from "./playerTurn.js";
 import { runOutcomeConditions, runKingOutcomes } from "./outcome.js";
 
@@ -66,8 +65,8 @@ const movePiece = async (board, row, column, pieceId, id) => {
 
   table.parentNode.replaceChild(clonedTable, table);
 
-  runOutcomeConditions(currentPlayer, board, pieceId);
-  runKingOutcomes(currentPlayer, board, pieceId);
+  runOutcomeConditions(board, pieceId);
+  runKingOutcomes(board, pieceId);
 
   //switch turns
   // togglePlayerTurn();

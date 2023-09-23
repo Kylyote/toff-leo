@@ -2,14 +2,14 @@ import { handleClick } from "./playerMove.js";
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Set the initial player to 'Attacker'
-let currentPlayer = "Attacker";
+// let currentPlayer = "Attacker";
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Function to toggle the player turn between 'Attacker' and 'Defender'
-function togglePlayerTurn() {
-  currentPlayer = currentPlayer === "Attacker" ? "Defender" : "Attacker";
-}
+// // Function to toggle the player turn between 'Attacker' and 'Defender'
+// function togglePlayerTurn() {
+//   currentPlayer = currentPlayer === "Attacker" ? "Defender" : "Attacker";
+// }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -262,8 +262,8 @@ function convertArray(array, chosenID) {
 
 export {
   logRowsWithSameArrayPosition,
-  togglePlayerTurn,
-  currentPlayer,
+  // togglePlayerTurn,
+  // currentPlayer,
   whosTurnIsItAnyway,
   splitID,
 };
