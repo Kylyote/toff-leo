@@ -3,7 +3,7 @@ const sequelize = require("../config/connection");
 
 class Chat extends Model {}
 
-Chat.init [
+Chat.init (
     {
      content: {
         type: DataTypes.TEXT,
@@ -33,6 +33,6 @@ Chat.init [
         freezeTableName: true,
         modelName: 'chat'
     }
-]
+)
 
 module.exports = Chat;
