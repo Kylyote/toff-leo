@@ -2,7 +2,8 @@
   "scripts": {
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "node seeds/index.js"
+    "seed": "node seeds/index.js",
+    "scss": "node-sass --watch scss -o public/css"
   },
   "name": "toff-leo",
   "version": "1.0.0",
@@ -19,6 +20,7 @@
     "express-handlebars": "^5.2.0",
     "express-session": "^1.17.1",
     "mysql2": "^2.2.5",
+    "node-sass": "^9.0.0",
     "sequelize": "^6.3.5",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2"
