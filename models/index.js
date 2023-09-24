@@ -11,12 +11,12 @@ Game.belongsTo(User, { as: "Defender", foreignKey: "defender_id" });
 User.hasMany(Game, { as: "Attacker", foreignKey: "attacker_id" });
 Game.belongsTo(User, { as: "Attacker", foreignKey: "attacker_id" });
 
-//Chat messages belong to games
-Chat.belongsTo(Game, { foreignKey: "game_id" });
-Game.hasMany(Chat, { foreignKey: "game_id" });
+//Chat messages belong to games 
+Chat.belongsTo(Game, {foreignKey: 'game_id'});
+Game.hasMany(Chat, {foreignKey: 'game_id'});
 
 module.exports = {
   User,
   Game,
-  Chat,
+  Chat
 };
