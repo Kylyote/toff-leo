@@ -1,0 +1,532 @@
+/* CORE STYLES */
+:root {
+  --neutral-100: #fff4f6;
+  --neutral-200: #f6eef0;
+  --neutral-300: #e7dfe1;
+  --neutral-400: #d5cfd0;
+  --neutral-500: #bab5b6;
+  --neutral-600: #706c6c;
+  --neutral-700: #5c5b52;
+  --neutral-800: #444444;
+  --neutral-900: #16191f;
+
+  --primary-100: #b1d7fe;
+  --primary-300: #93bee5;
+  --primary-500: #4997fc;
+  --primary-700: #314e7b;
+  --primary-900: #0e234c;
+
+  --secondary-100: #ddddf2;
+  --secondary-300: #bdbcdf;
+  --secondary-500: #9190bb;
+  --secondary-700: #6e698a;
+  --secondary-900: #5f5d7f;
+
+  --success-100: #95bab7;
+  --success-300: #5c9941;
+  --success-500: #7c9007;
+  --success-700: #356333;
+  --success-900: #213b20;
+
+  --warning-100: #f2d9be;
+  --warning-300: #e0b280;
+  --warning-500: #cca68b;
+  --warning-700: #a3755d;
+  --warning-900: #4c3621;
+
+  --danger-100: #edc8cc;
+  --danger-300: #d9989d;
+  --danger-500: #af7276;
+  --danger-700: #943a40;
+  --danger-900: #772830;
+
+  /* Stylistic opacities.  Uses '26' at the end of the hex to set opacity to 15% */
+  --opacity-neutral: #bab5b626;
+  --opacity-primary: #4997fc26;
+  --opacity-secondary: #9190bb26;
+  --opacity-success: #7c900726;
+  --opacity-warning: #cca68b26;
+  --opacity-danger: #af727626;
+
+  /* Stylings */
+  --overlay-shadow: 0px 4px 24px rgba(24, 30, 36, 0.16);
+  --card-shadow: 0px 4px 4px rgba(8, 8, 8, 0.16);
+
+  /* Text */
+  --font-family-header: "Skranji", cursive;
+  --font-family-default: "Rubik", sans-serif;
+
+  --font-weight-bold: 900;
+  --font-weight-medium: 700;
+  --font-weight-regular: 400;
+
+  --font-promo-size: 48px;
+  --font-promo-line-height: 64px;
+
+  --font-h1-size: 32px;
+  --font-h1-line-height: 40px;
+
+  --font-h2-size: 24px;
+  --font-h2-line-height: 32px;
+
+  --font-h3-size: 20px;
+  --font-h3-line-height: 24px;
+
+  --font-h4-size: 14px;
+  --font-h4-line-height: 16px;
+
+  --font-large-text-size: 16px;
+  --font-large-text-line-height: 20px;
+
+  --font-medium-text-size: 14px;
+  --font-medium-text-line-height: 16px;
+
+  --font-small-text-size: 12px;
+  --font-small-text-line-height: 14px;
+}
+
+.promo {
+  font-family: var(--font-family-header);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-promo-size);
+  font-weight: var(--font-promo-line-height);
+  color: var(--neutral-900);
+}
+
+h1 {
+  font-family: var(--font-family-header);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-h1-size);
+  line-height: var(--font-h1-line-height);
+  color: var(--neutral-900);
+  margin: 0;
+}
+
+h2 {
+  font-family: var(--font-family-header);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-h2-size);
+  line-height: var(--font-h2-line-height);
+  color: var(--neutral-900);
+}
+
+h3 {
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-h3-size);
+  line-height: var(--font-h3-line-height);
+  color: var(--neutral-900);
+}
+
+h4 {
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-h4-size);
+  line-height: var(--font-h4-line-height);
+  color: var(--neutral-900);
+}
+
+.large-text {
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-large-text-size);
+  line-height: var(--font-large-text-line-height);
+  color: var(--neutral-900);
+}
+
+.medium-text {
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-medium-text-size);
+  line-height: var(--font-medium-text-line-height);
+  color: var(--neutral-900);
+}
+
+.small-text {
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-small-text-size);
+  line-height: var(--font-small-text-line-height);
+  color: var(--neutral-900);
+}
+
+i {
+  font-size: 24px;
+}
+
+* {
+  padding: 0px;
+}
+body {
+  background-color: var(--neutral-200);
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* End design system style guide */
+
+button {
+  background-color: var(--success-700);
+  padding: 12px 16px;
+  border-radius: 4px;
+  border: none;
+  color: var(--neutral-100);
+  height: 40px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--success-900);
+  }
+}
+
+nav {
+  background-color: var(--success-700);
+  height: 56px;
+  padding: 12px 32px;
+  display: flex;
+
+  & a {
+    text-decoration: none;
+    color: var(--neutral-100);
+
+    &:hover {
+      color: var(--success-100);
+    }
+  }
+
+  & #left-nav-links {
+    display: flex;
+
+    & h2 {
+      margin-right: 24px;
+      text-decoration: none;
+    }
+  }
+
+  & #login-out {
+    margin-left: auto;
+    color: var(--neutral-100);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--success-100);
+    }
+  }
+}
+
+& .card {
+  background-color: var(--neutral-100);
+  background-image: url("../images/texture.png");
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: var(--overlay-shadow);
+}
+
+/* Login Page  */
+#login-div {
+  display: flex;
+  position: absolute;
+  width: 640px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  & #login-card {
+    margin-right: 16px;
+  }
+
+  & .card {
+    width: 100%;
+
+    & .login-card-header-div {
+      padding-bottom: 16px;
+
+      & h3 {
+        padding-bottom: 4px;
+        color: var(--neutral-900);
+      }
+
+      & p {
+        color: var(--neutral-900);
+      }
+    }
+
+    & .input-div {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 16px;
+
+      & label {
+        color: var(--neutral-900);
+        font-family: var(--font-family-default);
+        font-weight: var(--font-weight-regular);
+        font-size: var(--font-small-text-size);
+        line-height: var(--font-small-text-line-height);
+        margin-bottom: 4px;
+      }
+
+      & input {
+        background-color: var(--neutral-100);
+        border: 1px solid var(--neutral-400);
+        border-radius: 4px;
+        height: 40px;
+        padding: 0 12px;
+
+        &:focus {
+          outline: 1px solid var(--primary-500);
+        }
+      }
+    }
+  }
+
+  & button {
+    width: 100%;
+  }
+}
+/* COMMON PAGE BODY */
+#page-body {
+  display: flex;
+}
+
+/* GAME LIST PARTIAL */
+#left-panel {
+  width: 272px;
+  background-color: var(--neutral-100);
+  background-image: url("../images/texture.png");
+  height: 100vh;
+  overflow-x: scroll;
+  box-shadow: var(--overlay-shadow);
+  padding-right: 0;
+
+  & #left-panel-header {
+    display: flex;
+    padding: 8px 16px;
+    border-bottom: 1px solid var(--neutral-300);
+
+    & h3 {
+      color: var(--danger-700);
+    }
+
+    & #left-panel-defender {
+      color: var(--secondary-700);
+      margin-left: auto;
+    }
+  }
+
+  & #game-list {
+    flex-direction: column;
+
+    & .game-list-item {
+      padding: 16px;
+      border-bottom: 1px solid var(--neutral-300);
+
+      & .combatants {
+        display: flex;
+        border-bottom: 1px solid var(--neutral-300);
+        padding-bottom: 8px;
+        margin-bottom: 8px;
+
+        & .join-as-attacker {
+          margin-right: auto;
+        }
+
+        & .join-as-defender {
+          margin-left: auto;
+        }
+
+        & .game-list-item-attacker {
+          margin-right: auto;
+        }
+
+        & .game-list-item-defender {
+          margin-left: auto;
+        }
+      }
+
+      & .start-date {
+        color: var(--neutral-600);
+      }
+
+      & .mini-button {
+        background-color: var(--primary-500);
+        font-family: var(--font-family-default);
+        font-weight: var(--font-weight-regular);
+        font-size: var(--font-small-text-size);
+        line-height: var(--font-small-text-line-height);
+        color: var(--neutral-100);
+        height: 16px;
+        padding: 1px 8px;
+
+        &:hover {
+          background-color: var(--primary-700);
+        }
+      }
+
+      & .game-list-item-view-btn {
+        width: 100%;
+        background-color: var(--opacity-success);
+        color: var(--success-700);
+        margin-top: 8px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--success-100);
+        }
+      }
+    }
+  }
+}
+
+/* LOBBY */
+#root-div {
+  width: 100%;
+  & #root-header {
+    display: flex;
+    padding: 32px;
+    height: fit-content;
+
+    & button {
+      margin-left: auto;
+    }
+  }
+}
+
+#new-game-modal {
+  display: none;
+  position: fixed;
+  background-color: #00000080;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+
+  & .card {
+    padding: 24px;
+    width: 360px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    & #header-div {
+      margin-bottom: 24px;
+
+      &h2 {
+        margin-bottom: 4px;
+      }
+    }
+
+    & #role-btn-div {
+      width: 100%;
+      display: flex;
+      margin-bottom: 16px;
+
+      & button {
+        width: 100%;
+      }
+
+      & #attacker-btn {
+        margin-right: 16px;
+        background-color: var(--danger-700);
+
+        &:hover {
+          background-color: var(--danger-900);
+        }
+      }
+
+      & #defender-btn {
+        background-color: var(--secondary-700);
+
+        &:hover {
+          background-color: var(--secondary-900);
+        }
+      }
+    }
+
+    & #cancel-btn {
+      width: 100%;
+      background-color: var(--warning-100);
+      color: var(--warning-700);
+
+      &:hover {
+        background-color: var(--warning-300);
+      }
+    }
+  }
+}
+
+/* MY GAMES */
+#game-area {
+  width: 50vw;
+  height: 100%;
+  margin-left: 50%;
+  transform: translateX(-50%);
+
+  & #combatants-header {
+    display: flex;
+    margin-bottom: 24px;
+
+    & h3 {
+      margin-top: 6px;
+    }
+
+    & #combatants-header-attacker-div {
+      display: flex;
+      margin-right: auto;
+
+      & img {
+        margin-right: 8px;
+      }
+    }
+
+    & #combatants-header-defender-div {
+      display: flex;
+      margin-left: auto;
+
+      & h3 {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  & #my-games-greeting {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+
+    & h2 {
+      color: var(--neutral-600);
+    }
+  }
+}
+
+.jarlSquare {
+  background-color: var();
+}
+
+td {
+  position: relative;
+  background-color: var(--warning-100);
+  width: 4%;
+  height: 0%;
+  max-width: 100%;
+  max-height: 100%;
+  text-align: center;
+  /* border: 1px solid var(--opacity-neutral); */
+  & img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: fill;
+  }
+
+  .game-piece {
+    z-index: 1;
+  }
+}
+.winSquare {
+  background-color: var(--warning-300);
+}
