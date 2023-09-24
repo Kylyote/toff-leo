@@ -89,14 +89,17 @@ import { whosTurnIsItAnyway } from "./scripts/playerTurn.js";
 const renderGameArea = async () => {
   const domId = document.getElementById("table").closest("div").closest("div");
   const clearDom = document.getElementById("table");
+  const firstGameId = document.querySelector(".game-list-item").id;
 
   //////// updates gameboard //////////
-  console.log(domId.id);
+  //page load this checks to see if an id is stored in the dom. if not then it shows the first game in the list
+  const thisGameId = domId.id == "" ? firstGameId : domId.id;
+
   // clears the dom at #table before table render
   clearDom.innerHTML = "";
 
   // gets game by id
-  const getThisGame = await fetch(`/api/games/${domId.id}`, {
+  const getThisGame = await fetch(`/api/games/${thisGameId}`, {
     method: "GET",
   });
 
