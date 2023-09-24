@@ -176,19 +176,17 @@ td {
 .guardSquare::after {
   transform: translateX(-50%);
 }
-
+/* 
 .guard {
-  width: 60%;
-  height: 60%;
+  width: 100%;
+  height: 100%;
   position: absolute;
-  border-radius: 50%;
-  background-color: rgb(169, 124, 227);
-  border: 4px solid black;
-  left: 16%;
-  top: 18%;
+  left: 0;
+  top: 0;
+  object-fit: contain;
   z-index: 1;
-}
-
+} */
+/* 
 .beserker {
   width: 60%;
   height: 60%;
@@ -199,9 +197,9 @@ td {
   left: 16%;
   top: 18%;
   z-index: 1;
-}
+} */
 
-.jarl {
+/* .jarl {
   width: 60%;
   height: 60%;
   position: absolute;
@@ -211,7 +209,7 @@ td {
   left: 16%;
   top: 18%;
   z-index: 1;
-}
+} */
 
 .howTheTurnTables {
   position: absolute;
