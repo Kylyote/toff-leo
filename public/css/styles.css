@@ -347,12 +347,13 @@ nav {
     transform: translateX(-50%); }
     #game-area #combatants-header h3 {
       margin-top: 6px; }
+    #game-area #combatants-header img {
+      margin-right: 8px;
+      max-height: 40px; }
     #game-area #combatants-header #combatants-header-attacker-div {
       display: flex;
       margin-right: auto;
       max-width: 60vh; }
-      #game-area #combatants-header #combatants-header-attacker-div img {
-        margin-right: 8px; }
     #game-area #combatants-header #combatants-header-defender-div {
       display: flex;
       margin-left: auto; }
@@ -415,8 +416,10 @@ table {
   #chat-div #messages-render-div {
     height: calc(100% - 56px);
     display: flex;
-    flex-direction: column-reverse;
-    padding: 16px; }
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 16px;
+    overflow-y: scroll; }
     #chat-div #messages-render-div .chat-message-received {
       margin-bottom: 16px;
       padding-right: 40px; }

@@ -477,14 +477,15 @@ nav {
       margin-top: 6px;
     }
 
+    & img {
+      margin-right: 8px;
+      max-height: 40px;
+    }
+
     & #combatants-header-attacker-div {
       display: flex;
       margin-right: auto;
       max-width: 60vh;
-
-      & img {
-        margin-right: 8px;
-      }
     }
 
     & #combatants-header-defender-div {
@@ -574,8 +575,10 @@ table {
   & #messages-render-div {
     height: calc(100% - 56px);
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
+    justify-content: flex-end;
     padding: 16px;
+    overflow-y: scroll;
 
     & .chat-message-received {
       margin-bottom: 16px;
