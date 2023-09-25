@@ -57,6 +57,9 @@ io.on('connection', (socket) => {
   socket.on('game-updated', (data) => {
     socket.broadcast.emit('game-updated', data); // broadcast sends the message to all clients EXCEPT the sender
   });
+  socket.on('gameover', (data) => {
+    socket.broadcast.emit('gameover', data); // broadcast sends the message to all clients EXCEPT the sender
+  });
 });
 
 
