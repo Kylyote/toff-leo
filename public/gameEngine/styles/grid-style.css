@@ -87,10 +87,10 @@
 .jarlSquare::after {
   transform: translate(-50%, -50%) rotate(-45deg);
 } */
-html,
+/* html,
 body {
   height: 100%;
-}
+} */
 
 /* .tableHolder {
   border: 20px solid rgb(123, 68, 32);
@@ -114,20 +114,20 @@ body {
   table-layout: fixed;
 } */
 
-td {
-  position: relative;
-  background-color: rgb(189, 154, 90);
-  width: 4%;
+/* td {
+  position: relative; */
+/* background-color: rgb(189, 154, 90); */
+/* width: 4%;
   height: 4%;
   max-width: 100%;
   max-height: 100%;
-  text-align: center;
-  border: 3px solid black;
-}
-.winSquare {
+  text-align: center; */
+/* border: 3px solid black; */
+/* } */
+/* .winSquare {
   background-color: rgb(168, 109, 38);
-}
-
+} */
+/* 
 .beserkerSquare {
   position: relative;
   align-items: center;
@@ -141,9 +141,9 @@ td {
   width: 130%;
   height: 2px;
   background-color: black;
-}
+} */
 
-.beserkerSquare::before {
+/* .beserkerSquare::before {
   transform: translateX(-50%) rotate(45deg);
 }
 
@@ -153,8 +153,8 @@ td {
 
 .jarlsSquare {
   background-color: #ff8000;
-}
-.guardSquare {
+} */
+/* .guardSquare {
   position: relative;
   align-items: center;
   justify-content: center;
@@ -175,7 +175,7 @@ td {
 
 .guardSquare::after {
   transform: translateX(-50%);
-}
+} */
 /* 
 .guard {
   width: 100%;

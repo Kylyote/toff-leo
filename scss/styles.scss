@@ -508,12 +508,9 @@ nav {
 // GAME BOARD
 table {
   margin-top: -64px;
-  border-spacing: 0;
-  border: 5px solid rgb(0, 0, 0);
   width: 100%;
   height: 100%;
   table-layout: fixed;
-  border: 20px solid rgb(123, 68, 32);
   height: 60vh;
   width: 60vh;
   max-width: 60vh;
@@ -523,10 +520,13 @@ table {
   position: absolute;
   left: 50%;
   transform: translate(-50%, 60px);
+  background-image: url("/images/game-board.png");
+  background-size: 100% 100%;
+  box-shadow: var(--overlay-shadow);
 
   & td {
     position: relative;
-    background-color: var(--warning-100);
+    // background-color: var(--warning-100);
     width: 4%;
     height: 0%;
     max-width: 100%;
@@ -545,9 +545,6 @@ table {
     .game-piece {
       z-index: 1;
     }
-  }
-  .winSquare {
-    background-color: var(--warning-300);
   }
 }
 
