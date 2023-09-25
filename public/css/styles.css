@@ -338,12 +338,16 @@ nav {
   transform: translateX(-50%); }
   #game-area #combatants-header {
     display: flex;
-    margin-bottom: 24px; }
+    margin-bottom: 24px;
+    max-width: 60vh;
+    margin-left: 50%;
+    transform: translateX(-50%); }
     #game-area #combatants-header h3 {
       margin-top: 6px; }
     #game-area #combatants-header #combatants-header-attacker-div {
       display: flex;
-      margin-right: auto; }
+      margin-right: auto;
+      max-width: 60vh; }
       #game-area #combatants-header #combatants-header-attacker-div img {
         margin-right: 8px; }
     #game-area #combatants-header #combatants-header-defender-div {
@@ -359,27 +363,43 @@ nav {
     #game-area #my-games-greeting h2 {
       color: var(--neutral-600); }
 
-.jarlSquare {
-  background-color: var(); }
-
-td {
-  position: relative;
-  background-color: var(--warning-100);
-  width: 4%;
-  height: 0%;
-  max-width: 100%;
-  max-height: 100%;
+table {
+  margin-top: -64px;
+  border-spacing: 0;
+  border: 5px solid black;
+  width: 100%;
+  height: 100%;
+  table-layout: fixed;
+  border: 20px solid #7b4420;
+  height: 60vh;
+  width: 60vh;
+  max-width: 60vh;
+  max-height: 60vh;
+  overflow: auto;
   text-align: center;
-  /* border: 1px solid var(--opacity-neutral); */ }
-  td img {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    object-fit: fill; }
-  td .game-piece {
-    z-index: 1; }
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 60px); }
+  table td {
+    position: relative;
+    background-color: var(--warning-100);
+    width: 4%;
+    height: 0%;
+    max-width: 100%;
+    max-height: 100%;
+    text-align: center;
+    /* border: 1px solid var(--opacity-neutral); */ }
+    table td img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      object-fit: fill; }
+    table td .game-piece {
+      z-index: 1; }
+  table .winSquare {
+    background-color: var(--warning-300); }
 
-.winSquare {
-  background-color: var(--warning-300); }
+#page-body {
+  height: calc(100vh - 112px); }
