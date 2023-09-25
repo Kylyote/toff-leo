@@ -287,6 +287,7 @@ nav {
 /* COMMON PAGE BODY */
 #page-body {
   display: flex;
+  height: calc(100vh - 112px);
 }
 
 /* GAME LIST PARTIAL */
@@ -465,6 +466,9 @@ nav {
   & #combatants-header {
     display: flex;
     margin-bottom: 24px;
+    max-width: 60vh;
+    margin-left: 50%;
+    transform: translateX(-50%);
 
     & h3 {
       margin-top: 6px;
@@ -473,6 +477,7 @@ nav {
     & #combatants-header-attacker-div {
       display: flex;
       margin-right: auto;
+      max-width: 60vh;
 
       & img {
         margin-right: 8px;
@@ -501,32 +506,57 @@ nav {
   }
 }
 
-.jarlSquare {
-  background-color: var();
-}
-
-td {
-  position: relative;
-  background-color: var(--warning-100);
-  width: 4%;
-  height: 0%;
-  max-width: 100%;
-  max-height: 100%;
+// GAME BOARD
+table {
+  margin-top: -64px;
+  width: 100%;
+  height: 100%;
+  table-layout: fixed;
+  height: 65vh;
+  width: 65vh;
+  max-width: 65vh;
+  max-height: 65vh;
+  overflow: auto;
   text-align: center;
-  /* border: 1px solid var(--opacity-neutral); */
-  & img {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    object-fit: fill;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 60px);
+  background-image: url("/images/game-board.png");
+  background-size: 100% 100%;
+  box-shadow: var(--overlay-shadow);
+
+  & td {
+    position: relative;
+    // background-color: var(--warning-100);
+    width: 4%;
+    height: 0%;
+    max-width: 100%;
+    max-height: 100%;
+    text-align: center;
+    /* border: 1px solid var(--opacity-neutral); */
+    & img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      object-fit: fill;
+    }
+
+    .game-piece {
+      z-index: 1;
+    }
   }
 
-  .game-piece {
-    z-index: 1;
+  .highlight-attacker {
+    background-color: var(--danger-100);
   }
-}
-.winSquare {
-  background-color: var(--warning-300);
+
+  .highlight-defender {
+    background-color: var(--secondary-100);
+  }
+
+  .highlightMove {
+    background-color: var(--success-100);
+  }
 }
