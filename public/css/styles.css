@@ -220,7 +220,8 @@ nav {
 
 /* COMMON PAGE BODY */
 #page-body {
-  display: flex; }
+  display: flex;
+  height: calc(100vh - 112px); }
 
 /* GAME LIST PARTIAL */
 #left-panel {
@@ -368,10 +369,10 @@ table {
   width: 100%;
   height: 100%;
   table-layout: fixed;
-  height: 60vh;
-  width: 60vh;
-  max-width: 60vh;
-  max-height: 60vh;
+  height: 65vh;
+  width: 65vh;
+  max-width: 65vh;
+  max-height: 65vh;
   overflow: auto;
   text-align: center;
   position: absolute;
@@ -397,6 +398,9 @@ table {
       object-fit: fill; }
     table td .game-piece {
       z-index: 1; }
-
-#page-body {
-  height: calc(100vh - 112px); }
+  table .highlight-attacker {
+    background-color: var(--danger-100); }
+  table .highlight-defender {
+    background-color: var(--secondary-100); }
+  table .highlightMove {
+    background-color: var(--success-100); }

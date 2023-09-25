@@ -99,6 +99,9 @@ const handleInitialClick = (pieceType, board) => {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Function to log the rows with the same array position as the selected piece
 function logRowsWithSameArrayPosition(board, row, column, pieceId, parentId) {
+  const playerPiecePathClass =
+    pieceId < 24 ? "highlight-attacker" : "highlight-defender";
+
   console.log(
     "adding classes to available spaces" +
       " " +
@@ -119,10 +122,10 @@ function logRowsWithSameArrayPosition(board, row, column, pieceId, parentId) {
   //clear highlights
   const tds = document.querySelectorAll("td");
   tds.forEach((td) => {
-    td.classList.remove("highlight");
+    td.classList.remove("highlight-attacker", "highlight-defender");
   });
   const parentTD = document.querySelector(`#${parentId}`);
-  parentTD.classList.add("highlight");
+  parentTD.classList.add(`${playerPiecePathClass}`);
   // console.log( "this is the column array "+ columnArray);
   // console.log("this is the row array "+ currentRow)
 
@@ -173,7 +176,7 @@ function logRowsWithSameArrayPosition(board, row, column, pieceId, parentId) {
     //add event listeners and visual elements to the pieces that can be moved
     const columnArrayId = letter + column;
     const avail = document.querySelector(`#${columnArrayId}`);
-    avail.classList.add("highlight");
+    avail.classList.add(`${playerPiecePathClass}`);
     avail.addEventListener("click", handleMyClick);
   });
 
@@ -183,7 +186,7 @@ function logRowsWithSameArrayPosition(board, row, column, pieceId, parentId) {
     i++;
     // console.log("currID is " + currID)
     const avail = document.querySelector(`#${columnArrayId}`);
-    avail.classList.add("highlight");
+    avail.classList.add(`${playerPiecePathClass}`);
     avail.addEventListener("click", handleMyClick);
   });
 
@@ -194,7 +197,7 @@ function logRowsWithSameArrayPosition(board, row, column, pieceId, parentId) {
     const k0 = document.querySelector(`#k0`);
     const k10 = document.querySelector(`#k10`);
     const removeExemptJarl = (square) => {
-      square.classList.remove("highlight");
+      square.classList.remove("highlight-attacker", "highlight-defender");
       square.removeEventListener("click", handleMyClick);
     };
     removeExemptJarl(center);
