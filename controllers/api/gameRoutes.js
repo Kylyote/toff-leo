@@ -109,7 +109,42 @@ router.put("/join/:role/:gameId", async (req, res) => {
   }
 });
 
-// gets all of my games
+// Forfeit game by ID
+router.put("/leave/:role/:gameId", async (req,res) => {
+  try {
+    const { role, gameId } = req.params;
+    // Get session variables
+    console.log("Game role stored in params:" + role);
+    console.log("Game ID stored in params:" + gameId);
+
+    // set values to null and change game_status
+    const forfeitGame = await Game.update(
+      {
+        attacker_id: null,
+        defender_id: null,
+      },
+      {
+        where: {
+          id: gameId,
+          [Op.or]: [
+            { attacker_id: req.session.userId, role },
+            { defender_id: req.session.userId, role }
+          ],
+        },
+      },
+    );
+
+    if(forfeitGame) {
+      res.status(200).json({message: "You have forfeit the game."});
+    } else {
+      res.status(400).json({error: "Game failed successfully!"});
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+});
+
 router.get("/my-games", async (req, res) => {
   try {
     const getMyGames = await Game.findAll({

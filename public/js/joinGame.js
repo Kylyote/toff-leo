@@ -25,7 +25,7 @@ if (isAttacker.length > 0) {
           method: "PUT",
         }
       );
-
+        console.log(joinThisGame);
       if (joinThisGame.ok) {
         //Socket Emit
 
@@ -50,7 +50,7 @@ if (isDefender.length > 0) {
           method: "PUT",
         }
       );
-
+        console.log(joinThisGame);
       if (joinThisGame.ok) {
         socket.emit("game-updated", { gameId: thisGameId });
         document.location.replace(`/api/games/play/${thisGameId}`);

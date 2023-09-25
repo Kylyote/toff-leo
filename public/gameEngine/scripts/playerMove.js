@@ -145,10 +145,8 @@ let gameStatus = 'defenderWon'
 
   // \/ \/ \/ \/ THIS IS FOR TESTING LOCCALLY ONLY, REMOVE FOR GAME TO FUNCTION PROPERLY ONLINE \/ \/ \/ \/
   // whosTurnIsItAnyway(isAttacker);
-  renderGameArea();
-};
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+}
 // Example usage of the movePiece function
 
 export { handleClick };
