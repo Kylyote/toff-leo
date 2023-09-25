@@ -17,10 +17,49 @@ router.get("/", async (req, res) => {
   } catch (error) {}
 });
 
+
+
 router.get("/username", async (req, res) => {
   try {
     const getThisUser = await User.findByPk(req.session.userId);
     res.status(200).json(getThisUser);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+});
+
+//get a user by id
+router.get("/user/:id", async (req, res) => {
+  try {
+    const getUserById = await User.findByPk(req.params.id);
+    res.status(200).json(getUserById);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+});
+
+//update a specific user
+router.put("/update/:id", async (req, res) => {
+  try {
+    const updateUser = await Game.update(
+      {
+        win: req.body.win,
+        loss: req.body.loss,
+        games_played: req.body.games,
+        draw: req.body.draw,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+
+    const getThisUpdatedGame = await Game.findByPk(req.params.id);
+
+    res.status(200).json(getThisUpdatedGame);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);

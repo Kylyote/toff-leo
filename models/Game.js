@@ -38,12 +38,20 @@ Game.init(
       type: DataTypes.BOOLEAN,
       defaultValue: true, // switch for whomevers turn it is.
     },
+    num_of_moves: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
     start_date: {
       type: DataTypes.DATE,
       defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
     },
     end_date: {
       type: DataTypes.DATE,
+    },
+    gameover: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
     game_status: {
       type: DataTypes.ENUM(
@@ -71,6 +79,15 @@ Game.init(
         model: "user",
         key: "id",
       },
+    },
+    // store the winner
+    winner_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "user",
+        key: "id",
+      },
+      defaultValue: null,
     },
   },
   {
