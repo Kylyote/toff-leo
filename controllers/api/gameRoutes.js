@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { Op } = require("sequelize");
-const { Game, User } = require("../../models");
+const { Game, User, Chat } = require("../../models");
 const { withAuth, redirectToWatch } = require("../../utils/auth");
 
 // get all games
@@ -49,6 +49,7 @@ router.get("/:id", async (req, res) => {
       include: [
         { model: User, as: "Attacker" },
         { model: User, as: "Defender" },
+        { model: Chat },
       ],
     });
 
@@ -242,13 +243,12 @@ router.put("/gameover/:id", async (req, res) => {
     );
 
     const thisGameIsOver = await Game.findByPk(req.params.id);
-console.log("i think the update was successful")
+    console.log("i think the update was successful");
     res.status(200).json(thisGameIsOver);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
   }
 });
-
 
 module.exports = router;
