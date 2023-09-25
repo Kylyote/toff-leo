@@ -98,13 +98,22 @@ const movePiece = async (board, row, column, pieceId, id) => {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   if (didSomeoneWin.attackersWon == true) {
-    
+
     let gameStatus = 'attackerWon';
     let winner_id = attackerId;
      let win  = attackerData.win++;
      let loss = attackerData.loss;
      let draw = attackerData.draw;
      let games = attackerData.games_played++;
+
+     if (attackerId === defenderId){
+      gameStatus = 'draw';
+       winner_id = null;
+       win  = attackerData.win;
+       loss = attackerData.loss;
+       draw = attackerData.draw++;
+       games = attackerData.games_played++;
+   }
 
  const updateAttacker = await fetch(`/api/users/update/${attackerData.id}`, {
    method: 'PUT',
@@ -149,6 +158,15 @@ const movePiece = async (board, row, column, pieceId, id) => {
      let loss = defenderData.loss;
      let draw = defenderData.draw;
      let games = defenderData.games_played++;
+
+     if (attackerId === defenderId){
+      gameStatus = 'draw';
+       winner_id = null;
+       win  = attackerData.win;
+       loss = attackerData.loss;
+       draw = attackerData.draw++;
+       games = attackerData.games_played++;
+   }
 
  const updateDefender = await fetch(`/api/users/update/${defenderData.id}`, {
    method: 'PUT',
