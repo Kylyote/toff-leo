@@ -48,7 +48,7 @@ const loadChat = async () => {
         const messageTimeStamp = document.createElement("p");
 
         messageContainer.appendChild(chatMessageDiv);
-        // messageContainer.scrollTop = messageContainer.scrollHeight;
+        messageContainer.scrollTop = messageContainer.scrollHeight;
 
         chatMessageDiv.appendChild(sender);
         chatMessageDiv.appendChild(messageBody);
