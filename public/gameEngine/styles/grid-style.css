@@ -92,7 +92,7 @@ body {
   height: 100%;
 }
 
-.tableHolder {
+/* .tableHolder {
   border: 20px solid rgb(123, 68, 32);
   height: 80vw;
   width: 80vw;
@@ -104,15 +104,15 @@ body {
 
   left: 50%;
   transform: translate(-50%, 60px);
-}
+} */
 
-table {
+/* table {
   border-spacing: 0;
   border: 5px solid rgb(0, 0, 0);
   width: 75%;
   height: 75%;
   table-layout: fixed;
-}
+} */
 
 td {
   position: relative;
