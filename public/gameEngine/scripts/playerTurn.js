@@ -14,20 +14,37 @@ import { handleClick } from "./playerMove.js";
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Function to determine whose turn it is
+// const whosTurnIsItAnyway = (currentPlayer, board) => {
+//   // If the current player is 'Attacker', handle initial click for 'beserker' pieces
+//   console.log(currentPlayer);
+//   if (currentPlayer) {
+//     let pieceType = "beserker";
+//     handleInitialClick(pieceType, board);
+//     // If the current player is 'Defender', handle initial click for 'guard' and 'jarl' pieces
+//   } else if (!currentPlayer) {
+//     let pieceType = "guard, .jarl";
+//     handleInitialClick(pieceType, board);
+//   }
+// };
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const whosTurnIsItAnyway = (currentPlayer, board) => {
   // If the current player is 'Attacker', handle initial click for 'beserker' pieces
   console.log(currentPlayer);
-  if (currentPlayer) {
+  if (currentPlayer === true) {
     let pieceType = "beserker";
     handleInitialClick(pieceType, board);
     // If the current player is 'Defender', handle initial click for 'guard' and 'jarl' pieces
-  } else if (!currentPlayer) {
+  } else if (currentPlayer === false) {
+    let pieceType = "guard, .jarl";
+    handleInitialClick(pieceType, board);
+  } else if (currentPlayer === "me") {
+    let pieceType = "beserker";
+    handleInitialClick(pieceType, board);
+  } else if (currentPlayer === "imaginaryFriend") {
     let pieceType = "guard, .jarl";
     handleInitialClick(pieceType, board);
   }
 };
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //function for splitting the parent id into its parts
 const splitID = (id) => {
