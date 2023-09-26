@@ -408,11 +408,13 @@ table {
     table td .game-piece {
       z-index: 1; }
   table .highlight-attacker {
-    background-color: var(--danger-100); }
+    background-color: var(--opacity-danger);
+    outline: 1px solid var(--danger-100); }
   table .highlight-defender {
-    background-color: var(--secondary-100); }
+    background-color: var(--opacity-secondary);
+    outline: 1px solid var(--secondary-100); }
   table .highlightMove {
-    background-color: var(--success-100); }
+    background-color: var(--opacity-success); }
 
 #chat-div {
   min-width: 272px;
@@ -558,9 +560,16 @@ table {
         cursor: pointer; }
         #left-panel-sm .game-list-item-sm .game-list-item-view-btn:hover {
           background-color: var(--success-100); }
-  #combatants-header-attacker-div img {
-    height: 32px;
-    width: 32px; }
+  #combatants-header {
+    width: 45vh; }
+    #combatants-header img {
+      height: 32px;
+      width: 32px; }
+    #combatants-header h3 {
+      font-family: var(--font-family-default);
+      font-weight: var(--font-weight-medium);
+      font-size: var(--font-h4-size);
+      line-height: var(--font-h4-line-height); }
   table {
     margin-top: -64px;
     height: 45vh;

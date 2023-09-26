@@ -560,15 +560,17 @@ table {
   }
 
   .highlight-attacker {
-    background-color: var(--danger-100);
+    background-color: var(--opacity-danger);
+    outline: 1px solid var(--danger-100);
   }
 
   .highlight-defender {
-    background-color: var(--secondary-100);
+    background-color: var(--opacity-secondary);
+    outline: 1px solid var(--secondary-100);
   }
 
   .highlightMove {
-    background-color: var(--success-100);
+    background-color: var(--opacity-success);
   }
 }
 
@@ -792,10 +794,19 @@ table {
     }
   }
 
-  #combatants-header-attacker-div {
-    img {
+  & #combatants-header {
+    width: 45vh;
+
+    & img {
       height: 32px;
       width: 32px;
+    }
+
+    & h3 {
+      font-family: var(--font-family-default);
+      font-weight: var(--font-weight-medium);
+      font-size: var(--font-h4-size);
+      line-height: var(--font-h4-line-height);
     }
   }
 
