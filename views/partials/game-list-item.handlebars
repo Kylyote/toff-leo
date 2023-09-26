@@ -1,13 +1,13 @@
 <div class="game-list-item" id="{{id}}">
   <div class="combatants">
     {{#if Attacker}}
-      <h4 class="game-list-item-attacker">{{Attacker.username}}</h4>
+      <h4 class="game-list-item-attacker"><i class="fa-solid fa-sword fa-sm"></i>   {{Attacker.username}}</h4>
     {{else}}
       <button class="mini-button join-as-attacker" id="{{id}}">Join Game</button>
     {{/if}}
     <h4 class="vs">vs.</h4>
     {{#if Defender}}
-      <h4 class="game-list-item-defender">{{Defender.username}}</h4>
+      <h4 class="game-list-item-defender"><i class="fa-solid fa-shield fa-sm"></i>   {{Defender.username}}</h4>
     {{else}}
       <button class="mini-button join-as-defender" id="{{id}}">Join Game</button>
     {{/if}}
