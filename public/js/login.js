@@ -29,7 +29,8 @@ const signupFormHandler = async (event) => {
   const email = document.querySelector("#email-signup").value.trim();
   const password = document.querySelector("#password-signup").value.trim();
 
-  if (name && email && password) {
+  if (name && email && password) { 
+    
     const response = await fetch("/api/users", {
       method: "POST",
       body: JSON.stringify({ name, email, password }),
@@ -39,8 +40,10 @@ const signupFormHandler = async (event) => {
     if (response.ok) {
       document.location.replace("/");
     } else {
-      alert(response.statusText);
+      alert('username and email must be unique, password must be  6 char long');
+      console.log('whoops')
     }
+  
   }
 };
 

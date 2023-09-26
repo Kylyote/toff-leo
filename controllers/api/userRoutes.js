@@ -130,8 +130,18 @@ router.post("/", async (req, res) => {
       res.status(200).json("you have signed up and are logged in");
     });
   } catch (error) {
-      console.log('An error occurred:', error);
-    
+    res.status(400).json("an error occured");
+    // if (error instanceof sequelize.ValidationError) {
+    //   // Handle validation errors
+    //   const validationErrors = error.errors.map((err) => err.message);
+    //   console.log('Validation errors:', validationErrors);
+    // } else if (error instanceof sequelize.UniqueConstraintError) {
+    //   // Handle unique constraint errors
+    //   console.log('Email Or Username Are Already In Use');
+    // } else {
+    //   // Handle other errors
+    //   console.log('An error occurred:', error);
+    // }
   }
 });
 
