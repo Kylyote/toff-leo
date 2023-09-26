@@ -99,7 +99,7 @@ const renderGameArea = async () => {
    } else {
     gameId = '';
    }
-   const gameRenderArea = document.getElementById("gamerender")
+  const gameRenderArea = document.getElementById("gamerender")
   const domId = document.getElementById("table").closest("div").closest("div");
   const clearDom = document.getElementById("table");
   const firstGameId = document.querySelector(".game-list-item").id;
