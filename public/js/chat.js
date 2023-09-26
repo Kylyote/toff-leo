@@ -1,16 +1,5 @@
-//Socket.io
-let socketServerUrl;
-
-//For Local Development
-if (window.location.hostname === "localhost") {
-  socketServerUrl = "http://localhost:3001";
-} else {
-  //For Hosted URL ...
-  socketServerUrl = window.location.origin;
-}
-
-const socket = io(socketServerUrl);
-
+//Sockets
+const socket = window.socket;
 
 // renders chat on game load
 const loadChat = async () => {
@@ -124,19 +113,21 @@ const sendMessage = async () => {
       headers: { "Content-Type": "application/json" },
     });
 
-
     const thisNewMessage = await sendMessage.json();
 
-    if (thisNewMessage.ok) {
-      socket.emit("chat-updated", { gameId: thisGameId });
-    }
-
-    ///////////////////  SOCKET EMIT (thisNewMessage) GOES HERE
     const getMyId = await fetch("/api/users/my-id", {
       method: "GET",
     });
 
     const myId = await getMyId.json();
+
+    //Socket
+    if (sendMessage.ok){
+      socket.emit("chat-updated", {
+        senderId: myId,
+        messageContent: messageContent,
+      });
+    }
 
     renderNewMessage(myId, messageContent);
     messageField.value = "";
@@ -223,3 +214,8 @@ const renderNewMessage = async (senderId, content) => {
     messageTimeStamp.textContent = messageDateTime.toLocaleTimeString();
   }
 };
+
+socket.on('chat-updated', (data) => {
+  renderNewMessage(data.senderId, data.messageContent);
+  messageContainer.scrollTop = messageContainer.scrollHeight;
+});
