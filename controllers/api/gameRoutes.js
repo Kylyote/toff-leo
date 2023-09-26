@@ -243,6 +243,7 @@ router.put("/turn/:id", async (req, res) => {
       {
         board_state: req.body.board,
         attacker_turn: req.body.turn,
+        num_of_moves: req.body.numOfMoves,
       },
       {
         where: {
@@ -262,9 +263,11 @@ router.put("/turn/:id", async (req, res) => {
 
 router.put("/gameover/:id", async (req, res) => {
   try {
-    const gameover = await Game.update(
+    const gameIsOver = await Game.update(
       {
         game_status: req.body.gameStatus,
+        winner_id: req.body.winner_id,
+        gameover: true
       },
       {
         where: {
@@ -274,7 +277,7 @@ router.put("/gameover/:id", async (req, res) => {
     );
 
     const thisGameIsOver = await Game.findByPk(req.params.id);
-console.log("i think the update was successful")
+    console.log("i think the update was successful")
     res.status(200).json(thisGameIsOver);
   } catch (error) {
     console.log(error);

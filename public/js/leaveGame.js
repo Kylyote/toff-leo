@@ -35,9 +35,23 @@ async function forfeitGame(event) {
   //   method: "PUT",
   // });
 
-  // If the player is forfeiting as the attacker, increase their losses. Up defencer's wins
+  // If the player is forfeiting as the attacker, increase their losses. Up defender's wins. Set game status to defender wins
+  if (myId == myGame.defender_id) {
+    // Get data from DB for attacker and defender
+    let getAttackerData = await fetch(`/api/users/user/${myId}`, {
+      method:'GET',
+    });
+    let getDefenderData = await fetch(`/api/users/user/${myGame.defender_id}`, {
+      method: 'GET',
+    });
+    // change code back into an object from string
+    let attackerData = await getAttackerData.json();
+    let defenderData = await getDefenderData.json();
+    console.log("here is the data from the attacker: " + attackerData + '\n' + "here is the defender data: " + defenderData);
+    
+  }
+  // If the player is forgeiting as the defender, increase their losses. Up attacker's wins. Set game status to attacker wins. 
 
-  // If the player is forgeiting as the defender, increase their losses. Up attacker's wins
 
   console.log("Forfeit button was pressed");
 }

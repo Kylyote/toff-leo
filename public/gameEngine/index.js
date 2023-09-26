@@ -86,7 +86,20 @@ import { whosTurnIsItAnyway } from "./scripts/playerTurn.js";
 //   });
 // });
 
+
+
+
 const renderGameArea = async () => {
+
+  const pathArray = window.location.pathname.split('/');
+  let gameId = pathArray[pathArray.length - 1];
+  console.log('this is my game id ' + gameId);
+  if (gameId >= 0){
+  console.log('game found');
+   } else {
+    gameId = '';
+   }
+   const gameRenderArea = document.getElementById("gamerender")
   const domId = document.getElementById("table").closest("div").closest("div");
   const clearDom = document.getElementById("table");
   const firstGameId = document.querySelector(".game-list-item").id;
@@ -106,6 +119,33 @@ const renderGameArea = async () => {
   if (getThisGame.ok) {
     const thisGame = await getThisGame.json();
 
+ if (thisGame.gameover){
+  console.log('the game is over')
+ console.log(thisGame.winner_id)
+  const getWinner = await fetch(`/api/users/user/${thisGame.winner_id}`, {
+       method: "GET",
+  });
+
+  const winner = await getWinner.json();
+ let team
+  console.log(winner.username)
+ if(thisGame.winner_id === thisGame.attacker_id){
+   team = "Attackers"
+ }
+ if(thisGame.winner_id === thisGame.defender_id){
+   team = "Defenders"
+ }
+ console.log('the game is over')
+ gameRenderArea.innerHTML = `<h1>${winner.username} WON!</h1>
+ <h2>The game is over!</h2>
+ <p>${team} won the game in ${thisGame.num_of_moves} moves</p>
+ <button>See ${winner.username}'s stats!</button>`;
+
+ console.log(winner)
+
+
+ } else {
+
     const getSession = await fetch("/api/users/logged-in", {
       method: "GET",
     });
@@ -120,7 +160,7 @@ const renderGameArea = async () => {
 
     // gets current users details to extract name for label purposes
     const myUserName = await getMyUserName.json();
-
+// console.log(myUserName.username)
     // conditional for combatant header lables.  If you are a player it will render a different label
     const attackerLabel = loggedIn
       ? thisGame.Attacker
@@ -207,7 +247,8 @@ const renderGameArea = async () => {
         console.log("waiting on opponent");
       }
     }
-  } else {
+ }
+} else {
     alert("Could not get the game board");
   }
 
@@ -219,7 +260,20 @@ socket.on("game-updated", (data) => {
   renderGameArea();
 });
 
-renderGameArea();
+socket.on("gameover", async (data) => {
+  console.log("THE GAME IS OVER")
+  renderGameArea();
+});
+
+
+
+
+// renderGameArea();
+
+renderGameArea()
+
+
+
 export { renderGameArea };
 
 //Exporting Socket so it can be used elsewhere client side...

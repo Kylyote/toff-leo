@@ -68,61 +68,146 @@ const movePiece = async (board, row, column, pieceId, id) => {
 
   const domId = document.getElementById("table").closest("div");
   runOutcomeConditions(board, pieceId);
-  let didSomeoneWin = runKingOutcomes( board, pieceId);
+  let didSomeoneWin = runKingOutcomes( board, pieceId);    
+  
+  // Code to update win/loss at game end
+  const getThisGame = await fetch(`/api/games/${domId.id}`, {
+      method: "GET",
+    });
+  let thisGame
+    if (getThisGame.ok) {
+       thisGame = await getThisGame.json();
+    }
+    let attackerId = thisGame.attacker_id;
+    let defenderId = thisGame.defender_id;
+  // let moves = thisGame.num_of_moves
+
+     const getAttackerData = await fetch(`/api/users/user/${attackerId}`, {
+       method: "GET",
+     });
+   let attackerData
+     if (getAttackerData.ok) {
+       attackerData = await getAttackerData.json();
+
+     }  const getDefenderData = await fetch(`/api/users/user/${defenderId}`, {
+       method: "GET",
+     });
+   let defenderData
+     if (getDefenderData.ok) {
+       defenderData = await getDefenderData.json();
+     }
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   if (didSomeoneWin.attackersWon == true) {
-    let gameStatus = 'attackerWon'
+    
+    let gameStatus = 'attackerWon';
+    let winner_id = attackerId;
+     let win  = attackerData.win++;
+     let loss = attackerData.loss;
+     let draw = attackerData.draw;
+     let games = attackerData.games_played++;
+
+ const updateAttacker = await fetch(`/api/users/update/${attackerData.id}`, {
+   method: 'PUT',
+   body: JSON.stringify({win, loss, draw, games,})
+ })
+ if (updateAttacker.ok) {
+   console.log(attackerData.username + ' was updated')
+ }
+
+  win  = defenderData.win;
+  loss = defenderData.loss++;
+  draw = defenderData.draw;
+  games = defenderData.games_played++;
+ const updateDefender = await fetch(`/api/users/update/${defenderData.id}`, {
+ method: 'PUT',
+ body: JSON.stringify({win, loss, draw, games,})
+ })
+ if (updateDefender.ok) {
+ console.log(defenderData.username + ' was updated')
+ }
+
+
     console.log('THE ATTACKERS HAVE WON!!!')
     const gameover = await fetch(`/api/games/gameover/${domId.id}`, {
       method: "PUT",
-      body: JSON.stringify({ gameStatus }),
+      body: JSON.stringify({ gameStatus, winner_id }),
       headers: { "Content-Type": "application/json" },
     });
   
     //Socket Emit  
     if (gameover.ok) {
-      socket.emit('gameover', { gameId: domId.id });
+      socket.emit('game-updated', { gameId: domId.id });
     }
   } 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   else  if (didSomeoneWin.defendersWon === true) {
 
     console.log('THE DEFENDERS HAVE WON!!!')
-let gameStatus = 'defenderWon'
+    let gameStatus = 'defenderWon'
+    let winner_id =defenderId
+     let win  = defenderData.win++;
+     let loss = defenderData.loss;
+     let draw = defenderData.draw;
+     let games = defenderData.games_played++;
+
+ const updateDefender = await fetch(`/api/users/update/${defenderData.id}`, {
+   method: 'PUT',
+   body: JSON.stringify({win, loss, draw, games,})
+ })
+ if (updateDefender.ok) {
+   console.log(defenderData.username + ' was updated')
+ }
+
+  win  = attackerData.win;
+  loss = attackerData.loss++;
+  draw = attackerData.draw;
+  games = attackerData.games_played++;
+
+const updateAttacker = await fetch(`/api/users/update/${attackerData.id}`, {
+ method: 'PUT',
+ body: JSON.stringify({win, loss, draw, games,})
+ })
+ if (updateAttacker.ok) {
+ console.log(attackerData.username + ' was updated')
+ }
+
+
+
     const gameover = await fetch(`/api/games/gameover/${domId.id}`, {
       method: "PUT",
-      body: JSON.stringify({ gameStatus }),
+      body: JSON.stringify({ gameStatus, winner_id }),
     headers: { "Content-Type": "application/json" },
     });
   
     //Socket Emit  
     if (gameover.ok) {
-      socket.emit('gameover', { gameId: domId.id });
+      socket.emit('game-updated', { gameId: domId.id });
     }
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-} else {
+} else  {
   console.log('GAMEIS STILL IN PROGRESS...')
-   }
+  } 
   //switch turns
   // togglePlayerTurn();
   //add code here to post gameboard
   // console.log(board);
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//gets game Id form window
 
 
-  // const getThisGame = await fetch(`/api/games/${domId.id}`, {
-  //   method: "GET",
-  // });
-
-  // const thisGame = await getThisGame.json();
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   const turn = pieceId < 24 ? false : true;
-
+// if (turn){
+//   moves++
+// }
   console.log(turn);
-
+// console.log(moves)
   const updateGame = await fetch(`/api/games/turn/${domId.id}`, {
     method: "PUT",
-    body: JSON.stringify({ board, turn }),
+    body: JSON.stringify({ board, turn, }),
     headers: { "Content-Type": "application/json" },
   });
 
@@ -131,13 +216,14 @@ let gameStatus = 'defenderWon'
     socket.emit('game-updated', { gameId: domId.id });
   }
 
+
+
+
   //-----------
 
   // console.log(updateGame);
 
-  const getMyId = await fetch("/api/users/my-id", {
-    method: "GET",
-  });
+
 
   // const myId = await getMyId.json();
 
