@@ -129,19 +129,11 @@ router.post("/", async (req, res) => {
       req.session.userId = getThisUser.id; // sets users id for getting their games
       res.status(200).json("you have signed up and are logged in");
     });
-  } catch (error) {
-    res.status(400).json("an error occured");
-    // if (error instanceof sequelize.ValidationError) {
-    //   // Handle validation errors
-    //   const validationErrors = error.errors.map((err) => err.message);
-    //   console.log('Validation errors:', validationErrors);
-    // } else if (error instanceof sequelize.UniqueConstraintError) {
-    //   // Handle unique constraint errors
-    //   console.log('Email Or Username Are Already In Use');
-    // } else {
-    //   // Handle other errors
-    //   console.log('An error occurred:', error);
-    // }
+  } catch (error) { 
+    let errorMessage = error.errors[0].message;
+    console.log(errorMessage)
+    res.status(400).json(`${errorMessage}`);
+
   }
 });
 

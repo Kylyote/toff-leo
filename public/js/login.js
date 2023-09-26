@@ -40,8 +40,7 @@ const signupFormHandler = async (event) => {
     if (response.ok) {
       document.location.replace("/");
     } else {
-      alert('username and email must be unique, password must be  6 char long');
-      console.log('whoops')
+      console.log(response)
     }
   
   }
