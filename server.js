@@ -55,11 +55,14 @@ app.use(require("./controllers/index"));
 //Socket Broadcasting for Game Updates 
 io.on('connection', (socket) => {
   socket.on('game-updated', (data) => {
-    socket.broadcast.emit('game-updated', data); // broadcast sends the message to all clients EXCEPT the sender
+    socket.broadcast.emit('game-updated', data); // broadcast sends GAME UPDATED to all clients EXCEPT the sender
   });
   socket.on('gameover', (data) => {
-    socket.broadcast.emit('gameover', data); // broadcast sends the message to all clients EXCEPT the sender
+    socket.broadcast.emit('gameover', data); // broadcast sends GAME OVER message to all clients EXCEPT the sender
   });
+  socket.on('chat-updated', (data) => {
+    socket.broadcast.emit('chat-updated', data); //broadcast sends chat updated to all clients EXPECT the sender
+  })
 });
 
 
