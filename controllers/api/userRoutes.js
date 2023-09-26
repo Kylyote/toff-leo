@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { User, Game } = require("../../models");
 const withAuth = require("../../utils/auth");
-
+const sequelize = require("../../config/connection");
 // GET ALL USERS = for testing
 
 router.get("/", async (req, res) => {
@@ -110,7 +110,7 @@ router.post("/logout", async (req, res) => {
   });
 });
 
-// CREATE GAME
+// CREATE USER
 router.post("/", async (req, res) => {
   try {
     // creates new user
@@ -130,8 +130,8 @@ router.post("/", async (req, res) => {
       res.status(200).json("you have signed up and are logged in");
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json(error);
+      console.log('An error occurred:', error);
+    
   }
 });
 
