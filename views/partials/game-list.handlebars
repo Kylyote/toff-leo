@@ -12,3 +12,21 @@
   <script src="/js/joinGame.js" defer></script>
 {{/if}}
 </div>
+
+<div id="left-panel-sm">
+    <div id="left-panel-header-sm">
+        {{!-- <h3 id="left-panel-attacker-sm">Att.</h3> --}}
+                {{!-- <h3 id="left-panel-defender-sm">Def.</h3> --}}
+        <img src="/images/berserker-piece.png" id="left-panel-attacker-sm"></img>
+        <img src="/images/guard-piece.png" id="left-panel-defender-sm"></img>
+
+    </div>
+<div id="game-list-sm">
+{{#each games as |game|}}
+{{> game-list-item}}
+{{/each}}
+</div>
+{{#if loggedIn}}
+  <script src="/js/joinGame.js" defer></script>
+{{/if}}
+</div>

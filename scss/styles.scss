@@ -227,7 +227,8 @@ nav {
 #login-div {
   display: flex;
   position: absolute;
-  width: 640px;
+  width: 100%;
+  max-width: 640px;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -289,6 +290,14 @@ nav {
   display: flex;
   height: calc(100vh - 56px);
   overflow: hidden;
+}
+
+#left-panel-sm {
+  display: none;
+}
+
+.game-list-item-sm {
+  display: none;
 }
 
 /* GAME LIST PARTIAL */
@@ -461,14 +470,15 @@ nav {
 
 /* MY GAMES */
 #game-area {
-  width: 50vw;
-  height: 100%;
+  width: 100%;
+  height: calc(100vh - 56px);
   margin-left: 50%;
   transform: translateX(-50%);
 
   & #combatants-header {
     display: flex;
     margin-bottom: 24px;
+    width: 100%;
     max-width: 60vh;
     margin-left: 50%;
     transform: translateX(-50%);
@@ -513,13 +523,12 @@ nav {
 // GAME BOARD
 table {
   margin-top: -64px;
-  width: 100%;
   height: 100%;
   table-layout: fixed;
-  height: 65vh;
-  width: 65vh;
-  max-width: 65vh;
-  max-height: 65vh;
+  height: 60vh;
+  width: 60vh;
+  max-width: 100%;
+  max-height: 100%;
   overflow: auto;
   text-align: center;
   position: absolute;
@@ -664,6 +673,140 @@ table {
       &:hover {
         color: var(--success-900);
       }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  #left-panel {
+    display: none;
+  }
+
+  & .game-list-item {
+    display: none;
+  }
+
+  #login-div {
+    display: block;
+    max-width: 456px;
+    padding-top: 112px;
+    margin-bottom: 40px;
+
+    & #login-card {
+      margin-bottom: 16px;
+    }
+  }
+
+  & #combatants-header {
+    max-width: 45vh;
+  }
+
+  #left-panel-sm {
+    min-width: 128pxpx;
+    display: block;
+    background-color: var(--neutral-100);
+    background-image: url("../images/texture.png");
+    height: 100vh;
+    overflow-x: scroll;
+    box-shadow: var(--overlay-shadow);
+    padding-right: 0;
+
+    & #left-panel-header-sm {
+      display: flex;
+      padding: 8px 16px;
+      border-bottom: 1px solid var(--neutral-300);
+
+      & img {
+        height: 32px;
+      }
+
+      & #left-panel-defender-sm {
+        margin-left: auto;
+      }
+    }
+
+    & .game-list-item-sm {
+      padding: 16px;
+      border-bottom: 1px solid var(--neutral-300);
+      display: block;
+
+      & .combatants {
+        display: flex;
+        border-bottom: 1px solid var(--neutral-300);
+        padding-bottom: 8px;
+        margin-bottom: 8px;
+
+        & .join-as-attacker {
+          margin-right: auto;
+        }
+
+        & .join-as-defender {
+          margin-left: auto;
+        }
+
+        & .game-list-item-attacker {
+          margin-right: auto;
+        }
+
+        & .game-list-item-defender {
+          margin-left: auto;
+        }
+      }
+
+      & .start-date {
+        color: var(--neutral-600);
+      }
+
+      & .mini-button {
+        background-color: var(--primary-500);
+        font-family: var(--font-family-default);
+        font-weight: var(--font-weight-regular);
+        font-size: var(--font-small-text-size);
+        line-height: var(--font-small-text-line-height);
+        color: var(--neutral-100);
+        height: 16px;
+        padding: 1px 8px;
+
+        &:hover {
+          background-color: var(--primary-700);
+        }
+      }
+
+      & .game-list-item-view-btn {
+        width: 100%;
+        background-color: var(--opacity-success);
+        color: var(--success-700);
+        margin-top: 8px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--success-100);
+        }
+      }
+    }
+  }
+
+  & table {
+    margin-top: -64px;
+    height: 45vh;
+    width: 45vh;
+
+    .highlight-attacker {
+      background-color: var(--danger-100);
+    }
+
+    .highlight-defender {
+      background-color: var(--secondary-100);
+    }
+
+    .highlightMove {
+      background-color: var(--success-100);
     }
   }
 }
