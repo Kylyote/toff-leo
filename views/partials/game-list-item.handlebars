@@ -12,7 +12,17 @@
       <button class="mini-button join-as-defender" id="{{id}}">Join Game</button>
     {{/if}}
   </div>
-  <p class="small-text start-date">Started on:
+  <p class="small-text start-date">
+    {{! logic for if the the list itme has both attacker and defender.  If not change the label }}
+    {{#if Attacker}}
+      {{#if Defender}}
+        Started on:
+      {{else}}
+        Created on:
+      {{/if}}
+    {{else}}
+      Created on:
+    {{/if}}
     {{format_date start_date}}
     @
     {{format_time start_date}}</p>

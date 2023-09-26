@@ -17,7 +17,8 @@ const createGame = async (event) => {
 
   if (createNewGame.ok) {
     const thisNewGame = await createNewGame.json();
-    console.log(thisNewGame);
+    // redirects user to the game they created
+    document.location.replace(`/api/games/play/${thisNewGame.id}`);
   } else {
     alert(createNewGame.statusText);
   }
