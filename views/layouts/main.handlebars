@@ -21,17 +21,17 @@
   <body>
     <nav>
       <div id="left-nav-links">
-        <h2><a href="/">Lobby</a></h2>
+        <h2><a href="/"><i class="fa-solid fa-users"></i> Lobby</a></h2>
         <!-- Checks if user is logged in so they have access to their active games and stats -->
         {{#if loggedIn}}
-          <h2><a href="/my-games">My Games</a></h2>
-          <h2><a href="/my-stats">My Stats</a></h2>
+          <h2><a href="/my-games"><i class="fa-solid fa-user"></i> My Games</a></h2>
+          <h2><a href="/my-stats"><i class="fa-solid fa-gauge-min"></i> My Stats</a></h2>
         {{/if}}
       </div>
       {{#if loggedIn}}
-        <h2 id="login-out">Logout</h2>
+        <h2 id="login-out"><i class="fa-sharp fa-solid fa-arrow-right-from-arc"></i> Logout</h2>
       {{else}}
-        <h2 id="login-out"><a href="/login">Login</a></h2>
+        <h2 id="login-out"><a href="/login"><i class="fa-solid fa-arrow-right-to-arc"></i>  Login</a></h2>
       {{/if}}
     </nav>
     {{{body}}}
