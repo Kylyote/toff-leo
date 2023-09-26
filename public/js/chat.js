@@ -1,3 +1,17 @@
+//Socket.io
+let socketServerUrl;
+
+//For Local Development
+if (window.location.hostname === "localhost") {
+  socketServerUrl = "http://localhost:3001";
+} else {
+  //For Hosted URL ...
+  socketServerUrl = window.location.origin;
+}
+
+const socket = io(socketServerUrl);
+
+
 // renders chat on game load
 const loadChat = async () => {
   const isLoggedIn = await fetch("/api/users/logged-in", {
@@ -110,7 +124,12 @@ const sendMessage = async () => {
       headers: { "Content-Type": "application/json" },
     });
 
+
     const thisNewMessage = await sendMessage.json();
+
+    if (thisNewMessage.ok) {
+      socket.emit("chat-updated", { gameId: thisGameId });
+    }
 
     ///////////////////  SOCKET EMIT (thisNewMessage) GOES HERE
     const getMyId = await fetch("/api/users/my-id", {
