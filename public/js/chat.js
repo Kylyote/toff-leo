@@ -122,7 +122,7 @@ const sendMessage = async () => {
     const myId = await getMyId.json();
 
     //Socket
-    if (sendMessage.ok){
+    if (sendMessage.ok) {
       socket.emit("chat-updated", {
         senderId: myId,
         messageContent: messageContent,
@@ -215,7 +215,23 @@ const renderNewMessage = async (senderId, content) => {
   }
 };
 
-socket.on('chat-updated', (data) => {
+socket.on("chat-updated", (data) => {
   renderNewMessage(data.senderId, data.messageContent);
   messageContainer.scrollTop = messageContainer.scrollHeight;
+});
+
+// Table size hide chat functionality
+const showHideChatBtn = document.getElementById("show-chat");
+
+showHideChatBtn.addEventListener("click", () => {
+  let chatDrawer = document.getElementById("chat-div");
+  let chatDivState = chatDrawer.getAttribute("data-state");
+
+  let thisState = chatDivState == "hidden" ? true : false;
+
+  chatDrawer.style.transform = thisState
+    ? "translateY(0px)"
+    : "translateY(296px)";
+
+  chatDrawer.setAttribute("data-state", thisState ? "visable" : "hidden");
 });
