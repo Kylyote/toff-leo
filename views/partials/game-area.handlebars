@@ -1,4 +1,3 @@
-{{#if thisGame}}
 <div id="gamerender">
 
   <div id="combatants-header">
@@ -11,19 +10,13 @@
       <h3 id="defender-username"></h3></div>
     <img src="/images/defender-chip.png" id="defender-chip" />
   </div>
-  
+
   <div id="gameboard-area">
-    </div>
-    <div id="{{thisGame.id}}">
-      <table id="table"></table>
-    </div>
-  
+  </div>
+  <div id="{{thisGame.id}}">
+    <table id="table"></table>
   </div>
 
-{{else}}
-{{! the following will appear on the game are until to user selects a game }}
-<div id="my-games-greeting">
-  <h2>Select a game on the left to view</h2>
 </div>
-{{/if}}
+
 <script type="module" src="/gameEngine/index.js"></script>
