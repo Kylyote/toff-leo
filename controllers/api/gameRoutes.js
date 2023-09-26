@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { Op } = require("sequelize");
-const { Game, User } = require("../../models");
+const { Game, User, Chat } = require("../../models");
 const { withAuth, redirectToWatch } = require("../../utils/auth");
 
 // get all games
@@ -49,6 +49,7 @@ router.get("/:id", async (req, res) => {
       include: [
         { model: User, as: "Attacker" },
         { model: User, as: "Defender" },
+        { model: Chat },
       ],
     });
 
@@ -109,41 +110,6 @@ router.put("/join/:role/:gameId", async (req, res) => {
   }
 });
 
-// Forfeit game by ID
-router.put("/leave/:role/:gameId", async (req,res) => {
-  try {
-    const { role, gameId } = req.params;
-    // Get session variables
-    console.log("Game role stored in params:" + role);
-    console.log("Game ID stored in params:" + gameId);
-
-    // set values to null and change game_status
-    const forfeitGame = await Game.update(
-      {
-        attacker_id: null,
-        defender_id: null,
-      },
-      {
-        where: {
-          id: gameId,
-          [Op.or]: [
-            { attacker_id: req.session.userId, role },
-            { defender_id: req.session.userId, role }
-          ],
-        },
-      },
-    );
-
-    if(forfeitGame) {
-      res.status(200).json({message: "You have forfeit the game."});
-    } else {
-      res.status(400).json({error: "Game failed successfully!"});
-    }
-  } catch (error) {
-    console.log(error);
-    res.status(500).json(error);
-  }
-});
 
 router.get("/my-games", async (req, res) => {
   try {
@@ -277,13 +243,12 @@ router.put("/gameover/:id", async (req, res) => {
     );
 
     const thisGameIsOver = await Game.findByPk(req.params.id);
-    console.log("i think the update was successful")
+    console.log("i think the update was successful");
     res.status(200).json(thisGameIsOver);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
   }
 });
-
 
 module.exports = router;

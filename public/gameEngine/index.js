@@ -99,7 +99,7 @@ const renderGameArea = async () => {
    } else {
     gameId = '';
    }
-   const gameRenderArea = document.getElementById("gamerender")
+  const gameRenderArea = document.getElementById("gamerender")
   const domId = document.getElementById("table").closest("div").closest("div");
   const clearDom = document.getElementById("table");
   const firstGameId = document.querySelector(".game-list-item").id;
@@ -121,6 +121,10 @@ const renderGameArea = async () => {
 
  if (thisGame.gameover){
   console.log('the game is over')
+  if (thisGame.game_status == "draw"){
+    gameRenderArea.innerHTML = `<h1>The Game Was A DRAW!</h1>`;
+  } else {
+  
  console.log(thisGame.winner_id)
   const getWinner = await fetch(`/api/users/user/${thisGame.winner_id}`, {
        method: "GET",
@@ -142,7 +146,7 @@ const renderGameArea = async () => {
  <button>See ${winner.username}'s stats!</button>`;
 
  console.log(winner)
-
+}
 
  } else {
 
@@ -233,13 +237,26 @@ const renderGameArea = async () => {
 
       const myId = await getMyId.json();
 
+ if ((myId == thisGame.attacker_id) && myId == thisGame.defender_id ){
+   console.log("umm do you like have no friends")
+   let iHaveNoFriends;
+   if (thisGame.attacker_turn === true) {
+    iHaveNoFriends = 'me';
+   } else {
+    iHaveNoFriends = 'imaginaryFriend'
+   }
+   whosTurnIsItAnyway(iHaveNoFriends, thisGame.board_state);
+  } else {
+
       const myTurn =
         (myId == thisGame.attacker_id && thisGame.attacker_turn) ||
         (myId == thisGame.defender_id && !thisGame.attacker_turn)
           ? true
           : false;
 
-      const isAttacker = myId == thisGame.attacker_id ? true : false;
+      
+      
+          const isAttacker = myId == thisGame.attacker_id ? true : false;
 
       if (myTurn) {
         whosTurnIsItAnyway(isAttacker, thisGame.board_state);
@@ -247,6 +264,7 @@ const renderGameArea = async () => {
         console.log("waiting on opponent");
       }
     }
+  }
  }
 } else {
     alert("Could not get the game board");

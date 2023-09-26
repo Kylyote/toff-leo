@@ -43,7 +43,7 @@ router.get("/user/:id", async (req, res) => {
 //update a specific user
 router.put("/update/:id", async (req, res) => {
   try {
-    const updateUser = await Game.update(
+    const updateUser = await User.update(
       {
         win: req.body.win,
         loss: req.body.loss,
@@ -57,9 +57,9 @@ router.put("/update/:id", async (req, res) => {
       }
     );
 
-    const getThisUpdatedGame = await Game.findByPk(req.params.id);
+    const getThisUpdatedUser = await User.findByPk(req.params.id);
 
-    res.status(200).json(getThisUpdatedGame);
+    res.status(200).json(getThisUpdatedUser);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);

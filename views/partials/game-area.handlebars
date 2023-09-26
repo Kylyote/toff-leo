@@ -1,4 +1,3 @@
-{{#if thisGame}}
 <div id="gamerender">
 
   <div id="combatants-header">
@@ -11,15 +10,13 @@
       <h3 id="defender-username"></h3></div>
     <img src="/images/defender-chip.png" id="defender-chip" />
   </div>
-  
+
   <div id="gameboard-area">
-    </div>
-    <div id="{{thisGame.id}}">
-      <table id="table"></table>
-    </div>
-  
   </div>
-<<<<<<< HEAD
+  <div id="{{thisGame.id}}">
+    <table id="table"></table>
+  </div>
+
   <section class="end-game">
     <section id="forfeit-game">
       <button id="forfeit-game-btn">Forfeit</button>
@@ -27,24 +24,7 @@
   </section>
 </div>
 
-<<<<<<< Updated upstream
-<script type="module" src="/gameEngine/index.js"></script>
-=======
-
 {{! the following will appear on the game area until the user selects a game }}
-<div id="my-games-greeting">
-  <h2>Select a game on the left to view</h2>
-</div>
 <script type="module" src="/gameEngine/index.js"></script>
 <script type="module" src="/js/leaveGame.js"></script>
->>>>>>> Stashed changes
-=======
 
-{{else}}
-{{! the following will appear on the game are until to user selects a game }}
-<div id="my-games-greeting">
-  <h2>Select a game on the left to view</h2>
-</div>
-{{/if}}
-<script type="module" src="/gameEngine/index.js"></script>
->>>>>>> main

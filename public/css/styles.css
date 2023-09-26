@@ -221,11 +221,12 @@ nav {
 /* COMMON PAGE BODY */
 #page-body {
   display: flex;
-  height: calc(100vh - 112px); }
+  height: calc(100vh - 56px);
+  overflow: hidden; }
 
 /* GAME LIST PARTIAL */
 #left-panel {
-  width: 272px;
+  min-width: 272px;
   background-color: var(--neutral-100);
   background-image: url("../images/texture.png");
   height: 100vh;
@@ -283,7 +284,8 @@ nav {
 
 /* LOBBY */
 #root-div {
-  width: 100%; }
+  width: 100%;
+  height: 100; }
   #root-div #root-header {
     display: flex;
     padding: 32px;
@@ -345,12 +347,13 @@ nav {
     transform: translateX(-50%); }
     #game-area #combatants-header h3 {
       margin-top: 6px; }
+    #game-area #combatants-header img {
+      margin-right: 8px;
+      max-height: 40px; }
     #game-area #combatants-header #combatants-header-attacker-div {
       display: flex;
       margin-right: auto;
       max-width: 60vh; }
-      #game-area #combatants-header #combatants-header-attacker-div img {
-        margin-right: 8px; }
     #game-area #combatants-header #combatants-header-defender-div {
       display: flex;
       margin-left: auto; }
@@ -404,3 +407,74 @@ table {
     background-color: var(--secondary-100); }
   table .highlightMove {
     background-color: var(--success-100); }
+
+#chat-div {
+  min-width: 272px;
+  max-width: 272px;
+  border-left: 1px solid var(--neutral-500);
+  height: 100%; }
+  #chat-div #messages-render-div {
+    height: calc(100% - 56px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 16px;
+    overflow-y: scroll; }
+    #chat-div #messages-render-div .chat-message-received {
+      margin-bottom: 16px;
+      padding-right: 40px; }
+      #chat-div #messages-render-div .chat-message-received h4 {
+        margin-bottom: 4px;
+        width: 100%; }
+      #chat-div #messages-render-div .chat-message-received .chat-message-body {
+        width: 100%;
+        padding: 8px 12px;
+        background-color: var(--neutral-100);
+        box-shadow: var(--card-shadow);
+        border-radius: 4px;
+        background-image: url("../images/texture.png"); }
+        #chat-div #messages-render-div .chat-message-received .chat-message-body .medium-text {
+          margin-bottom: 4px; }
+        #chat-div #messages-render-div .chat-message-received .chat-message-body .small-text {
+          color: var(--neutral-600); }
+    #chat-div #messages-render-div .chat-message-sent {
+      margin-bottom: 16px;
+      padding-left: 40px; }
+      #chat-div #messages-render-div .chat-message-sent h4 {
+        margin-bottom: 4px;
+        text-align: right; }
+      #chat-div #messages-render-div .chat-message-sent .chat-message-body {
+        padding: 8px 12px;
+        background-image: url("../images/texture.png");
+        background-color: var(--neutral-100);
+        box-shadow: var(--card-shadow);
+        border-radius: 4px; }
+        #chat-div #messages-render-div .chat-message-sent .chat-message-body .medium-text {
+          margin-bottom: 4px;
+          text-align: right; }
+        #chat-div #messages-render-div .chat-message-sent .chat-message-body .small-text {
+          text-align: right;
+          color: var(--neutral-600); }
+  #chat-div #input-div {
+    padding: 8px;
+    display: flex;
+    border-top: 1px solid var(--neutral-500); }
+    #chat-div #input-div input {
+      background-color: var(--neutral-100);
+      border: 1px solid var(--neutral-400);
+      border-radius: 4px;
+      height: 40px;
+      padding: 0 12px;
+      margin-right: 16px;
+      width: 100%; }
+      #chat-div #input-div input:focus {
+        outline: 1px solid var(--primary-500); }
+    #chat-div #input-div i {
+      font-size: 20px;
+      width: 24px;
+      line-height: 40px;
+      cursor: pointer;
+      color: var(--success-700);
+      margin-right: 12px; }
+      #chat-div #input-div i:hover {
+        color: var(--success-900); }
