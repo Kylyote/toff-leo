@@ -558,6 +558,9 @@ table {
         cursor: pointer; }
         #left-panel-sm .game-list-item-sm .game-list-item-view-btn:hover {
           background-color: var(--success-100); }
+  #combatants-header-attacker-div img {
+    height: 32px;
+    width: 32px; }
   table {
     margin-top: -64px;
     height: 45vh;
