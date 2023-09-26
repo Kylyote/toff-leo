@@ -236,7 +236,7 @@ nav {
   min-width: 272px;
   background-color: var(--neutral-100);
   background-image: url("../images/texture.png");
-  height: 100vh;
+  height: 100%;
   overflow-x: scroll;
   box-shadow: var(--overlay-shadow);
   padding-right: 0; }
