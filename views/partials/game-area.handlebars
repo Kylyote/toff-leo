@@ -16,15 +16,15 @@
   <div id="{{thisGame.id}}">
     <table id="table"></table>
   </div>
-
-  <section class="end-game">
-    <section id="forfeit-game">
-      <button id="forfeit-game-btn">Forfeit</button>
-    </section>
-  </section>
 </div>
-
+{{#if loggedIn}}
+    <section class="end-game">
+      <section id="forfeit-game">
+        <button id="forfeit-game-btn">Forfeit</button>
+      </section>
+    </section>
+<script type="module" src="/js/leaveGame.js"></script>
+{{/if}}
 {{! the following will appear on the game area until the user selects a game }}
 <script type="module" src="/gameEngine/index.js"></script>
-<script type="module" src="/js/leaveGame.js"></script>
 
