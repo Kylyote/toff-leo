@@ -224,12 +224,10 @@ const showHideChatBtn = document.getElementById("show-chat");
 showHideChatBtn.addEventListener("click", () => {
   let chatDrawer = document.getElementById("chat-div");
   let chatDivState = chatDrawer.getAttribute("data-state");
-
   let thisState = chatDivState == "hidden" ? true : false;
 
   chatDrawer.style.transform = thisState
     ? "translateY(0px)"
     : "translateY(296px)";
-
   chatDrawer.setAttribute("data-state", thisState ? "visable" : "hidden");
 });

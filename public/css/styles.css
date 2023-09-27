@@ -537,7 +537,8 @@ nav {
     top: 0;
     z-index: 3; }
   #page-body {
-    overflow: none; }
+    overflow: none;
+    position: relative; }
   #left-panel {
     display: none; }
   .game-list-item {
