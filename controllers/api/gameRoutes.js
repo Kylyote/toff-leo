@@ -241,7 +241,7 @@ router.put("/gameover/:id", async (req, res) => {
         },
       }
     );
-
+    
     const thisGameIsOver = await Game.findByPk(req.params.id);
     console.log("i think the update was successful");
     res.status(200).json(thisGameIsOver);

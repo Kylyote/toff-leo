@@ -121,7 +121,7 @@ const movePiece = async (board, row, column, pieceId, id) => {
    body: JSON.stringify({win, loss, draw, games,})
  })
  if (updateAttacker.ok) {
-   console.log(attackerData.username + ' was updated')
+   console.log(attackerData.username + ' was updated');
  }
 
   win  = defenderData.win;
@@ -133,9 +133,8 @@ const movePiece = async (board, row, column, pieceId, id) => {
  body: JSON.stringify({win, loss, draw, games,})
  })
  if (updateDefender.ok) {
- console.log(defenderData.username + ' was updated')
+ console.log(defenderData.username + ' was updated');
  }
-
 
     console.log('THE ATTACKERS HAVE WON!!!')
     const gameover = await fetch(`/api/games/gameover/${domId.id}`, {
@@ -171,7 +170,8 @@ const movePiece = async (board, row, column, pieceId, id) => {
 
  const updateDefender = await fetch(`/api/users/update/${defenderData.id}`, {
    method: 'PUT',
-   body: JSON.stringify({win, loss, draw, games,})
+   body: JSON.stringify({win, loss, draw, games,}),
+   headers: { "Content-Type": "application/json" },
  });
  if (updateDefender.ok) {
    console.log(defenderData.username + ' was updated');
@@ -184,7 +184,8 @@ const movePiece = async (board, row, column, pieceId, id) => {
 
   const updateAttacker = await fetch(`/api/users/update/${attackerData.id}`, {
   method: 'PUT',
-  body: JSON.stringify({win, loss, draw, games,})
+  body: JSON.stringify({win, loss, draw, games,}),
+  headers: { "Content-Type": "application/json" },
   });
   if (updateAttacker.ok) {
     console.log(attackerData.username + ' was updated');
@@ -195,7 +196,7 @@ const movePiece = async (board, row, column, pieceId, id) => {
     const gameover = await fetch(`/api/games/gameover/${domId.id}`, {
       method: "PUT",
       body: JSON.stringify({ gameStatus, winner_id }),
-    headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" },
     });
   
     //Socket Emit  

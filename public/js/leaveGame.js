@@ -1,3 +1,6 @@
+//import needed modules
+import {socket} from "../gameEngine/index.js";
+
 const leaveGameBtn = document.querySelector("#leave-game-btn");
 const forfeitGameBtn = document.querySelector("#forfeit-game-btn");
 
@@ -14,9 +17,12 @@ async function forfeitGame(event) {
   console.log("This is the player ID: " + myId);
   
   // Game ID from the window, can be seen in the URL path
-  const pathArray = window.location.pathname.split('/');
-  const gameId = pathArray[pathArray.length - 1];
-  console.log("This is the game ID: " + gameId);
+  // const pathArray = window.location.pathname.split('/');
+  // const gameId = pathArray[pathArray.length - 1];
+  // console.log("This is the game ID: " + gameId);
+  const domId = document.getElementById("table").closest("div");
+  const gameId = domId.id;
+
 
   const getMyGame = await fetch(`/api/games/${gameId}`, {
     method: "GET",
@@ -45,19 +51,23 @@ async function forfeitGame(event) {
     // Push changes to game update
     const updateGame = await fetch(`/api/games/gameover/${gameId}`, {
       method: "PUT",
-      body: JSON.stringify({ gameStatus, winner_id })
+      body: JSON.stringify({ gameStatus, winner_id }),
+      headers: { "Content-Type": "application/json"},
     });
     if(updateGame.ok){
       console.log(gameId + " game info updated with game end");
     }
 
     // update defender game stats
-    let win = defenderData.win++;
-    let games = defenderData.games_played++;
+    let win = defenderData.win;
+    win++;
+    let games = defenderData.games_played;
+    games++;
     // push changes to the defender database
     const updateDefender = await fetch(`/api/users/update/${defenderData.id}`, {
       method: "PUT",
-      body: JSON.stringify({win, games})
+      body: JSON.stringify({win, games}),
+      headers: { "Content-Type": "application/json" },
     });
     if (updateDefender.ok){
       console.log(defenderData.username + " info updated");
@@ -74,6 +84,11 @@ async function forfeitGame(event) {
     });
     if(updateAttacker.ok){
       console.log(attackerData.username + " info updated")
+    }
+    
+    //Socket Emit to call game over screen 
+    if (updateGame.ok) {
+      socket.emit('game-updated', { gameId: domId.id });
     }
   }
 
@@ -97,19 +112,23 @@ async function forfeitGame(event) {
     // Push changes to game update
     const updateGame = await fetch(`/api/games/gameover/${gameId}`, {
       method: "PUT",
-      body: JSON.stringify({ gameStatus, winner_id })
+      body: JSON.stringify({ gameStatus, winner_id }),
+      headers: { "Content-Type": "application/json"},
     });
     if(updateGame.ok){
       console.log(gameId + " game info updated with game end");
     }
 
     // update attacker game stats
-    let win = attackerData.win++;
-    let games = attackerData.games_played++;
+    let win = attackerData.win;
+    win++;
+    let games = attackerData.games_played;
+    games++;
     // push changes to the attacker database
     const updateAttacker = await fetch(`/api/users/update/${attackerData.id}`, {
       method: "PUT",
-      body: JSON.stringify({win, games})
+      body: JSON.stringify({win, games}),
+      headers: { "Content-Type": "application/json" },
     });
     if(updateAttacker.ok){
       console.log(attackerData.username + " info updated")
@@ -127,7 +146,13 @@ async function forfeitGame(event) {
     if (updateDefender.ok){
       console.log(defenderData.username + " info updated");
     }
+    //Socket Emit to call game over screen 
+    if (updateGame.ok) {
+      socket.emit('game-updated', { gameId: domId.id });
+    }
   }
+
+        
 }
 
 forfeitGameBtn.addEventListener("click", forfeitGame);

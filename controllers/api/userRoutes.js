@@ -47,8 +47,8 @@ router.put("/update/:id", async (req, res) => {
       {
         win: req.body.win,
         loss: req.body.loss,
-        games_played: req.body.games,
         draw: req.body.draw,
+        games_played: req.body.games,
       },
       {
         where: {
@@ -56,9 +56,9 @@ router.put("/update/:id", async (req, res) => {
         },
       }
     );
-
+    console.log("THIS USER UPDATE FUCKING RAN!");
     const getThisUpdatedUser = await User.findByPk(req.params.id);
-
+    
     res.status(200).json(getThisUpdatedUser);
   } catch (error) {
     console.log(error);
