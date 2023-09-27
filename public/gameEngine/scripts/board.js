@@ -24,6 +24,7 @@ const gameBoard = {
   i: [null, null, null, null, null, null, null, null, null, null, null],
   j: [null, null, null, null, null, 18, null, null, null, null, null],
   k: [null, null, null, 19, 20, 21, 22, 23, null, null, null],
+  //associate visual classes of board with the cellId eg. h2, a3, f5
 };
 
 // console.log(board)
@@ -33,7 +34,7 @@ const generateNineByNine = (board)  => {
   let html = "";
   
   for (const key in board) {
-      html += '<tr id="table-nine-by-nine">';
+      html += '<tr id="table_board">';
       const currentArray = board[key];
   
       for (let i = 0; i < currentArray.length; i++) {
@@ -63,7 +64,7 @@ const generateBoard = (board) => {
   let html = "";
 
   for (const key in board) {
-    html += '<tr id="table">';
+    html += '<tr id="table_board">';
     const currentArray = board[key];
 
     for (let i = 0; i < currentArray.length; i++) {

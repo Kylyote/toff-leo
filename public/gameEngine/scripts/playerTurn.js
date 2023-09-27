@@ -72,9 +72,18 @@ const handleInitialClick = (pieceType, board) => {
       console.log("these are my clicks " + clicks);
       if (clicks != 0) {
         console.log("i should be resetting the turn");
+        let table;
+        let clonedTable;
+        console.log(board.a.length)
+if (board.a.length === 9){
+         table = document.getElementById("table-nine-by-nine");
+         clonedTable = table.cloneNode(true); // Clone the table and its descendants
 
-        const table = document.getElementById("table");
-        const clonedTable = table.cloneNode(true); // Clone the table and its descendants
+      }else {
+         table = document.getElementById("table");
+         clonedTable = table.cloneNode(true); // Clone the table and its descendants
+
+      }
 
         table.parentNode.replaceChild(clonedTable, table);
         handleInitialClick(pieceType, board);
