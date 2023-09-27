@@ -12,7 +12,7 @@ if (window.location.hostname === "localhost") {
   socketServerUrl = window.location.origin;
 }
 
-const socket = io(socketServerUrl);
+window.socket = io(socketServerUrl);
 
 if (isAttacker.length > 0) {
   isAttacker.forEach((element) => {

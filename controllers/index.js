@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { Op } = require("sequelize");
 const apiRoutes = require("./api");
 const { Game, User } = require("../models");
+const { withAuth } = require("../utils/auth");
 
 router.use("/api", apiRoutes); //extends routes into api folder.
 
@@ -39,7 +40,7 @@ router.get("/login", async (req, res) => {
 });
 
 // renders my-games
-router.get("/my-games", async (req, res) => {
+router.get("/my-games", withAuth, async (req, res) => {
   try {
     const getMyGames = await Game.findAll({
       where: {

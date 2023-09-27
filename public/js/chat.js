@@ -1,3 +1,6 @@
+//Sockets
+const socket = window.socket;
+
 // renders chat on game load
 const loadChat = async () => {
   const isLoggedIn = await fetch("/api/users/logged-in", {
@@ -112,12 +115,19 @@ const sendMessage = async () => {
 
     const thisNewMessage = await sendMessage.json();
 
-    ///////////////////  SOCKET EMIT (thisNewMessage) GOES HERE
     const getMyId = await fetch("/api/users/my-id", {
       method: "GET",
     });
 
     const myId = await getMyId.json();
+
+    //Socket
+    if (sendMessage.ok){
+      socket.emit("chat-updated", {
+        senderId: myId,
+        messageContent: messageContent,
+      });
+    }
 
     renderNewMessage(myId, messageContent);
     messageField.value = "";
@@ -204,3 +214,8 @@ const renderNewMessage = async (senderId, content) => {
     messageTimeStamp.textContent = messageDateTime.toLocaleTimeString();
   }
 };
+
+socket.on('chat-updated', (data) => {
+  renderNewMessage(data.senderId, data.messageContent);
+  messageContainer.scrollTop = messageContainer.scrollHeight;
+});
