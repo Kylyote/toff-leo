@@ -1,13 +1,13 @@
 <div class="game-list-item" id="{{id}}">
   <div class="combatants">
     {{#if Attacker}}
-      <h4 class="game-list-item-attacker">{{Attacker.username}}</h4>
+      <h4 class="game-list-item-attacker"><i class="fa-solid fa-sword fa-sm"></i>   {{Attacker.username}}</h4>
     {{else}}
       <button class="mini-button join-as-attacker" id="{{id}}">Join Game</button>
     {{/if}}
     <h4 class="vs">vs.</h4>
     {{#if Defender}}
-      <h4 class="game-list-item-defender">{{Defender.username}}</h4>
+      <h4 class="game-list-item-defender"><i class="fa-solid fa-shield fa-sm"></i>   {{Defender.username}}</h4>
     {{else}}
       <button class="mini-button join-as-defender" id="{{id}}">Join Game</button>
     {{/if}}
@@ -16,12 +16,43 @@
     {{! logic for if the the list itme has both attacker and defender.  If not change the label }}
     {{#if Attacker}}
       {{#if Defender}}
-        Started on:
+        <i class="fa-solid fa-calendar-clock fa-sm"></i> Started on:
       {{else}}
-        Created on:
+        <i class="fa-solid fa-calendar-clock fa-sm"></i> Created on:
       {{/if}}
     {{else}}
-      Created on:
+      <i class="fa-solid fa-calendar-clock fa-sm"></i> Created on:
+    {{/if}}
+    {{format_date start_date}}
+    @
+    {{format_time start_date}}</p>
+  <button class="game-list-item-view-btn mini-button" id="{{id}}"><i class="fa-solid fa-eye fa-sm"></i> View Game</button>
+</div>
+
+<div class="game-list-item-sm" id="{{id}}">
+  <div class="combatants">
+    {{#if Attacker}}
+      <h4 class="game-list-item-attacker">{{Attacker.username}}</h4>
+    {{else}}
+      <button class="mini-button join-as-attacker" id="{{id}}">Join</button>
+    {{/if}}
+    <h4 class="vs">vs.</h4>
+    {{#if Defender}}
+      <h4 class="game-list-item-defender">{{Defender.username}}</h4>
+    {{else}}
+      <button class="mini-button join-as-defender" id="{{id}}">Join</button>
+    {{/if}}
+  </div>
+  <p class="small-text start-date">
+    {{! logic for if the the list itme has both attacker and defender.  If not change the label }}
+    {{#if Attacker}}
+      {{#if Defender}}
+      <i class="fa-solid fa-calendar-clock fa-sm"></i> Started on:
+      {{else}}
+      <i class="fa-solid fa-calendar-clock fa-sm"></i> Created on:
+      {{/if}}
+    {{else}}
+     <i class="fa-solid fa-calendar-clock fa-sm"></i> Created on:
     {{/if}}
     {{format_date start_date}}
     @

@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { User, Game } = require("../../models");
 const withAuth = require("../../utils/auth");
-
+const sequelize = require("../../config/connection");
 // GET ALL USERS = for testing
 
 router.get("/", async (req, res) => {
@@ -43,7 +43,7 @@ router.get("/user/:id", async (req, res) => {
 //update a specific user
 router.put("/update/:id", async (req, res) => {
   try {
-    const updateUser = await Game.update(
+    const updateUser = await User.update(
       {
         win: req.body.win,
         loss: req.body.loss,
@@ -57,7 +57,7 @@ router.put("/update/:id", async (req, res) => {
       }
     );
 
-    const getThisUpdatedGame = await Game.findByPk(req.params.id);
+    const getThisUpdatedGame = await User.findByPk(req.params.id);
 
     res.status(200).json(getThisUpdatedGame);
   } catch (error) {
@@ -110,7 +110,7 @@ router.post("/logout", async (req, res) => {
   });
 });
 
-// CREATE GAME
+// CREATE USER
 router.post("/", async (req, res) => {
   try {
     // creates new user
@@ -129,9 +129,11 @@ router.post("/", async (req, res) => {
       req.session.userId = getThisUser.id; // sets users id for getting their games
       res.status(200).json("you have signed up and are logged in");
     });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json(error);
+  } catch (error) { 
+    let errorMessage = error.errors[0].message;
+    console.log(errorMessage)
+    res.status(400).json(`${errorMessage}`);
+
   }
 });
 
