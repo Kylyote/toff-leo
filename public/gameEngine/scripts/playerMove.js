@@ -155,7 +155,6 @@ const movePiece = async (board, row, column, pieceId, id) => {
     if (gameover.ok) {
       socket.emit('game-updated', { gameId: domId.id });
     }
-    renderGameArea();
   } 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   else if (didSomeoneWin.defendersWon === true) {
@@ -218,7 +217,6 @@ const movePiece = async (board, row, column, pieceId, id) => {
     if (gameover.ok) {
       socket.emit('game-updated', { gameId: domId.id });
     }
-    renderGameArea();
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 } else  {
   console.log('GAMEIS STILL IN PROGRESS...');
