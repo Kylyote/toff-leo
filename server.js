@@ -54,17 +54,19 @@ app.use(require("./controllers/index"));
 
 //Socket Broadcasting for Game Updates 
 io.on('connection', (socket) => {
+  //Game Updates
   socket.on('game-updated', (data) => {
     socket.broadcast.emit('game-updated', data); // broadcast sends GAME UPDATED to all clients EXCEPT the sender
   });
+  //Gameover Updates
   socket.on('gameover', (data) => {
     socket.broadcast.emit('gameover', data); // broadcast sends GAME OVER message to all clients EXCEPT the sender
   });
+  //Chat Updates
   socket.on('chat-updated', (data) => {
     socket.broadcast.emit('chat-updated', data); //broadcast sends chat updated to all clients EXPECT the sender
-  })
+  });
 });
-
 
 // set to alter. This will update the tables in the database if changes are made to the models.  set to default when deployed
 sequelize.sync({ alter: true }).then(() => {

@@ -86,51 +86,59 @@ const movePiece = async (board, row, column, pieceId, id) => {
        method: "GET",
      });
    let attackerData
-     if (getAttackerData.ok) {
+   
        attackerData = await getAttackerData.json();
 
-     }  const getDefenderData = await fetch(`/api/users/user/${defenderId}`, {
+      const getDefenderData = await fetch(`/api/users/user/${defenderId}`, {
        method: "GET",
      });
    let defenderData
-     if (getDefenderData.ok) {
+
        defenderData = await getDefenderData.json();
-     }
+    
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   if (didSomeoneWin.attackersWon == true) {
 
     let gameStatus = 'attackerWon';
     let winner_id = attackerId;
-     let win  = attackerData.win++;
+     let win  = attackerData.win;
+     win++;
      let loss = attackerData.loss;
      let draw = attackerData.draw;
-     let games = attackerData.games_played++;
+     let games = attackerData.games_played;
+     games++;
 
      if (attackerId === defenderId){
       gameStatus = 'draw';
        winner_id = null;
        win  = attackerData.win;
        loss = attackerData.loss;
-       draw = attackerData.draw++;
-       games = attackerData.games_played++;
+       draw = attackerData.draw;
+       draw++;
+       games = attackerData.games_played;
+       games++;
    }
 
  const updateAttacker = await fetch(`/api/users/update/${attackerData.id}`, {
    method: 'PUT',
-   body: JSON.stringify({win, loss, draw, games,})
+   body: JSON.stringify({win, loss, draw, games,}),
+   headers: { "Content-Type": "application/json" },
  })
  if (updateAttacker.ok) {
    console.log(attackerData.username + ' was updated');
  }
 
   win  = defenderData.win;
-  loss = defenderData.loss++;
+  loss = defenderData.loss;
+  loss++;
   draw = defenderData.draw;
-  games = defenderData.games_played++;
+  games = defenderData.games_played;
+  games++;
  const updateDefender = await fetch(`/api/users/update/${defenderData.id}`, {
  method: 'PUT',
- body: JSON.stringify({win, loss, draw, games,})
+ body: JSON.stringify({win, loss, draw, games,}),
+ headers: { "Content-Type": "application/json" },
  })
  if (updateDefender.ok) {
  console.log(defenderData.username + ' was updated');
@@ -147,25 +155,30 @@ const movePiece = async (board, row, column, pieceId, id) => {
     if (gameover.ok) {
       socket.emit('game-updated', { gameId: domId.id });
     }
+    renderGameArea();
   } 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   else if (didSomeoneWin.defendersWon === true) {
 
-    console.log('THE DEFENDERS HAVE WON!!!');
-      let gameStatus = 'defenderWon';
-      let winner_id = defenderId;
-      let win  = defenderData.win++;
-      let loss = defenderData.loss;
-      let draw = defenderData.draw;
-      let games = defenderData.games_played++;
+    console.log('THE DEFENDERS HAVE WON!!!')
+    let gameStatus = 'defenderWon'
+    let winner_id =defenderId
+     let win  = defenderData.win;
+     win++;
+     let loss = defenderData.loss;
+     let draw = defenderData.draw;
+     let games = defenderData.games_played;
+     games++;
 
      if (attackerId === defenderId){
-        gameStatus = 'draw';
-        winner_id = null;
-        win  = attackerData.win;
-        loss = attackerData.loss;
-        draw = attackerData.draw++;
-        games = attackerData.games_played++;
+      gameStatus = 'draw';
+       winner_id = null;
+       win  = attackerData.win;
+       loss = attackerData.loss;
+       draw = attackerData.draw;
+       draw++;
+       games = attackerData.games_played;
+       games++;
    }
 
  const updateDefender = await fetch(`/api/users/update/${defenderData.id}`, {
@@ -178,9 +191,11 @@ const movePiece = async (board, row, column, pieceId, id) => {
  }
 
   win  = attackerData.win;
-  loss = attackerData.loss++;
+  loss = attackerData.loss;
+  win++;
   draw = attackerData.draw;
-  games = attackerData.games_played++;
+  games = attackerData.games_played;
+  games++
 
   const updateAttacker = await fetch(`/api/users/update/${attackerData.id}`, {
   method: 'PUT',
@@ -203,6 +218,7 @@ const movePiece = async (board, row, column, pieceId, id) => {
     if (gameover.ok) {
       socket.emit('game-updated', { gameId: domId.id });
     }
+    renderGameArea();
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 } else  {
   console.log('GAMEIS STILL IN PROGRESS...');
@@ -234,8 +250,8 @@ const movePiece = async (board, row, column, pieceId, id) => {
   if (updateGame.ok) {
     socket.emit('game-updated', { gameId: domId.id });
   }
-
-
+  renderGameArea();
+  
 
 
   //-----------
