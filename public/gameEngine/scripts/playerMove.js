@@ -70,6 +70,7 @@ const movePiece = async (board, row, column, pieceId, id) => {
   runOutcomeConditions(board, pieceId);
   let didSomeoneWin = runKingOutcomes( board, pieceId);    
   
+  // Code to update win/loss at game end
   const getThisGame = await fetch(`/api/games/${domId.id}`, {
       method: "GET",
     });
@@ -85,56 +86,63 @@ const movePiece = async (board, row, column, pieceId, id) => {
        method: "GET",
      });
    let attackerData
-     if (getAttackerData.ok) {
+   
        attackerData = await getAttackerData.json();
 
-     }  const getDefenderData = await fetch(`/api/users/user/${defenderId}`, {
+      const getDefenderData = await fetch(`/api/users/user/${defenderId}`, {
        method: "GET",
      });
    let defenderData
-     if (getDefenderData.ok) {
+
        defenderData = await getDefenderData.json();
-     }
+    
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   if (didSomeoneWin.attackersWon == true) {
 
     let gameStatus = 'attackerWon';
     let winner_id = attackerId;
-     let win  = attackerData.win++;
+     let win  = attackerData.win;
+     win++;
      let loss = attackerData.loss;
      let draw = attackerData.draw;
-     let games = attackerData.games_played++;
+     let games = attackerData.games_played;
+     games++;
 
      if (attackerId === defenderId){
       gameStatus = 'draw';
        winner_id = null;
        win  = attackerData.win;
        loss = attackerData.loss;
-       draw = attackerData.draw++;
-       games = attackerData.games_played++;
+       draw = attackerData.draw;
+       draw++;
+       games = attackerData.games_played;
+       games++;
    }
 
  const updateAttacker = await fetch(`/api/users/update/${attackerData.id}`, {
    method: 'PUT',
-   body: JSON.stringify({win, loss, draw, games,})
+   body: JSON.stringify({win, loss, draw, games,}),
+   headers: { "Content-Type": "application/json" },
  })
  if (updateAttacker.ok) {
-   console.log(attackerData.username + ' was updated')
+   console.log(attackerData.username + ' was updated');
  }
 
   win  = defenderData.win;
-  loss = defenderData.loss++;
+  loss = defenderData.loss;
+  loss++;
   draw = defenderData.draw;
-  games = defenderData.games_played++;
+  games = defenderData.games_played;
+  games++;
  const updateDefender = await fetch(`/api/users/update/${defenderData.id}`, {
  method: 'PUT',
- body: JSON.stringify({win, loss, draw, games,})
+ body: JSON.stringify({win, loss, draw, games,}),
+ headers: { "Content-Type": "application/json" },
  })
  if (updateDefender.ok) {
- console.log(defenderData.username + ' was updated')
+ console.log(defenderData.username + ' was updated');
  }
-
 
     console.log('THE ATTACKERS HAVE WON!!!')
     const gameover = await fetch(`/api/games/gameover/${domId.id}`, {
@@ -149,52 +157,60 @@ const movePiece = async (board, row, column, pieceId, id) => {
     }
   } 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  else  if (didSomeoneWin.defendersWon === true) {
+  else if (didSomeoneWin.defendersWon === true) {
 
     console.log('THE DEFENDERS HAVE WON!!!')
     let gameStatus = 'defenderWon'
     let winner_id =defenderId
-     let win  = defenderData.win++;
+     let win  = defenderData.win;
+     win++;
      let loss = defenderData.loss;
      let draw = defenderData.draw;
-     let games = defenderData.games_played++;
+     let games = defenderData.games_played;
+     games++;
 
      if (attackerId === defenderId){
       gameStatus = 'draw';
        winner_id = null;
        win  = attackerData.win;
        loss = attackerData.loss;
-       draw = attackerData.draw++;
-       games = attackerData.games_played++;
+       draw = attackerData.draw;
+       draw++;
+       games = attackerData.games_played;
+       games++;
    }
 
  const updateDefender = await fetch(`/api/users/update/${defenderData.id}`, {
    method: 'PUT',
-   body: JSON.stringify({win, loss, draw, games,})
- })
+   body: JSON.stringify({win, loss, draw, games,}),
+   headers: { "Content-Type": "application/json" },
+ });
  if (updateDefender.ok) {
-   console.log(defenderData.username + ' was updated')
+   console.log(defenderData.username + ' was updated');
  }
 
   win  = attackerData.win;
-  loss = attackerData.loss++;
+  loss = attackerData.loss;
+  win++;
   draw = attackerData.draw;
-  games = attackerData.games_played++;
+  games = attackerData.games_played;
+  games++
 
-const updateAttacker = await fetch(`/api/users/update/${attackerData.id}`, {
- method: 'PUT',
- body: JSON.stringify({win, loss, draw, games,})
- })
- if (updateAttacker.ok) {
- console.log(attackerData.username + ' was updated')
- }
+  const updateAttacker = await fetch(`/api/users/update/${attackerData.id}`, {
+  method: 'PUT',
+  body: JSON.stringify({win, loss, draw, games,}),
+  headers: { "Content-Type": "application/json" },
+  });
+  if (updateAttacker.ok) {
+    console.log(attackerData.username + ' was updated');
+  }
 
 
 
     const gameover = await fetch(`/api/games/gameover/${domId.id}`, {
       method: "PUT",
       body: JSON.stringify({ gameStatus, winner_id }),
-    headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" },
     });
   
     //Socket Emit  
@@ -203,7 +219,7 @@ const updateAttacker = await fetch(`/api/users/update/${attackerData.id}`, {
     }
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 } else  {
-  console.log('GAMEIS STILL IN PROGRESS...')
+  console.log('GAMEIS STILL IN PROGRESS...');
   } 
   //switch turns
   // togglePlayerTurn();
@@ -232,26 +248,24 @@ const updateAttacker = await fetch(`/api/users/update/${attackerData.id}`, {
   if (updateGame.ok) {
     socket.emit('game-updated', { gameId: domId.id });
   }
-
-
-
-
+  
+  
+  
   //-----------
-
+  
   // console.log(updateGame);
-
-
-
+  
+  
+  
   // const myId = await getMyId.json();
-
+  
   // const isAttacker = myId == thisGame.attacker_id ? true : false;
-
+  
   // \/ \/ \/ \/ THIS IS FOR TESTING LOCCALLY ONLY, REMOVE FOR GAME TO FUNCTION PROPERLY ONLINE \/ \/ \/ \/
   // whosTurnIsItAnyway(isAttacker);
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   renderGameArea();
-};
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+}
 // Example usage of the movePiece function
 
 export { handleClick };
