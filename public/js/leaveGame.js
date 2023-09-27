@@ -1,4 +1,6 @@
 //import needed modules
+import { renderGameArea } from "../gameEngine/index.js";
+
 import {socket} from "../gameEngine/index.js";
 
 const leaveGameBtn = document.querySelector("#leave-game-btn");
@@ -20,9 +22,8 @@ async function forfeitGame(event) {
   // const pathArray = window.location.pathname.split('/');
   // const gameId = pathArray[pathArray.length - 1];
   // console.log("This is the game ID: " + gameId);
-  const domId = document.getElementById("table").closest("div");
-  const gameId = domId.id;
-
+  const dom = document.getElementById("gameboard-area");
+  const gameId = dom.parentNode.id;
 
   const getMyGame = await fetch(`/api/games/${gameId}`, {
     method: "GET",
@@ -88,7 +89,7 @@ async function forfeitGame(event) {
     
     //Socket Emit to call game over screen 
     if (updateGame.ok) {
-      socket.emit('game-updated', { gameId: domId.id });
+      socket.emit('game-updated', { gameId: gameId });
     }
   }
 
@@ -148,10 +149,10 @@ async function forfeitGame(event) {
     }
     //Socket Emit to call game over screen 
     if (updateGame.ok) {
-      socket.emit('game-updated', { gameId: domId.id });
+      socket.emit('game-updated', { gameId: gameId });
     }
   }
-
+  renderGameArea()
         
 }
 
