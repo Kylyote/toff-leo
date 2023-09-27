@@ -1,4 +1,4 @@
-const router = require("express").Router();
+ const router = require("express").Router();
 const { User, Game } = require("../../models");
 const withAuth = require("../../utils/auth");
 const sequelize = require("../../config/connection");
@@ -47,8 +47,8 @@ router.put("/update/:id", async (req, res) => {
       {
         win: req.body.win,
         loss: req.body.loss,
-        games_played: req.body.games,
         draw: req.body.draw,
+        games_played: req.body.games,
       },
       {
         where: {

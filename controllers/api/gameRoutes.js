@@ -110,7 +110,7 @@ router.put("/join/:role/:gameId", async (req, res) => {
   }
 });
 
-// gets all of my games
+
 router.get("/my-games", async (req, res) => {
   try {
     const getMyGames = await Game.findAll({
@@ -241,7 +241,7 @@ router.put("/gameover/:id", async (req, res) => {
         },
       }
     );
-
+    
     const thisGameIsOver = await Game.findByPk(req.params.id);
     console.log("i think the update was successful");
     res.status(200).json(thisGameIsOver);

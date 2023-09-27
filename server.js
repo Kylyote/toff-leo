@@ -68,7 +68,7 @@ io.on('connection', (socket) => {
   });
 });
 
-// set to alter.  This will update the tables in the database if changes are made to the models.  set to default when deployed
+// set to alter. This will update the tables in the database if changes are made to the models.  set to default when deployed
 sequelize.sync({ alter: true }).then(() => {
   server.listen(PORT, () => console.log(`Toff-leo is now listing on http://localhost:${PORT}`));
 });
