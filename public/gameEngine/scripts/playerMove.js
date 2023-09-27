@@ -248,23 +248,23 @@ const movePiece = async (board, row, column, pieceId, id) => {
   if (updateGame.ok) {
     socket.emit('game-updated', { gameId: domId.id });
   }
-  renderGameArea();
   
-
-
+  
+  
   //-----------
-
+  
   // console.log(updateGame);
-
-
-
+  
+  
+  
   // const myId = await getMyId.json();
-
+  
   // const isAttacker = myId == thisGame.attacker_id ? true : false;
-
+  
   // \/ \/ \/ \/ THIS IS FOR TESTING LOCCALLY ONLY, REMOVE FOR GAME TO FUNCTION PROPERLY ONLINE \/ \/ \/ \/
   // whosTurnIsItAnyway(isAttacker);
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  renderGameArea();
 }
 // Example usage of the movePiece function
 
