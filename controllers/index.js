@@ -85,5 +85,13 @@ router.get("/my-games/:id", async (req, res) => {
   }
 });
 
+// Renders stat page
+router.get('/my-stats', withAuth, async(req, res) => {
+  try {
+    const getMyStats = await User.findByPk()
+  } catch (err) {
+    
+  }
+})
 // was throwing error without the Router() middleware being passed into server.js
 module.exports = router;
