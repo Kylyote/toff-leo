@@ -315,6 +315,10 @@ nav {
     padding: 8px 16px;
     border-bottom: 1px solid var(--neutral-300);
 
+    & i {
+      font-size: 12px;
+    }
+
     & h3 {
       color: var(--danger-700);
     }
@@ -521,7 +525,7 @@ nav {
 }
 
 // GAME BOARD
-#table {
+#table-render {
   margin-top: -64px;
   height: 100%;
   table-layout: fixed;
@@ -822,7 +826,7 @@ nav {
     }
   }
 
-  table {
+  & #table-render {
     margin-top: -64px;
     height: 45vh;
     width: 45vh;
@@ -959,6 +963,21 @@ nav {
           color: var(--success-900);
         }
       }
+    }
+  }
+
+  nav {
+    & h2 {
+      font-family: var(--font-family-default);
+      font-weight: var(--font-weight-medium);
+      font-size: var(--font-h3-size);
+      line-height: var(--font-h3-line-height);
+      margin-top: 4px;
+    }
+
+    & i {
+      font-size: 16px;
+      margin-top: 4px;
     }
   }
 }

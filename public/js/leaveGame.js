@@ -6,18 +6,16 @@ import {socket} from "../gameEngine/index.js";
 const leaveGameBtn = document.querySelector("#leave-game-btn");
 const forfeitGameBtn = document.querySelector("#forfeit-game-btn");
 
-
 async function forfeitGame(event) {
   event.preventDefault();
 
-  
-  // This double stacks the API route when in a game. Only works in main lobby, which will then not give the game ID. 
+  // This double stacks the API route when in a game. Only works in main lobby, which will then not give the game ID.
   const getMyId = await fetch("/api/users/my-id", {
     method: "GET",
   });
   const myId = await getMyId.json();
   console.log("This is the player ID: " + myId);
-  
+
   // Game ID from the window, can be seen in the URL path
   // const pathArray = window.location.pathname.split('/');
   // const gameId = pathArray[pathArray.length - 1];
@@ -36,26 +34,32 @@ async function forfeitGame(event) {
   if (myId == myGame.attacker_id) {
     // Get data from DB for attacker and defender
     let getAttackerData = await fetch(`/api/users/user/${myId}`, {
-      method:'GET',
+      method: "GET",
     });
     let getDefenderData = await fetch(`/api/users/user/${myGame.defender_id}`, {
-      method: 'GET',
+      method: "GET",
     });
     // change code back into an object from string
     let attackerData = await getAttackerData.json();
     let defenderData = await getDefenderData.json();
 
     // update game
-    let gameStatus = 'defenderWon';
+    let gameStatus = "defenderWon";
     let winner_id = defenderData.id;
-    console.log(gameStatus + " Status of the current game" + '\n' + winner_id + " game winner");
+    console.log(
+      gameStatus +
+        " Status of the current game" +
+        "\n" +
+        winner_id +
+        " game winner"
+    );
     // Push changes to game update
     const updateGame = await fetch(`/api/games/gameover/${gameId}`, {
       method: "PUT",
       body: JSON.stringify({ gameStatus, winner_id }),
-      headers: { "Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
     });
-    if(updateGame.ok){
+    if (updateGame.ok) {
       console.log(gameId + " game info updated with game end");
     }
 
@@ -67,10 +71,10 @@ async function forfeitGame(event) {
     // push changes to the defender database
     const updateDefender = await fetch(`/api/users/update/${defenderData.id}`, {
       method: "PUT",
-      body: JSON.stringify({win, games}),
+      body: JSON.stringify({ win, games }),
       headers: { "Content-Type": "application/json" },
     });
-    if (updateDefender.ok){
+    if (updateDefender.ok) {
       console.log(defenderData.username + " info updated");
     }
 
@@ -81,42 +85,48 @@ async function forfeitGame(event) {
     // push changes to the attacker database
     const updateAttacker = await fetch(`/api/users/update/${myId}`, {
       method: "PUT",
-      body: JSON.stringify({ loss, games })
+      body: JSON.stringify({ loss, games }),
     });
-    if(updateAttacker.ok){
-      console.log(attackerData.username + " info updated")
+    if (updateAttacker.ok) {
+      console.log(attackerData.username + " info updated");
     }
-    
-    //Socket Emit to call game over screen 
+
+    //Socket Emit to call game over screen
     if (updateGame.ok) {
       socket.emit('game-updated', { gameId: gameId });
     }
   }
 
-  // If the player is forgeiting as the defender, increase their losses. Up attacker's wins. Set game status to attacker wins. 
+  // If the player is forgeiting as the defender, increase their losses. Up attacker's wins. Set game status to attacker wins.
   if (myId == myGame.defender_id) {
     // Get data from DB for attacker and defender
     let getDefenderData = await fetch(`/api/users/user/${myId}`, {
-      method:'GET',
+      method: "GET",
     });
     let getAttackerData = await fetch(`/api/users/user/${myGame.attacker_id}`, {
-      method: 'GET',
+      method: "GET",
     });
     // change code back into an object from string
     let defenderData = await getDefenderData.json();
     let attackerData = await getAttackerData.json();
 
     // update game
-    let gameStatus = 'attackerWon';
+    let gameStatus = "attackerWon";
     let winner_id = attackerData.id;
-    console.log(gameStatus + " Status of the current game" + '\n' + winner_id + " game winner");
+    console.log(
+      gameStatus +
+        " Status of the current game" +
+        "\n" +
+        winner_id +
+        " game winner"
+    );
     // Push changes to game update
     const updateGame = await fetch(`/api/games/gameover/${gameId}`, {
       method: "PUT",
       body: JSON.stringify({ gameStatus, winner_id }),
-      headers: { "Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
     });
-    if(updateGame.ok){
+    if (updateGame.ok) {
       console.log(gameId + " game info updated with game end");
     }
 
@@ -128,11 +138,11 @@ async function forfeitGame(event) {
     // push changes to the attacker database
     const updateAttacker = await fetch(`/api/users/update/${attackerData.id}`, {
       method: "PUT",
-      body: JSON.stringify({win, games}),
+      body: JSON.stringify({ win, games }),
       headers: { "Content-Type": "application/json" },
     });
-    if(updateAttacker.ok){
-      console.log(attackerData.username + " info updated")
+    if (updateAttacker.ok) {
+      console.log(attackerData.username + " info updated");
     }
 
     // Update defender game stats
@@ -141,13 +151,13 @@ async function forfeitGame(event) {
     // This needs to be used since the database only accepts names that are used in the model
     const updateDefender = await fetch(`/api/users/update/${myId}`, {
       method: "PUT",
-      body: JSON.stringify({ loss, games })
+      body: JSON.stringify({ loss, games }),
     });
     // push changes to the attacker database
-    if (updateDefender.ok){
+    if (updateDefender.ok) {
       console.log(defenderData.username + " info updated");
     }
-    //Socket Emit to call game over screen 
+    //Socket Emit to call game over screen
     if (updateGame.ok) {
       socket.emit('game-updated', { gameId: gameId });
     }

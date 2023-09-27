@@ -86,12 +86,8 @@ import { whosTurnIsItAnyway } from "./scripts/playerTurn.js";
 //   });
 // });
 
-
-
-
 const renderGameArea = async () => {
-
-  const pathArray = window.location.pathname.split('/');
+  const pathArray = window.location.pathname.split("/");
   let gameId = pathArray[pathArray.length - 1];
   console.log('this is my game id ' + gameId);
   if (gameId >= 0){
@@ -136,97 +132,94 @@ if(thisGameForDom.is_nine_by_nine){
   if (getThisGame.ok) {
     const thisGame = await getThisGame.json();
 
- if (thisGame.gameover){
-  console.log('the game is over')
-  if (thisGame.game_status == "draw"){
-    gameRenderArea.innerHTML = `<h1>The Game Was A DRAW!</h1>`;
-  } else {
-  
- console.log(thisGame.winner_id)
-  const getWinner = await fetch(`/api/users/user/${thisGame.winner_id}`, {
-       method: "GET",
-  });
+    if (thisGame.gameover) {
+      console.log("the game is over");
+      if (thisGame.game_status == "draw") {
+        gameRenderArea.innerHTML = `<h1>The Game Was A DRAW!</h1>`;
+      } else {
+        console.log(thisGame.winner_id);
+        const getWinner = await fetch(`/api/users/user/${thisGame.winner_id}`, {
+          method: "GET",
+        });
 
-  const winner = await getWinner.json();
- let team
-  console.log(winner.username)
- if(thisGame.winner_id === thisGame.attacker_id){
-   team = "Attackers"
- }
- if(thisGame.winner_id === thisGame.defender_id){
-   team = "Defenders"
- }
- console.log('the game is over')
- gameRenderArea.innerHTML = `<h1>${winner.username} WON!</h1>
+        const winner = await getWinner.json();
+        let team;
+        console.log(winner.username);
+        if (thisGame.winner_id === thisGame.attacker_id) {
+          team = "Attackers";
+        }
+        if (thisGame.winner_id === thisGame.defender_id) {
+          team = "Defenders";
+        }
+        console.log("the game is over");
+        gameRenderArea.innerHTML = `<h1>${winner.username} WON!</h1>
  <h2>The game is over!</h2>
  <p>${team} won the game in ${thisGame.num_of_moves} moves</p>
  <button>See ${winner.username}'s stats!</button>`;
 
- console.log(winner)
-}
+        console.log(winner);
+      }
+    } else {
+      const getSession = await fetch("/api/users/logged-in", {
+        method: "GET",
+      });
 
- } else {
+      const loggedIn = await getSession.json();
 
-    const getSession = await fetch("/api/users/logged-in", {
-      method: "GET",
-    });
+      //////// updates combatant headers ////////////
+      // gets current user details to extract name for labels
+      const getMyUserName = await fetch("/api/users/username", {
+        method: "GET",
+      });
 
-    const loggedIn = await getSession.json();
+      // gets current users details to extract name for label purposes
+      const myUserName = await getMyUserName.json();
+      // console.log(myUserName.username)
+      // conditional for combatant header lables.  If you are a player it will render a different label
+      const attackerLabel = loggedIn
+        ? thisGame.Attacker
+          ? myUserName.username == thisGame.Attacker.username
+            ? "You"
+            : thisGame.Attacker.username
+          : "Waiting for an Attacker"
+        : thisGame.Attacker.username;
 
-    //////// updates combatant headers ////////////
-    // gets current user details to extract name for labels
-    const getMyUserName = await fetch("/api/users/username", {
-      method: "GET",
-    });
+      const defenderLabel = loggedIn
+        ? thisGame.Defender
+          ? myUserName.username == thisGame.Defender.username
+            ? "You"
+            : thisGame.Defender.username
+          : "Waiting for a Defender"
+        : thisGame.Defender.username;
 
-    // gets current users details to extract name for label purposes
-    const myUserName = await getMyUserName.json();
-// console.log(myUserName.username)
-    // conditional for combatant header lables.  If you are a player it will render a different label
-    const attackerLabel = loggedIn
-      ? thisGame.Attacker
-        ? myUserName.username == thisGame.Attacker.username
-          ? "You"
-          : thisGame.Attacker.username
-        : "Waiting for an Attacker"
-      : thisGame.Attacker.username;
+      const whosTurnAttacker = loggedIn
+        ? thisGame.Attacker && thisGame.Defender
+          ? myUserName.username == thisGame.Attacker.username
+            ? "It's your turn"
+            : `It's ${thisGame.Attacker.username}'s turn`
+          : "Pending..."
+        : `It's ${thisGame.Attacker.username}'s turn`;
 
-    const defenderLabel = loggedIn
-      ? thisGame.Defender
-        ? myUserName.username == thisGame.Defender.username
-          ? "You"
-          : thisGame.Defender.username
-        : "Waiting for a Defender"
-      : thisGame.Defender.username;
+      const whosTurnDefender = loggedIn
+        ? thisGame.Attacker && thisGame.Defender
+          ? myUserName.username == thisGame.Defender.username
+            ? "It's your turn"
+            : `It's ${thisGame.Defender.username}'s turn`
+          : "Pending..."
+        : `It's ${thisGame.Defender.username}'s turn`;
 
-    const whosTurnAttacker = loggedIn
-      ? thisGame.Attacker && thisGame.Defender
-        ? myUserName.username == thisGame.Attacker.username
-          ? "It's your turn"
-          : `It's ${thisGame.Attacker.username}'s turn`
-        : "Pending..."
-      : `It's ${thisGame.Attacker.username}'s turn`;
+      // gets elements from the page
+      const attackerName = document.getElementById("attacker-username");
+      const defenderName = document.getElementById("defender-username");
+      const whosTurn = document.getElementById("whos-turn");
 
-    const whosTurnDefender = loggedIn
-      ? thisGame.Attacker && thisGame.Defender
-        ? myUserName.username == thisGame.Defender.username
-          ? "It's your turn"
-          : `It's ${thisGame.Defender.username}'s turn`
-        : "Pending..."
-      : `It's ${thisGame.Defender.username}'s turn`;
-
-    // gets elements from the page
-    const attackerName = document.getElementById("attacker-username");
-    const defenderName = document.getElementById("defender-username");
-    const whosTurn = document.getElementById("whos-turn");
-
-    // renders data to elements
-    // combatants header div
-    attackerName.textContent = attackerLabel;
-    whosTurn.textContent = thisGame.attacker_turn
-      ? whosTurnAttacker
-      : whosTurnDefender;
-    defenderName.textContent = defenderLabel;
+      // renders data to elements
+      // combatants header div
+      attackerName.textContent = attackerLabel;
+      whosTurn.textContent = thisGame.attacker_turn
+        ? whosTurnAttacker
+        : whosTurnDefender;
+      defenderName.textContent = defenderLabel;
 
     //////////////// udpates table ////////////////////////
     // scrubs returned game
@@ -234,8 +227,8 @@ if (thisGame.is_nine_by_nine){
     const container = document.getElementById("table-nine-by-nine");
     // // togglePlayerTurn()
 
-    // // generates board and adds visual elements
-    // //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      // // generates board and adds visual elements
+      // //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     container.innerHTML = generateBoard(thisGame.board_state);
 } else {
@@ -255,43 +248,40 @@ if (thisGame.is_nine_by_nine){
     //starts turn
     // this is basically gonna need to be wrappdein an if statement that parses the database to say if plyerteam is equal to the current player then run this function
 
-    if (loggedIn) {
-      const getMyId = await fetch("/api/users/my-id", {
-        method: "GET",
-      });
+      if (loggedIn) {
+        const getMyId = await fetch("/api/users/my-id", {
+          method: "GET",
+        });
 
-      const myId = await getMyId.json();
+        const myId = await getMyId.json();
 
- if ((myId == thisGame.attacker_id) && myId == thisGame.defender_id ){
-   console.log("umm do you like have no friends")
-   let iHaveNoFriends;
-   if (thisGame.attacker_turn === true) {
-    iHaveNoFriends = 'me';
-   } else {
-    iHaveNoFriends = 'imaginaryFriend'
-   }
-   whosTurnIsItAnyway(iHaveNoFriends, thisGame.board_state);
-  } else {
+        if (myId == thisGame.attacker_id && myId == thisGame.defender_id) {
+          console.log("umm do you like have no friends");
+          let iHaveNoFriends;
+          if (thisGame.attacker_turn === true) {
+            iHaveNoFriends = "me";
+          } else {
+            iHaveNoFriends = "imaginaryFriend";
+          }
+          whosTurnIsItAnyway(iHaveNoFriends, thisGame.board_state);
+        } else {
+          const myTurn =
+            (myId == thisGame.attacker_id && thisGame.attacker_turn) ||
+            (myId == thisGame.defender_id && !thisGame.attacker_turn)
+              ? true
+              : false;
 
-      const myTurn =
-        (myId == thisGame.attacker_id && thisGame.attacker_turn) ||
-        (myId == thisGame.defender_id && !thisGame.attacker_turn)
-          ? true
-          : false;
-
-      
-      
           const isAttacker = myId == thisGame.attacker_id ? true : false;
 
-      if (myTurn) {
-        whosTurnIsItAnyway(isAttacker, thisGame.board_state);
-      } else {
-        console.log("waiting on opponent");
+          if (myTurn) {
+            whosTurnIsItAnyway(isAttacker, thisGame.board_state);
+          } else {
+            console.log("waiting on opponent");
+          }
+        }
       }
     }
-  }
- }
-} else {
+  } else {
     alert("Could not get the game board");
   }
 
@@ -304,18 +294,13 @@ socket.on("game-updated", (data) => {
 });
 
 socket.on("gameover", async (data) => {
-  console.log("THE GAME IS OVER")
+  console.log("THE GAME IS OVER");
   renderGameArea();
 });
 
-
-
-
 // renderGameArea();
 
-renderGameArea()
-
-
+renderGameArea();
 
 export { renderGameArea };
 
