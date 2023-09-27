@@ -18,7 +18,7 @@ const loadChat = async () => {
     const myId = await getMyId.json();
 
     const domId = document
-      .getElementById("table")
+      .getElementById("table-render")
       .closest("div")
       .closest("div");
     const firstGameId = document.querySelector(".game-list-item").id;
@@ -98,7 +98,7 @@ const sendMessage = async () => {
     console.log("test");
     // gets the id from the dom
     const domId = document
-      .getElementById("table")
+      .getElementById("table-render")
       .closest("div")
       .closest("div");
     const firstGameId = document.querySelector(".game-list-item").id;
@@ -140,7 +140,10 @@ sendBtn.addEventListener("click", sendMessage);
 
 const renderNewMessage = async (senderId, content) => {
   const firstGameId = document.querySelector(".game-list-item").id;
-  const domId = document.getElementById("table").closest("div").closest("div");
+  const domId = document
+    .getElementById("table-render")
+    .closest("div")
+    .closest("div");
 
   // gets my session id
   const getMyId = await fetch("/api/users/my-id", {
