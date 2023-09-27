@@ -24,11 +24,41 @@ const gameBoard = {
   i: [null, null, null, null, null, null, null, null, null, null, null],
   j: [null, null, null, null, null, 18, null, null, null, null, null],
   k: [null, null, null, 19, 20, 21, 22, 23, null, null, null],
-  //associate visual classes of board with the cellId eg. h2, a3, f5
 };
 
 // console.log(board)
 //
+
+const generateNineByNine = (board)  => {
+  let html = "";
+  
+  for (const key in board) {
+      html += '<tr id="table-nine-by-nine">';
+      const currentArray = board[key];
+  
+      for (let i = 0; i < currentArray.length; i++) {
+        const value = currentArray[i];
+        let className = "";
+        const cellId = `${key}${i}`; // Define the ID for each <td> element
+  
+        if (value === null) {
+          html += `<td id='${cellId}'></td>`; // Add the ID to the <td> element
+      } else if (value < 24) {
+          html += `<td id='${cellId}'><img src="/images/berserker-nine-by-nine.png" class='beserker game-piece' id='${value}'></img></td>`;
+        } else if (value > 23 && value < 36) {
+          html += `<td id='${cellId}'><img src="/images/guard-nine-by-nine.png" class='guard game-piece' id='${value}'></img></td>`;
+        } else if (value === 36) {
+          html += `<td id='${cellId}'><img src="/images/jarl-nine-nine.png" class='jarl game-piece' id='${value}'></img></td>`;
+        }
+      }
+  
+      html += "</tr>";
+    }
+    // console.log(html)
+    return html;
+  };
+  
+
 const generateBoard = (board) => {
   let html = "";
 
@@ -133,6 +163,7 @@ export {
   // board,
   gameBoard,
   generateBoard,
+  generateNineByNine,
   addClassToCells,
   guardCell,
   jarlCell,

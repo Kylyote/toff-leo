@@ -28,11 +28,14 @@ Game.init(
       primaryKey: true,
       autoIncrement: true,
     },
+    is_nine_by_nine: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
     board_state: {
       //store the board as json string
       type: DataTypes.JSON,
       allowNull: false,
-      defaultValue: initialBoardState,
     },
     attacker_turn: {
       type: DataTypes.BOOLEAN,

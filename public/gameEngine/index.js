@@ -222,9 +222,9 @@ const renderGameArea = async () => {
 
     container.innerHTML = generateBoard(thisGame.board_state);
 
-    addClassToCells(guardCell, "guardSquare");
-    addClassToCells(jarlCell, "jarlsSquare");
-    addClassToCells(beserkerCell, "beserkerSquare");
+    // addClassToCells(guardCell, "guardSquare");
+    // addClassToCells(jarlCell, "jarlsSquare");
+    // addClassToCells(beserkerCell, "beserkerSquare");
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // let playerTeam = "Attacker";
     //starts turn
