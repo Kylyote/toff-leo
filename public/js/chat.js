@@ -17,9 +17,11 @@ const loadChat = async () => {
 
     const myId = await getMyId.json();
 
+
     const dom = document.getElementById("gameboard-area");
     const domId = dom.parentNode.id;
     const thisGameId = domId == "" ? firstGameId : domId;
+
     const firstGameId = document.querySelector(".game-list-item").id;
 
     //page load this checks to see if an id is stored in the dom. if not then it shows the first game in the list

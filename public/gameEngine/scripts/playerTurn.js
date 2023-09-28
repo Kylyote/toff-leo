@@ -79,11 +79,9 @@ if (board.a.length === 9){
          table = document.getElementById("table-nine-by-nine");
          clonedTable = table.cloneNode(true); // Clone the table and its descendants
 
-      }else {
-         table = document.getElementById("table");
-         clonedTable = table.cloneNode(true); // Clone the table and its descendants
 
-      }
+        const table = document.getElementById("table-render");
+        const clonedTable = table.cloneNode(true); // Clone the table and its descendants
 
         table.parentNode.replaceChild(clonedTable, table);
         handleInitialClick(pieceType, board);

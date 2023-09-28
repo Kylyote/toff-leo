@@ -89,14 +89,19 @@ import { whosTurnIsItAnyway } from "./scripts/playerTurn.js";
 const renderGameArea = async () => {
   const pathArray = window.location.pathname.split("/");
   let gameId = pathArray[pathArray.length - 1];
-  console.log('this is my game id ' + gameId);
-  if (gameId >= 0){
-  console.log('game found');
-   } else {
-    gameId = '';
-   }
-  const gameRenderArea = document.getElementById("gamerender");
 
+  console.log("this is my game id " + gameId);
+  if (gameId >= 0) {
+    console.log("game found");
+  } else {
+    gameId = "";
+  }
+  const gameRenderArea = document.getElementById("gamerender");
+  const domId = document
+    .getElementById("table-render")
+    .closest("div")
+    .closest("div");
+  const clearDom = document.getElementById("table-render");
   const firstGameId = document.querySelector(".game-list-item").id;
   const dom = document.getElementById("gameboard-area");
   const domId = dom.parentNode.id;
@@ -226,13 +231,13 @@ if(thisGameForDom.is_nine_by_nine){
 if (thisGame.is_nine_by_nine){
     const container = document.getElementById("table-nine-by-nine");
     // // togglePlayerTurn()
-
       // // generates board and adds visual elements
       // //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
     container.innerHTML = generateBoard(thisGame.board_state);
 } else {
-  const container = document.getElementById("table");
+  const container = document.getElementById("table-render");
   // // togglePlayerTurn()
 
   // // generates board and adds visual elements
@@ -247,6 +252,7 @@ if (thisGame.is_nine_by_nine){
     // let playerTeam = "Attacker";
     //starts turn
     // this is basically gonna need to be wrappdein an if statement that parses the database to say if plyerteam is equal to the current player then run this function
+
 
       if (loggedIn) {
         const getMyId = await fetch("/api/users/my-id", {
