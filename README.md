@@ -11,7 +11,7 @@ TOFL Game App is a real-time multiplayer gaming platform where users can create,
 * **Game History**: Access previously played games and their results.
 
 ## Technologies Used
-* **Frontend**: HTML, CSS, JavaScript, Handlebars
+* **Frontend**: HTML, SCSS, JavaScript, Handlebars
 * **Backend**: Node.js, Express.js
 * **Database**: MySQL
 * **ORM**: Sequelize
@@ -50,3 +50,15 @@ npm start
 3. **Play the Game**: Engage with your opponent and play the game.
 4. **Chat with Opponent**: Utilize the in-game chat feature to communicate with your opponent in real-time.
 5. **View Ongoing Games**: Watch other ongoing games with live updates.
+
+## Deployment 
+A live version of Toflio hosted on Heroku can be viewed [here](https://toff-leo-6bd4612bd777.herokuapp.com/).
+
+
+## Contact Us 
+If you're interested in reaching out to the contributing team, please check us out on Github. 
+* Bryan Bickel : [Github](https://github.com/briimcfly)
+* Colton Firestone : [Github](https://github.com/ColtonMakesStuff)
+* Jeffrey Gunn : [Github](https://github.com/jsgunn22)
+* Kyle Jacoy : [Github](https://github.com/Kylyote)
+ 
