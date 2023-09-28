@@ -1,3 +1,4 @@
+ <div id="game-list-div">
 <div id="left-panel">
   <div id="left-panel-header">
       <h3 id="left-panel-attacker"><i class="fa-solid fa-sword"></i> Attacker</h3>      
@@ -24,4 +25,9 @@
 
 {{#if loggedIn}}
   <script src="/js/joinGame.js" defer></script>
-{{/if}}
+
+    <div id="create-game-btn-div">
+      <button id="create-game-btn"><i class="fa-solid fa-plus fa-sm"></i> Create Game</button>
+    </div>
+    {{/if}}
+  </div>

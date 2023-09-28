@@ -3,7 +3,6 @@
   <div id="root-div">
     <div id="root-header">
       <h2><i class="fa-solid fa-user"></i> My Games</h2>
-      <button id="create-game-btn"><i class="fa-solid fa-plus fa-sm"></i> Create New Game</button>
       <!-- Fix this either through CSS or handlebars to not show when a game is over --> 
       <section class="end-game">
         <section id="forfeit-game">
@@ -20,8 +19,10 @@
   {{> chat}}
 </div>
 {{> create-game-modal}}
+{{> leave-game-modal}}
 <script type="module" src="/js/gameList.js"></script>
 <script type="module" src="/js/leaveGame.js"></script>
   {{!-- <script type="module" src="/js/myGames.js"></script> --}}
     <script src="/js/createGame.js"></script> 
          <script src="/js/chat.js" defer></script>
+

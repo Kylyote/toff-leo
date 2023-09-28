@@ -223,8 +223,6 @@ nav {
   box-shadow: var(--overlay-shadow);
 }
 
-
-
 /* Login Page  */
 #login-div {
   display: flex;
@@ -333,6 +331,7 @@ nav {
 
   & #game-list {
     flex-direction: column;
+    padding-bottom: 60px;
 
     & .game-list-item {
       padding: 16px;
@@ -405,8 +404,17 @@ nav {
     padding: 32px;
     height: fit-content;
 
-    & button {
+    & .end-game {
       margin-left: auto;
+
+      & button {
+        background-color: var(--opacity-danger);
+        color: var(--danger-700);
+
+        &:hover {
+          outline: 1px solid var(--danger-700);
+        }
+      }
     }
   }
 }
@@ -475,7 +483,6 @@ nav {
           background-color: var(--primary-700);
         }
       }
-    
     }
     & #board-size-div {
       width: 100%;
@@ -486,7 +493,6 @@ nav {
         width: 100%;
       }
 
-  
       & .eleven-board {
         margin-right: 16px;
         background-color: var(--neutral-700);
@@ -511,7 +517,6 @@ nav {
         }
       }
       & .nine-board-selected {
-        
         background-color: var(--secondary-900);
 
         &:hover {
@@ -537,6 +542,58 @@ nav {
 
       &:hover {
         background-color: var(--success-700);
+      }
+    }
+  }
+}
+
+#leave-game-modal {
+  display: none;
+  position: fixed;
+  background-color: #00000080;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+
+  & .card {
+    padding: 24px;
+    width: 360px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    & h2 {
+      margin-bottom: 4px;
+    }
+
+    & h4 {
+      margin-bottom: 16px;
+    }
+
+    & #leave-game-btn-div {
+      width: 100%;
+      display: flex;
+
+      & #confirm-leave-btn {
+        width: 100%;
+        margin-right: 16px;
+        background-color: var(--danger-700);
+        color: var(--neutral-100);
+
+        &:hover {
+          background-color: var(--danger-300);
+        }
+      }
+
+      & #cancel-leave-btn {
+        width: 100%;
+        background-color: var(--warning-700);
+        color: var(--neutral-100);
+
+        &:hover {
+          background-color: var(--warning-300);
+        }
       }
     }
   }
@@ -596,7 +653,7 @@ nav {
 
 // GAME BOARD
 
-  #table-render {
+#table-render {
   margin-top: -64px;
   height: 100%;
   table-layout: fixed;
@@ -633,7 +690,6 @@ nav {
       z-index: 1;
     }
   }
-
 
   .highlight-attacker {
     background-color: var(--opacity-danger);
@@ -687,7 +743,6 @@ nav {
       z-index: 1;
     }
   }
-
 
   .highlight-attacker {
     background-color: var(--opacity-danger);
@@ -808,6 +863,29 @@ nav {
 
       &:hover {
         color: var(--success-900);
+      }
+    }
+  }
+}
+
+// for create game button location
+#game-list-div {
+  position: relative;
+
+  & #create-game-btn-div {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 16px;
+    background-color: var(--neutral-100);
+    background-image: url("../images/texture.png");
+    border-top: 1px solid var(--neutral-400);
+
+    & button {
+      width: 100%;
+
+      & i {
+        margin-right: 4px;
       }
     }
   }
@@ -1108,7 +1186,7 @@ nav {
   }
 }
 
-#stat-section{
+#stat-section {
   display: flex;
   margin-bottom: 24px;
   width: 100%;

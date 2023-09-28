@@ -252,7 +252,8 @@ nav {
       color: var(--secondary-700);
       margin-left: auto; }
   #left-panel #game-list {
-    flex-direction: column; }
+    flex-direction: column;
+    padding-bottom: 60px; }
     #left-panel #game-list .game-list-item {
       padding: 16px;
       border-bottom: 1px solid var(--neutral-300); }
@@ -299,8 +300,13 @@ nav {
     display: flex;
     padding: 32px;
     height: fit-content; }
-    #root-div #root-header button {
+    #root-div #root-header .end-game {
       margin-left: auto; }
+      #root-div #root-header .end-game button {
+        background-color: var(--opacity-danger);
+        color: var(--danger-700); }
+        #root-div #root-header .end-game button:hover {
+          outline: 1px solid var(--danger-700); }
 
 #new-game-modal {
   display: none;
@@ -381,6 +387,41 @@ nav {
       margin-bottom: 16px; }
       #new-game-modal .card #submit-btn:hover {
         background-color: var(--success-700); }
+
+#leave-game-modal {
+  display: none;
+  position: fixed;
+  background-color: #00000080;
+  top: 0;
+  width: 100vw;
+  height: 100vh; }
+  #leave-game-modal .card {
+    padding: 24px;
+    width: 360px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); }
+    #leave-game-modal .card h2 {
+      margin-bottom: 4px; }
+    #leave-game-modal .card h4 {
+      margin-bottom: 16px; }
+    #leave-game-modal .card #leave-game-btn-div {
+      width: 100%;
+      display: flex; }
+      #leave-game-modal .card #leave-game-btn-div #confirm-leave-btn {
+        width: 100%;
+        margin-right: 16px;
+        background-color: var(--danger-700);
+        color: var(--neutral-100); }
+        #leave-game-modal .card #leave-game-btn-div #confirm-leave-btn:hover {
+          background-color: var(--danger-300); }
+      #leave-game-modal .card #leave-game-btn-div #cancel-leave-btn {
+        width: 100%;
+        background-color: var(--warning-700);
+        color: var(--neutral-100); }
+        #leave-game-modal .card #leave-game-btn-div #cancel-leave-btn:hover {
+          background-color: var(--warning-300); }
 
 /* MY GAMES */
 #game-area {
@@ -571,6 +612,21 @@ nav {
       margin-right: 12px; }
       #chat-div #input-div i:hover {
         color: var(--success-900); }
+
+#game-list-div {
+  position: relative; }
+  #game-list-div #create-game-btn-div {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 16px;
+    background-color: var(--neutral-100);
+    background-image: url("../images/texture.png");
+    border-top: 1px solid var(--neutral-400); }
+    #game-list-div #create-game-btn-div button {
+      width: 100%; }
+      #game-list-div #create-game-btn-div button i {
+        margin-right: 4px; }
 
 @media (max-width: 640px) {
   nav {
