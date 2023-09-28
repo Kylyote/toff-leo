@@ -19,12 +19,14 @@ return arrayName
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const  runOutcomeConditions = (board, pieceId) => {
     const isTheKingHome = findPiecePosition(board, 36);
-    const aArray = board.a.slice();
+    console.log(isTheKingHome)
+    
     //check to see if 9x9
     let imNine = false;
-if (board.a.length === 9){
+if (board.a.length == 9){
 imNine = true;
 };
+const aArray = board.a.slice();
     // Replacing the first item with 100
   aArray.splice(0, 1, 100);
   
@@ -34,7 +36,7 @@ imNine = true;
     let bArray = board.b.slice();
     let cArray = board.c.slice();
     let dArray = board.d.slice();
-let eArray = board.e.slice();;
+    let eArray = board.e.slice();;
     if (imNine == true && isTheKingHome.place != 'e4'){
       eArray.splice(4, 1, 100);
   }
@@ -43,9 +45,9 @@ if (imNine == false && isTheKingHome.place != 'f5'){
     fArray.splice(5, 1, 100);
 } 
 
-let gArray = board.g.slice();
-let hArray = board.h.slice();
-let iArray = board.i.slice();
+    let gArray = board.g.slice();
+    let hArray = board.h.slice();
+    let iArray = board.i.slice();
 if (imNine == true){
    
       // Replacing the first item with 100
@@ -55,8 +57,8 @@ if (imNine == true){
   iArray.splice(iArray.length - 1, 1, 100);
     }
 
-let jArray;
-let kArray;
+    let jArray;
+    let kArray;
     if (imNine == false ){
   
        iArray = board.i.slice();

@@ -219,7 +219,7 @@ function logRowsWithSameArrayPosition(board, row, column, pieceId, parentId) {
   if (pieceId != 36) {
     
     if (board.a.length === 9){
-      const center = document.querySelector(`#f5`);
+      const center = document.querySelector(`#e4`);
       const a0 = document.querySelector(`#a0`);
       const a8 = document.querySelector(`#a8`);
       const i0 = document.querySelector(`#i0`);
