@@ -244,6 +244,8 @@ nav {
     display: flex;
     padding: 8px 16px;
     border-bottom: 1px solid var(--neutral-300); }
+    #left-panel #left-panel-header i {
+      font-size: 12px; }
     #left-panel #left-panel-header h3 {
       color: var(--danger-700); }
     #left-panel #left-panel-header #left-panel-defender {
@@ -375,7 +377,7 @@ nav {
     #game-area #my-games-greeting h2 {
       color: var(--neutral-600); }
 
-table {
+#table-render {
   margin-top: -64px;
   height: 100%;
   table-layout: fixed;
@@ -391,29 +393,29 @@ table {
   background-image: url("/images/game-board.png");
   background-size: 100% 100%;
   box-shadow: var(--overlay-shadow); }
-  table td {
+  #table-render td {
     position: relative;
     width: 4%;
     height: 0%;
     max-width: 100%;
     max-height: 100%;
     text-align: center; }
-    table td img {
+    #table-render td img {
       width: 100%;
       height: 100%;
       position: absolute;
       top: 0;
       left: 0;
       object-fit: fill; }
-    table td .game-piece {
+    #table-render td .game-piece {
       z-index: 1; }
-  table .highlight-attacker {
+  #table-render .highlight-attacker {
     background-color: var(--opacity-danger);
     outline: 1px solid var(--danger-100); }
-  table .highlight-defender {
+  #table-render .highlight-defender {
     background-color: var(--opacity-secondary);
     outline: 1px solid var(--secondary-100); }
-  table .highlightMove {
+  #table-render .highlightMove {
     background-color: var(--opacity-success); }
 
 #chat-div {
@@ -421,6 +423,8 @@ table {
   max-width: 272px;
   border-left: 1px solid var(--neutral-500);
   height: 100%; }
+  #chat-div #show-chat {
+    display: none; }
   #chat-div #messages-render-div {
     height: calc(100% - 56px);
     display: flex;
@@ -491,7 +495,10 @@ table {
   nav {
     position: sticky;
     top: 0;
-    z-index: 1; }
+    z-index: 3; }
+  #page-body {
+    overflow: none;
+    position: relative; }
   #left-panel {
     display: none; }
   .game-list-item {
@@ -506,14 +513,17 @@ table {
   #combatants-header {
     max-width: 45vh; }
   #left-panel-sm {
-    min-width: 128pxpx;
+    width: 186px;
+    min-width: 186px;
+    max-height: calc(100vh - 56px);
     display: block;
     background-color: var(--neutral-100);
     background-image: url("../images/texture.png");
     height: 100vh;
     overflow-x: scroll;
     box-shadow: var(--overlay-shadow);
-    padding-right: 0; }
+    padding-right: 0;
+    z-index: 2; }
     #left-panel-sm #left-panel-header-sm {
       display: flex;
       padding: 8px 16px;
@@ -570,13 +580,113 @@ table {
       font-weight: var(--font-weight-medium);
       font-size: var(--font-h4-size);
       line-height: var(--font-h4-line-height); }
-  table {
+  #table-render {
     margin-top: -64px;
     height: 45vh;
     width: 45vh; }
-    table .highlight-attacker {
-      background-color: var(--danger-100); }
-    table .highlight-defender {
-      background-color: var(--secondary-100); }
-    table .highlightMove {
-      background-color: var(--success-100); } }
+  #chat-div {
+    transform: translateY(296px);
+    transition: transform 0.5s ease-in-out;
+    width: calc(100vw - 186px);
+    max-width: 100vw;
+    height: 296px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: var(--neutral-100);
+    z-index: 1;
+    box-shadow: var(--overlay-shadow);
+    border: none; }
+    #chat-div #show-chat {
+      display: block;
+      position: relative;
+      height: 32px;
+      width: 32px;
+      padding: 0 4px;
+      left: 16px;
+      top: -32px;
+      border-radius: 4px 4px 0 0;
+      background-color: var(--neutral-100);
+      color: var(--neutral-600); }
+      #chat-div #show-chat i {
+        font-size: 16px; }
+    #chat-div #messages-render-div {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 16px;
+      overflow-y: scroll;
+      margin-top: -32px;
+      margin-bottom: -56px;
+      padding-bottom: 56px; }
+      #chat-div #messages-render-div .chat-message-received {
+        margin-bottom: 16px;
+        padding-right: 40px; }
+        #chat-div #messages-render-div .chat-message-received h4 {
+          margin-bottom: 4px;
+          width: 100%; }
+        #chat-div #messages-render-div .chat-message-received .chat-message-body {
+          width: 100%;
+          padding: 8px 12px;
+          background-color: var(--neutral-100);
+          box-shadow: var(--card-shadow);
+          border-radius: 4px;
+          background-image: url("../images/texture.png"); }
+          #chat-div #messages-render-div .chat-message-received .chat-message-body .medium-text {
+            margin-bottom: 4px; }
+          #chat-div #messages-render-div .chat-message-received .chat-message-body .small-text {
+            color: var(--neutral-600); }
+      #chat-div #messages-render-div .chat-message-sent {
+        margin-bottom: 16px;
+        padding-left: 40px; }
+        #chat-div #messages-render-div .chat-message-sent h4 {
+          margin-bottom: 4px;
+          text-align: right; }
+        #chat-div #messages-render-div .chat-message-sent .chat-message-body {
+          padding: 8px 12px;
+          background-image: url("../images/texture.png");
+          background-color: var(--neutral-100);
+          box-shadow: var(--card-shadow);
+          border-radius: 4px; }
+          #chat-div #messages-render-div .chat-message-sent .chat-message-body .medium-text {
+            margin-bottom: 4px;
+            text-align: right; }
+          #chat-div #messages-render-div .chat-message-sent .chat-message-body .small-text {
+            text-align: right;
+            color: var(--neutral-600); }
+    #chat-div #input-div {
+      height: 56px;
+      padding: 8px;
+      display: flex;
+      border-top: 1px solid var(--neutral-500);
+      background-color: var(--neutral-100);
+      position: relative; }
+      #chat-div #input-div input {
+        background-color: var(--neutral-100);
+        border: 1px solid var(--neutral-400);
+        border-radius: 4px;
+        height: 40px;
+        padding: 0 12px;
+        margin-right: 16px;
+        width: 100%; }
+        #chat-div #input-div input:focus {
+          outline: 1px solid var(--primary-500); }
+      #chat-div #input-div i {
+        font-size: 20px;
+        width: 24px;
+        line-height: 40px;
+        cursor: pointer;
+        color: var(--success-700);
+        margin-right: 12px; }
+        #chat-div #input-div i:hover {
+          color: var(--success-900); }
+  nav h2 {
+    font-family: var(--font-family-default);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-h3-size);
+    line-height: var(--font-h3-line-height);
+    margin-top: 4px; }
+  nav i {
+    font-size: 16px;
+    margin-top: 4px; } }
