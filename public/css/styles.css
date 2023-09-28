@@ -828,13 +828,22 @@ nav {
     font-size: 16px;
     margin-top: 4px; } }
 
-#stat-section {
+#statsrender {
   display: flex;
-  margin-bottom: 24px;
+  flex-direction: column;
+  position: absolute;
   width: 100%;
-  max-width: 60vh;
-  margin-left: 50%;
-  transform: translateX(-50%); }
+  max-width: 400px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center; }
+  #statsrender #stat-section {
+    display: flex;
+    flex-direction: column; }
+    #statsrender #stat-section #stats-row {
+      display: flex;
+      justify-content: space-between; }
 
 .game-result {
   display: flex;
@@ -851,3 +860,7 @@ nav {
     max-height: 200px; }
   .game-result .shield {
     max-height: 200px; }
+
+.boat-line {
+  max-height: 150px;
+  margin-bottom: 10px; }

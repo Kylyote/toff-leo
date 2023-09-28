@@ -2,21 +2,36 @@
   {{> game-list}} 
   <div id="root-div">
     <div id="root-header">
-      <h2><i class="fa-solid fa-user"></i> {{myStats.username}}'s Current Statistics</h2>
-    </div>
-
+      
+    
+</div>
 <section id="statsrender" class="stat-page">
   <!--
   <div id="stat-header">
     <h2>{{myStats.name}}'s Current Statistics</h2>
   </div> 
-  --> 
+  --> <h1 ><i class="fa-solid fa-user"></i> {{myStats.username}}'s Stats</h1>
+  <img class="boat-line" src="/images/boat-line.png" alt="boat">
   <div id="stat-section" class="large-text">
-    <h3>Wins: {{myStats.win}}</h3>
-    <h3>Losses: {{myStats.loss}}</h3>
-    <h3>Draws: {{myStats.draw}}</h3>
-    <h3>Total games played: {{myStats.games_played}}</h3>
-    <h3>Ratio: <span id="stat-ratio"></span></h3>
+    <div id="stats-row"><h3>Wins: </h3>
+    <h3>{{myStats.win}}</h3></div>
+
+    <div id="stats-row">   <h3>Losses: </h3>
+    <h3>{{myStats.loss}}</h3></div>
+
+    <div id="stats-row"><h3>Draws: </h3>
+    <h3>{{myStats.draw}}</h3></div>
+
+    <div id="stats-row"><h3>Games-Played: </h3>
+    <h3>{{myStats.games_played}}</h3></div>
+
+    <div id="stats-row">  <h3>Win-Ratio: </h3>
+    <h3><span id="stat-ratio"></span></h3></div>
+    
+ 
+    
+    
+  
   </div>
 </section>
       

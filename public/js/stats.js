@@ -15,12 +15,12 @@ const runRatio = async () => {
 
   console.log(thisUser);
 
-  const ratio = thisUser.win / thisUser.loss;
-
+  let ratio = (thisUser.win / (thisUser.win + thisUser.loss)) * 100;
+let ratioInt = parseInt(ratio)
   console.log(ratio);
 
   const docElement = document.querySelector("#stat-ratio");
-  docElement.innerHTML = ratio;
+  docElement.innerHTML = ` % ${ratioInt}`;
 
 }
 runRatio();
