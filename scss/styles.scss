@@ -525,7 +525,8 @@ nav {
 }
 
 // GAME BOARD
-#table-render {
+
+  #table-render {
   margin-top: -64px;
   height: 100%;
   table-layout: fixed;
@@ -562,6 +563,61 @@ nav {
       z-index: 1;
     }
   }
+
+
+  .highlight-attacker {
+    background-color: var(--opacity-danger);
+    outline: 1px solid var(--danger-100);
+  }
+
+  .highlight-defender {
+    background-color: var(--opacity-secondary);
+    outline: 1px solid var(--secondary-100);
+  }
+
+  .highlightMove {
+    background-color: var(--opacity-success);
+  }
+}
+
+#table-nine-by-nine {
+  margin-top: -64px;
+  height: 100%;
+  table-layout: fixed;
+  height: 60vh;
+  width: 60vh;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 60px);
+  background-image: url("/images/game-board-nine-by-nine.png");
+  background-size: 100% 100%;
+  box-shadow: var(--overlay-shadow);
+
+  & td {
+    position: relative;
+    width: 4%;
+    height: 0%;
+    max-width: 100%;
+    max-height: 100%;
+    text-align: center;
+    & img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      object-fit: fill;
+    }
+
+    .game-piece {
+      z-index: 1;
+    }
+  }
+
 
   .highlight-attacker {
     background-color: var(--opacity-danger);
