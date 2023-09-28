@@ -223,6 +223,8 @@ nav {
   box-shadow: var(--overlay-shadow);
 }
 
+
+
 /* Login Page  */
 #login-div {
   display: flex;
@@ -442,17 +444,75 @@ nav {
         width: 100%;
       }
 
-      & #attacker-btn {
+      & .attacker-btn {
+        margin-right: 16px;
+        background-color: var(--neutral-700);
+
+        &:hover {
+          background-color: var(--danger-500);
+        }
+      }
+      & .attacker-btn-selected {
         margin-right: 16px;
         background-color: var(--danger-700);
 
         &:hover {
-          background-color: var(--danger-900);
+          background-color: var(--danger-700);
         }
       }
 
-      & #defender-btn {
-        background-color: var(--secondary-700);
+      & .defender-btn {
+        background-color: var(--neutral-700);
+
+        &:hover {
+          background-color: var(--secondary-500);
+        }
+      }
+      & .defender-btn-selected {
+        background-color: var(--primary-700);
+
+        &:hover {
+          background-color: var(--primary-700);
+        }
+      }
+    
+    }
+    & #board-size-div {
+      width: 100%;
+      display: flex;
+      margin-bottom: 16px;
+
+      & button {
+        width: 100%;
+      }
+
+  
+      & .eleven-board {
+        margin-right: 16px;
+        background-color: var(--neutral-700);
+
+        &:hover {
+          background-color: var(--secondary-500);
+        }
+      }
+      & .nine-board {
+        background-color: var(--neutral-700);
+
+        &:hover {
+          background-color: var(--secondary-500);
+        }
+      }
+      & .eleven-board-selected {
+        margin-right: 16px;
+        background-color: var(--secondary-900);
+
+        &:hover {
+          background-color: var(--secondary-900);
+        }
+      }
+      & .nine-board-selected {
+        
+        background-color: var(--secondary-900);
 
         &:hover {
           background-color: var(--secondary-900);
@@ -467,6 +527,16 @@ nav {
 
       &:hover {
         background-color: var(--warning-300);
+      }
+    }
+    & #submit-btn {
+      width: 100%;
+      background-color: var(--success-300);
+      color: var(white);
+      margin-bottom: 16px;
+
+      &:hover {
+        background-color: var(--success-700);
       }
     }
   }

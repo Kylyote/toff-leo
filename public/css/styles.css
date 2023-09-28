@@ -326,14 +326,47 @@ nav {
       margin-bottom: 16px; }
       #new-game-modal .card #role-btn-div button {
         width: 100%; }
-      #new-game-modal .card #role-btn-div #attacker-btn {
+      #new-game-modal .card #role-btn-div .attacker-btn {
+        margin-right: 16px;
+        background-color: var(--neutral-700); }
+        #new-game-modal .card #role-btn-div .attacker-btn:hover {
+          background-color: var(--danger-500); }
+      #new-game-modal .card #role-btn-div .attacker-btn-selected {
         margin-right: 16px;
         background-color: var(--danger-700); }
-        #new-game-modal .card #role-btn-div #attacker-btn:hover {
-          background-color: var(--danger-900); }
-      #new-game-modal .card #role-btn-div #defender-btn {
-        background-color: var(--secondary-700); }
-        #new-game-modal .card #role-btn-div #defender-btn:hover {
+        #new-game-modal .card #role-btn-div .attacker-btn-selected:hover {
+          background-color: var(--danger-700); }
+      #new-game-modal .card #role-btn-div .defender-btn {
+        background-color: var(--neutral-700); }
+        #new-game-modal .card #role-btn-div .defender-btn:hover {
+          background-color: var(--secondary-500); }
+      #new-game-modal .card #role-btn-div .defender-btn-selected {
+        background-color: var(--primary-700); }
+        #new-game-modal .card #role-btn-div .defender-btn-selected:hover {
+          background-color: var(--primary-700); }
+    #new-game-modal .card #board-size-div {
+      width: 100%;
+      display: flex;
+      margin-bottom: 16px; }
+      #new-game-modal .card #board-size-div button {
+        width: 100%; }
+      #new-game-modal .card #board-size-div .eleven-board {
+        margin-right: 16px;
+        background-color: var(--neutral-700); }
+        #new-game-modal .card #board-size-div .eleven-board:hover {
+          background-color: var(--secondary-500); }
+      #new-game-modal .card #board-size-div .nine-board {
+        background-color: var(--neutral-700); }
+        #new-game-modal .card #board-size-div .nine-board:hover {
+          background-color: var(--secondary-500); }
+      #new-game-modal .card #board-size-div .eleven-board-selected {
+        margin-right: 16px;
+        background-color: var(--secondary-900); }
+        #new-game-modal .card #board-size-div .eleven-board-selected:hover {
+          background-color: var(--secondary-900); }
+      #new-game-modal .card #board-size-div .nine-board-selected {
+        background-color: var(--secondary-900); }
+        #new-game-modal .card #board-size-div .nine-board-selected:hover {
           background-color: var(--secondary-900); }
     #new-game-modal .card #cancel-btn {
       width: 100%;
@@ -341,6 +374,13 @@ nav {
       color: var(--warning-700); }
       #new-game-modal .card #cancel-btn:hover {
         background-color: var(--warning-300); }
+    #new-game-modal .card #submit-btn {
+      width: 100%;
+      background-color: var(--success-300);
+      color: var(white);
+      margin-bottom: 16px; }
+      #new-game-modal .card #submit-btn:hover {
+        background-color: var(--success-700); }
 
 /* MY GAMES */
 #game-area {

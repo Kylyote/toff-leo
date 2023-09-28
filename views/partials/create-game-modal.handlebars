@@ -3,16 +3,21 @@
   <div class="card">
     <div id="header-div">
       <h2>Start a New Game</h2>
-      <h4>What role would you like?</h4>
+      
     </div>
+    <h4>What role would you like?</h4>
     <div id="role-btn-div">
-      <button id="attacker-btn">Attacker</button>
-      <button id="defender-btn">Defender</button>
+      <button id="attacker-btn" class="attacker-btn-selected">Attacker</button>
+      <button id="defender-btn" class="defender-btn">Defender</button>
+    </div>
+    <div>
+     <h4>What board size would you like?</h4>
     </div>
     <div id="board-size-div">
-      <button id="eleven-board">11 X 11</button>
-      <button id="nine-board">9 X 9</button>
+      <button id="eleven-board" class="eleven-board-selected">11 X 11</button>
+      <button id="nine-board" class="nine-board">9 X 9</button>
     </div>
+    <button id="submit-btn">Let's Go!</button>
     <button id="cancel-btn">Nevermind...</button>
   </div>
 </div>
