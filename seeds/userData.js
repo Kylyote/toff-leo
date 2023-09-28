@@ -7,6 +7,7 @@ const userData = [
     email: "ragnar@asgard.com",
     win: 5,
     loss: 2,
+    games_played: 7,
   },
   {
     username: "Lagertha",
@@ -14,6 +15,7 @@ const userData = [
     email: "lagertha@asgard.com",
     win: 3,
     loss: 1,
+    games_played: 4
   },
   {
     username: "Ivar",
@@ -21,6 +23,7 @@ const userData = [
     win: 7,
     email: "ivar@asgard.com",
     loss: 4,
+    games_played: 11,
   },
   {
     username: "Bjorn",
@@ -28,6 +31,7 @@ const userData = [
     win: 6,
     email: "bjorn@asgard.com",
     loss: 1,
+    games_played: 7,
   },
   {
     username: "Floki",
@@ -35,6 +39,7 @@ const userData = [
     win: 5,
     email: "floki@asgard.com",
     loss: 2,
+    games_played: 7,
   },
   {
     username: "Sigurd",
@@ -42,6 +47,7 @@ const userData = [
     win: 3,
     email: "sigurd@asgard.com",
     loss: 2,
+    games_played: 5,
   },
   {
     username: "Rollo",
@@ -49,6 +55,7 @@ const userData = [
     win: 4,
     email: "rollo@asgard.com",
     loss: 5,
+    games_played: 9,
   },
   {
     username: "Ubbe",
@@ -56,6 +63,7 @@ const userData = [
     win: 5,
     email: "ubbe@asgard.com",
     loss: 3,
+    games_played: 8,
   },
   {
     username: "Erik",
@@ -63,6 +71,7 @@ const userData = [
     win: 7,
     email: "erik@asgard.com",
     loss: 0,
+    games_played: 7,
   },
   {
     username: "Olaf",
@@ -70,13 +79,15 @@ const userData = [
     win: 6,
     email: "olaf@asgard.com",
     loss: 4,
+    games_played: 10,
   },
   {
     username: "john",
     password: "password",
-    win: 3,
+    win: 0,
     email: "john@john.com",
-    loss: 3,
+    loss: 5,
+    games_played: 5,
   }
 ];
 
