@@ -60,6 +60,34 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+const taflNineByNine = {
+  a: [ null, null, null,     0,      1,    2,  null, null, null],
+  b: [ null, null, null, null,     3, null, null, null, null],
+  c: [ null, null, null, null,   24, null, null, null, null],
+  d: [     4, null, null, null,   25, null, null, null,     5],
+  e: [     6,     7,   26,   27,   36,  28,   29,     8,     9],
+  f: [   10, null, null, null,   30, null, null, null,    11],
+  g: [ null, null, null, null,   31, null, null, null, null],
+  h: [ null, null, null, null,   12, null, null, null, null],
+  i: [ null, null, null,   13,   14,   15, null, null, null],
+  };
+
+  const taflElevenByEleven = {
+    a: [null, null, null, 0, 1, 2, 3, 4, null, null, null],
+    b: [null, null, null, null, null, 5, null, null, null, null, null],
+    c: [null, null, null, null, null, null, null, null, null, null, null],
+    d: [6, null, null, null, null, 24, null, null, null, null, 7],
+    e: [8, null, null, null, 25, 26, 27, null, null, null, 9],
+    f: [10, 11, null, 28, 29, 36, 30, 31, null, 12, 13],
+    g: [14, null, null, null, 32, 33, 34, null, null, null, 15],
+    h: [16, null, null, null, null, 35, null, null, null, null, 17],
+    i: [null, null, null, null, null, null, null, null, null, null, null],
+    j: [null, null, null, null, null, 18, null, null, null, null, null],
+    k: [null, null, null, 19, 20, 21, 22, 23, null, null, null],
+  };
+  
+
+
 // create new game
 router.post("/create", async (req, res) => {
   try {
@@ -68,6 +96,10 @@ router.post("/create", async (req, res) => {
         req.body.chosenRole == "attacker" ? req.session.userId : null,
       defender_id:
         req.body.chosenRole == "defender" ? req.session.userId : null,
+      board_state:
+        req.body.chosenBoard == "taflNineByNine" ? taflNineByNine : taflElevenByEleven,
+      is_nine_by_nine:
+        req.body.chosenBoard == "taflNineByNine" ? true : false,
     });
 
     res.status(200).json(createNewGame);

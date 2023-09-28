@@ -10,13 +10,20 @@
       <h3 id="defender-username"></h3></div>
     <img src="/images/defender-chip.png" id="defender-chip" />
   </div>
-
+<div id="{{thisGame.id}}">
   <div id="gameboard-area">
   </div>
+  </div>
+  {{#if thisGame.is_nine_by_nine}}
+  <div id="{{thisGame.id}}">
+    <table id="table-nine-by-nine"></table>
+  </div>
+  {{else}}
   <div id="{{thisGame.id}}">
     <table id="table-render"></table>
   </div>
+  {{/if}}
 </div>
-
+</div>
 {{! the following will appear on the game area until the user selects a game }}
 <script type="module" src="/gameEngine/index.js"></script>

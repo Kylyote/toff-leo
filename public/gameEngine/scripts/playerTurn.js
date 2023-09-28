@@ -72,6 +72,13 @@ const handleInitialClick = (pieceType, board) => {
       console.log("these are my clicks " + clicks);
       if (clicks != 0) {
         console.log("i should be resetting the turn");
+        let table;
+        let clonedTable;
+        console.log(board.a.length)
+if (board.a.length === 9){
+         table = document.getElementById("table-nine-by-nine");
+         clonedTable = table.cloneNode(true); // Clone the table and its descendants
+
 
         const table = document.getElementById("table-render");
         const clonedTable = table.cloneNode(true); // Clone the table and its descendants
@@ -206,8 +213,25 @@ function logRowsWithSameArrayPosition(board, row, column, pieceId, parentId) {
     avail.classList.add(`${playerPiecePathClass}`);
     avail.addEventListener("click", handleMyClick);
   });
-
+ 
   if (pieceId != 36) {
+    
+    if (board.a.length === 9){
+      const center = document.querySelector(`#e4`);
+      const a0 = document.querySelector(`#a0`);
+      const a8 = document.querySelector(`#a8`);
+      const i0 = document.querySelector(`#i0`);
+      const i8 = document.querySelector(`#i8`);
+      const removeExemptJarl = (square) => {
+        square.classList.remove("highlight-attacker", "highlight-defender");
+        square.removeEventListener("click", handleMyClick);
+      };
+      removeExemptJarl(center);
+      removeExemptJarl(a0);
+      removeExemptJarl(a8);
+      removeExemptJarl(i0);
+      removeExemptJarl(i8);
+ } else {
     const center = document.querySelector(`#f5`);
     const a0 = document.querySelector(`#a0`);
     const a10 = document.querySelector(`#a10`);
@@ -222,7 +246,7 @@ function logRowsWithSameArrayPosition(board, row, column, pieceId, parentId) {
     removeExemptJarl(a10);
     removeExemptJarl(k0);
     removeExemptJarl(k10);
-  }
+  }}
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
