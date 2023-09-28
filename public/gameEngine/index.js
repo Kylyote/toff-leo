@@ -133,27 +133,37 @@ const renderGameArea = async () => {
     if (thisGame.gameover) {
       console.log("the game is over");
       if (thisGame.game_status == "draw") {
-        gameRenderArea.innerHTML = `<h1>The Game Was A DRAW!</h1>`;
+        gameRenderArea.innerHTML = `<section class="game-result">
+        <img class='draw' src='/images/draw.png' alt='Crossed Swords'/>
+        <h1>The Game Was A DRAW!</h1>
+        </section>`;
       } else {
         console.log(thisGame.winner_id);
         const getWinner = await fetch(`/api/users/user/${thisGame.winner_id}`, {
           method: "GET",
         });
-
+let img;
         const winner = await getWinner.json();
         let team;
         console.log(winner.username);
         if (thisGame.winner_id === thisGame.attacker_id) {
           team = "Attackers";
+          img = "<img class='crossed-swords' src='/images/crossed-swords.png' alt='Crossed Swords'/>";
+         
         }
         if (thisGame.winner_id === thisGame.defender_id) {
           team = "Defenders";
+          img = "<img class='shield' src='/images/shield.png' alt='shield'/>";
         }
         console.log("the game is over");
-        gameRenderArea.innerHTML = `<h1>${winner.username} WON!</h1>
- <h2>The game is over!</h2>
- <p>${team} won the game in ${thisGame.num_of_moves} moves</p>
- <button>See ${winner.username}'s stats!</button>`;
+         console.log(img)
+        gameRenderArea.innerHTML = `<section class="game-result">
+        ${img}
+        <h1>${winner.username} WON!</h1>
+        <h2>The game is over!</h2>
+        <p>${team} won the game!</p>
+        <a href="/my-stats"><button>See my stats</button></a>
+      </section>`;
 
         console.log(winner);
       }

@@ -835,3 +835,19 @@ nav {
   max-width: 60vh;
   margin-left: 50%;
   transform: translateX(-50%); }
+
+.game-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; }
+  .game-result p {
+    margin-top: 10px; }
+  .game-result button {
+    margin-top: 10px; }
+  .game-result .draw {
+    max-height: 300px; }
+  .game-result .crossed-swords {
+    max-height: 200px; }
+  .game-result .shield {
+    max-height: 200px; }
