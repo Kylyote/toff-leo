@@ -1,3 +1,13 @@
-<section class="stat-page">
-  <h1>{{user.wins}}</h1>
+<section id="statsrender" class="stat-page">
+  <div id="stat-header">
+    <h2>{{user.name}}'s Current Statistics</h2>
+  </div>  
+  <div class="stat-section">
+    <p>Wins: {{user.win}}</p>
+    <p>Losses: {{user.loss}}</p>
+    <p>Draws: {{user.draw}}</p>
+    <p>Total games played: {{user.games_played}}</p>
+    <p>Win-Loss Ratio: </p>
+  </div>
+
 </section>
