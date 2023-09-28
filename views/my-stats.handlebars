@@ -25,3 +25,7 @@
 </div>
 <script src="/js/stats.js"></script>
 <script src="/js/gameList.js"></script>
+{{#if loggedIn}}
+{{> create-game-modal}}
+  <script src="/js/createGame.js"></script>
+{{/if}}
