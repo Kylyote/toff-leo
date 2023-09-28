@@ -47,8 +47,12 @@ const movePiece = async (board, row, column, pieceId, id) => {
   // Update the game board with the new position
   board[letter][numb] = board[row][column];
   board[row][column] = null;
-
-  const table = document.getElementById("table-render");
+  let table;
+  if (board.a.length === 9) {
+    table = document.getElementById("table-nine-by-nine");
+  } else {
+    table = document.getElementById("table-render");
+  }
 
   const mypiece = table.querySelectorAll("div");
   const tds = table.querySelectorAll("td.highlight");
@@ -65,15 +69,19 @@ const movePiece = async (board, row, column, pieceId, id) => {
 
   table.parentNode.replaceChild(clonedTable, table);
 
-  const domId = document.getElementById("table-render").closest("div");
+  const dom = document.getElementById("gameboard-area");
+  const domId = dom.parentNode.id;
+
   const firstGameId = document.querySelector(".game-list-item").id;
-  const thisGameId = domId.id == "" ? firstGameId : domId.id;
+  const thisGameId = domId == "" ? firstGameId : domId;
 
   console.log(thisGameId);
+
   runOutcomeConditions(board, pieceId);
   let didSomeoneWin = runKingOutcomes(board, pieceId);
 
   // Code to update win/loss at game end
+
   const getThisGame = await fetch(`/api/games/${thisGameId}`, {
     method: "GET",
   });
@@ -234,6 +242,7 @@ const movePiece = async (board, row, column, pieceId, id) => {
   //   moves++
   // }
   console.log(turn);
+
   // console.log(moves)
   const updateGame = await fetch(`/api/games/turn/${thisGameId}`, {
     method: "PUT",

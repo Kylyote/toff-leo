@@ -89,6 +89,7 @@ import { whosTurnIsItAnyway } from "./scripts/playerTurn.js";
 const renderGameArea = async () => {
   const pathArray = window.location.pathname.split("/");
   let gameId = pathArray[pathArray.length - 1];
+
   console.log("this is my game id " + gameId);
   if (gameId >= 0) {
     console.log("game found");
@@ -96,18 +97,29 @@ const renderGameArea = async () => {
     gameId = "";
   }
   const gameRenderArea = document.getElementById("gamerender");
-  const domId = document
-    .getElementById("table-render")
-    .closest("div")
-    .closest("div");
-  const clearDom = document.getElementById("table-render");
-  const firstGameId = document.querySelector(".game-list-item").id;
 
+  const firstGameId = document.querySelector(".game-list-item").id;
+  const dom = document.getElementById("gameboard-area");
+  const domId = dom.parentNode.id;
+  const thisGameId = domId == "" ? firstGameId : domId;
+  // if (thisGameForDom.is_nine_by_nine)
+
+  let clearDom;
   //////// updates gameboard //////////
   //page load this checks to see if an id is stored in the dom. if not then it shows the first game in the list
-  const thisGameId = domId.id == "" ? firstGameId : domId.id;
 
-  // clears the dom at #table before table render
+  const getThisGameforDom = await fetch(`/api/games/${thisGameId}`, {
+    method: "GET",
+  });
+
+  const thisGameForDom = await getThisGameforDom.json();
+  console.log(thisGameForDom);
+  if (thisGameForDom.is_nine_by_nine) {
+    // clears the dom at #table before table render
+    clearDom = document.getElementById("table-nine-by-nine");
+  } else {
+    clearDom = document.getElementById("table-render");
+  }
   clearDom.innerHTML = "";
 
   // gets game by id
@@ -209,18 +221,25 @@ const renderGameArea = async () => {
 
       //////////////// udpates table ////////////////////////
       // scrubs returned game
+      if (thisGame.is_nine_by_nine) {
+        const container = document.getElementById("table-nine-by-nine");
+        // // togglePlayerTurn()
+        // // generates board and adds visual elements
+        // //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-      const container = document.getElementById("table-render");
-      // // togglePlayerTurn()
+        container.innerHTML = generateBoard(thisGame.board_state);
+      } else {
+        const container = document.getElementById("table-render");
+        // // togglePlayerTurn()
 
-      // // generates board and adds visual elements
-      // //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // // generates board and adds visual elements
+        // //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-      container.innerHTML = generateBoard(thisGame.board_state);
-
-      addClassToCells(guardCell, "guardSquare");
-      addClassToCells(jarlCell, "jarlsSquare");
-      addClassToCells(beserkerCell, "beserkerSquare");
+        container.innerHTML = generateBoard(thisGame.board_state);
+      }
+      // addClassToCells(guardCell, "guardSquare");
+      // addClassToCells(jarlCell, "jarlsSquare");
+      // addClassToCells(beserkerCell, "beserkerSquare");
       //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       // let playerTeam = "Attacker";
       //starts turn

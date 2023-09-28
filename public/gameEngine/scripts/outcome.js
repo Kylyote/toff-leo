@@ -19,38 +19,61 @@ return arrayName
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const  runOutcomeConditions = (board, pieceId) => {
     const isTheKingHome = findPiecePosition(board, 36);
-    const aArray = board.a.slice();
+    console.log(isTheKingHome)
+    
+    //check to see if 9x9
+    let imNine = false;
+if (board.a.length == 9){
+imNine = true;
+};
+const aArray = board.a.slice();
     // Replacing the first item with 100
   aArray.splice(0, 1, 100);
   
   // Replacing the last item with 100
   aArray.splice(aArray.length - 1, 1, 100);
   
-    const bArray = board.b.slice();
-    const cArray = board.c.slice();
-    const dArray = board.d.slice();
-    const eArray = board.e.slice();
-    const fArray = board.f.slice();
-if (isTheKingHome.place != 'f5'){
+    let bArray = board.b.slice();
+    let cArray = board.c.slice();
+    let dArray = board.d.slice();
+    let eArray = board.e.slice();;
+    if (imNine == true && isTheKingHome.place != 'e4'){
+      eArray.splice(4, 1, 100);
+  }
+    let fArray = board.f.slice();
+if (imNine == false && isTheKingHome.place != 'f5'){
     fArray.splice(5, 1, 100);
-}
+} 
 
-    const gArray = board.g.slice();
-    const hArray = board.h.slice();
-    const iArray = board.i.slice();
-    const jArray = board.j.slice();
+    let gArray = board.g.slice();
+    let hArray = board.h.slice();
+    let iArray = board.i.slice();
+if (imNine == true){
+   
+      // Replacing the first item with 100
+  iArray.splice(0, 1, 100);
   
-    const kArray = board.k.slice();
+  // Replacing the last item with 100
+  iArray.splice(iArray.length - 1, 1, 100);
+    }
+
+    let jArray;
+    let kArray;
+    if (imNine == false ){
+  
+       iArray = board.i.slice();
+       jArray = board.j.slice();
+       kArray = board.k.slice();
       // Replacing the first item with 100
   kArray.splice(0, 1, 100);
   
   // Replacing the last item with 100
   kArray.splice(jArray.length - 1, 1, 100);
-  
+  }
   
    console.log(aArray)
    console.log(board.a)
-  const zero = getAColumn ("zeroArray", board, 0)
+  let zero = getAColumn ("zeroArray", board, 0)
     // Replacing the first item with 100
     zero.splice(0, 1, 100);
   
@@ -59,27 +82,42 @@ if (isTheKingHome.place != 'f5'){
     
   const one = getAColumn ("oneArray", board, 1)
   const two = getAColumn ("twoArray", board, 2)
-  const three = getAColumn ("threeArray", board, 3)
-  const four = getAColumn ("fourArray", board, 4)
-  const five = getAColumn ("fiveArray", board, 5)
-  if (isTheKingHome.place != 'f5'){
+  const three = getAColumn ("threeArray", board, 3) 
+  let four = getAColumn ("fourArray", board, 4)
+  if (imNine == true && isTheKingHome.place != 'e4'){
+    four.splice(4, 1, 100);
+}
+
+  let five = getAColumn ("fiveArray", board, 5)
+  if (imNine == false && isTheKingHome.place != 'f5'){
     five.splice(5, 1, 100);
 }
   const six = getAColumn ("sixArray", board, 6)
   const seven = getAColumn ("sevenArray", board, 7)
-  const eight = getAColumn ("eightArray", board, 8)
-  const nine = getAColumn ("nineArray", board, 9)
+  let eight = getAColumn ("eightArray", board, 8)
+if (imNine ==false) {
+  eight.splice(0, 1, 100);
   
-  const ten = getAColumn ("tenArray", board, 10)
+  // Replacing the last item with 100
+  eight.splice(eight.length - 1, 1, 100);
+}
+
+  let nine;
+  let ten;
+  if (imNine == false ) {
+   nine = getAColumn ("nineArray", board, 9)
+   ten = getAColumn ("tenArray", board, 10)
     // Replacing the first item with 100
-    ten.splice(0, 1, 100);
+  ten.splice(0, 1, 100);
   
     // Replacing the last item with 100
     ten.splice(ten.length - 1, 1, 100);
-  
+   }
     console.log(ten, zero, kArray, aArray)
-  
-    const brokenRows =[
+    let brokenColumns;
+    let brokenRows;
+  if (imNine ==false){
+     brokenRows =[
       aArray,
       bArray,
       cArray,
@@ -91,8 +129,8 @@ if (isTheKingHome.place != 'f5'){
       iArray,
       jArray,
       kArray
-    ]
-      const brokenColumns =[
+    ];
+       brokenColumns =[
       zero,
       one,
       two,
@@ -105,8 +143,32 @@ if (isTheKingHome.place != 'f5'){
       nine,
       ten
   
-    ]
+    ];
+    } else {
+       brokenRows =[
+        aArray,
+        bArray,
+        cArray,
+        dArray,
+        eArray,
+        fArray,
+        gArray,
+        hArray,
+        iArray
+      ];
+       brokenColumns = [
+        zero,
+        one,
+        two,
+        three,
+        four,
+        five,
+        six,
+        seven,
+        eight
     
+      ] ; 
+    };
     const rowConditioned = checkEachThing(brokenRows, pieceId);
     const columnConditioned = checkEachThing(brokenColumns, pieceId);
     
@@ -226,6 +288,7 @@ if (isTheKingHome.place != 'f5'){
     }
   
     if (pieceId <24) { 
+      console.log(array.length)
       for (let i = 0; i < array.length; i++) {
         if (
           array[i] > 23 && 
@@ -243,6 +306,7 @@ if (isTheKingHome.place != 'f5'){
             array[i - 1] == pieceId 
           )
           ) {
+            console.log(array.length)
             keyCondition.push(`${key} ${i}`);
           console.log(`Value ${array[i]} at index ${key} ${i} meets the condition`);
         }
@@ -260,6 +324,11 @@ if (isTheKingHome.place != 'f5'){
   const runKingOutcomes = (board, pieceId) => {
     let defendersWon = false;
 let attackersWon = false;
+let imNine = false;
+if (board.a.length === 9){
+imNine = true;
+};
+
    
 const piece36Position = findPiecePosition(board, 36);
     let kingRow = board[piece36Position.splitLetter].slice();
@@ -271,14 +340,14 @@ const piece36Position = findPiecePosition(board, 36);
     }
   
 
-if(piece36Position.splitLetter == 'a' || piece36Position.splitLetter == 'k'){
+if(piece36Position.splitLetter == 'a' || (imNine == false && piece36Position.splitNumb == 'k') || (imNine == true && piece36Position.splitNumb == 'i')){
     kingRow.splice(0, 1, 100);
   
     // Replacing the last item with 100
     kingRow.splice(kingRow.length - 1, 1, 100);
   }
     
-  if(piece36Position.splitNumb == 0 || piece36Position.splitNumb == 10){
+  if(piece36Position.splitNumb == 0 || (imNine == false && piece36Position.splitNumb == 10) || (imNine == true && piece36Position.splitNumb == 8)){
     kingColumn.splice(0, 1, 100);
   
     // Replacing the last item with 100
@@ -287,16 +356,26 @@ if(piece36Position.splitLetter == 'a' || piece36Position.splitLetter == 'k'){
 
 
   if(
-    piece36Position.place == "e5"|| 
-    piece36Position.place == "f4"|| 
-    piece36Position.place == "f6"||
-    piece36Position.place == "g5"
+    (imNine == false && piece36Position.place == "e5")|| 
+    (imNine == false && piece36Position.place == "f4")|| 
+    (imNine == false && piece36Position.place == "f6")||
+    (imNine == false && piece36Position.place == "g5")||
+    (imNine == true && piece36Position.place == "d4")||
+    (imNine == true && piece36Position.place == "e3")||
+    (imNine == true && piece36Position.place == "e5")||
+    (imNine == true && piece36Position.place == "d4")
     ){
-if (kingColumn[5] != 36){
+if ((imNine == false && kingColumn[5] != 36)){
     kingColumn.splice(5, 1, 100);
 }
-if (kingRow[5] != 36){
+if ((imNine == false && kingRow[5] != 36)){
     kingRow.splice(5, 1, 100);
+}
+if ((imNine == true && kingColumn[4] != 36)){
+  kingRow.splice(4, 1, 100);
+}
+if ((imNine == true && kingRow[4] != 36)){
+  kingRow.splice(4, 1, 100);
 }
   }
 
@@ -305,11 +384,16 @@ if (kingRow[5] != 36){
 
     if (pieceId >23) {
   // console.log(piece36Position.place)
-  if (
-    piece36Position.place == "a0"|| 
-    piece36Position.place == "a10"|| 
-    piece36Position.place == "k0"||
-    piece36Position.place == "k10")
+  if ( 
+    (imNine == false && piece36Position.place == "a0") || 
+    (imNine == false && piece36Position.place == "a10")|| 
+    (imNine == false && piece36Position.place == "k0")||
+    (imNine == false && piece36Position.place == "k10") || 
+    (imNine == true && piece36Position.place == "a0") ||
+    (imNine == true && piece36Position.place == "a8") ||
+    (imNine == true && piece36Position.place == "i0") ||
+    (imNine == true && piece36Position.place == "i8") 
+    )
               //THE KING HAS WON THE GAME
               defendersWon = true
         console.log('win')
@@ -317,11 +401,16 @@ if (kingRow[5] != 36){
     if (pieceId < 24) { 
    console.log(piece36Position.place)
   if (
-    piece36Position.place == "e5"|| 
-    piece36Position.place == "f4"|| 
-    piece36Position.place == "f6"||
-    piece36Position.place == "g5"||
-    piece36Position.place == "f5"
+    (imNine == false && piece36Position.place == "e5") || 
+    (imNine == false && piece36Position.place == "f4")|| 
+    (imNine == false && piece36Position.place == "f6")||
+    (imNine == false && piece36Position.place == "g5") || 
+    (imNine == false && piece36Position.place == "f5") ||
+    (imNine == true && piece36Position.place == "d4") ||
+    (imNine == true && piece36Position.place == "e3") ||
+    (imNine == true && piece36Position.place == "e5") ||
+    (imNine == true && piece36Position.place == "f4") ||
+    (imNine == true && piece36Position.place == "e4") 
     ){
     console.log('king is outside the castle walls')
  let colCapture = false
