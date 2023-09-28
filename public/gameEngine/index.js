@@ -97,36 +97,29 @@ const renderGameArea = async () => {
     gameId = "";
   }
   const gameRenderArea = document.getElementById("gamerender");
-  const domId = document
-    .getElementById("table-render")
-    .closest("div")
-    .closest("div");
-  const clearDom = document.getElementById("table-render");
+
   const firstGameId = document.querySelector(".game-list-item").id;
   const dom = document.getElementById("gameboard-area");
   const domId = dom.parentNode.id;
   const thisGameId = domId == "" ? firstGameId : domId;
-// if (thisGameForDom.is_nine_by_nine)
- 
-  
-  
+  // if (thisGameForDom.is_nine_by_nine)
 
   let clearDom;
   //////// updates gameboard //////////
   //page load this checks to see if an id is stored in the dom. if not then it shows the first game in the list
- 
+
   const getThisGameforDom = await fetch(`/api/games/${thisGameId}`, {
     method: "GET",
   });
 
-    const thisGameForDom = await getThisGameforDom.json();
-    console.log(thisGameForDom)
-if(thisGameForDom.is_nine_by_nine){
-  // clears the dom at #table before table render 
-   clearDom = document.getElementById("table-nine-by-nine");
-} else {
-   clearDom = document.getElementById("table");
-}
+  const thisGameForDom = await getThisGameforDom.json();
+  console.log(thisGameForDom);
+  if (thisGameForDom.is_nine_by_nine) {
+    // clears the dom at #table before table render
+    clearDom = document.getElementById("table-nine-by-nine");
+  } else {
+    clearDom = document.getElementById("table-render");
+  }
   clearDom.innerHTML = "";
 
   // gets game by id
@@ -226,33 +219,31 @@ if(thisGameForDom.is_nine_by_nine){
         : whosTurnDefender;
       defenderName.textContent = defenderLabel;
 
-    //////////////// udpates table ////////////////////////
-    // scrubs returned game
-if (thisGame.is_nine_by_nine){
-    const container = document.getElementById("table-nine-by-nine");
-    // // togglePlayerTurn()
-      // // generates board and adds visual elements
-      // //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      //////////////// udpates table ////////////////////////
+      // scrubs returned game
+      if (thisGame.is_nine_by_nine) {
+        const container = document.getElementById("table-nine-by-nine");
+        // // togglePlayerTurn()
+        // // generates board and adds visual elements
+        // //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+        container.innerHTML = generateBoard(thisGame.board_state);
+      } else {
+        const container = document.getElementById("table-render");
+        // // togglePlayerTurn()
 
-    container.innerHTML = generateBoard(thisGame.board_state);
-} else {
-  const container = document.getElementById("table-render");
-  // // togglePlayerTurn()
+        // // generates board and adds visual elements
+        // //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  // // generates board and adds visual elements
-  // //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  container.innerHTML = generateBoard(thisGame.board_state);
-}
-    // addClassToCells(guardCell, "guardSquare");
-    // addClassToCells(jarlCell, "jarlsSquare");
-    // addClassToCells(beserkerCell, "beserkerSquare");
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // let playerTeam = "Attacker";
-    //starts turn
-    // this is basically gonna need to be wrappdein an if statement that parses the database to say if plyerteam is equal to the current player then run this function
-
+        container.innerHTML = generateBoard(thisGame.board_state);
+      }
+      // addClassToCells(guardCell, "guardSquare");
+      // addClassToCells(jarlCell, "jarlsSquare");
+      // addClassToCells(beserkerCell, "beserkerSquare");
+      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      // let playerTeam = "Attacker";
+      //starts turn
+      // this is basically gonna need to be wrappdein an if statement that parses the database to say if plyerteam is equal to the current player then run this function
 
       if (loggedIn) {
         const getMyId = await fetch("/api/users/my-id", {

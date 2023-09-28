@@ -74,15 +74,14 @@ const handleInitialClick = (pieceType, board) => {
         console.log("i should be resetting the turn");
         let table;
         let clonedTable;
-        console.log(board.a.length)
-if (board.a.length === 9){
-         table = document.getElementById("table-nine-by-nine");
-         clonedTable = table.cloneNode(true); // Clone the table and its descendants
-
-
-        const table = document.getElementById("table-render");
-        const clonedTable = table.cloneNode(true); // Clone the table and its descendants
-
+        console.log(board.a.length);
+        if (board.a.length === 9) {
+          table = document.getElementById("table-nine-by-nine");
+          clonedTable = table.cloneNode(true); // Clone the table and its descendants
+        } else {
+          const table = document.getElementById("table-render");
+          const clonedTable = table.cloneNode(true); // Clone the table and its descendants
+        }
         table.parentNode.replaceChild(clonedTable, table);
         handleInitialClick(pieceType, board);
       }
@@ -213,10 +212,9 @@ function logRowsWithSameArrayPosition(board, row, column, pieceId, parentId) {
     avail.classList.add(`${playerPiecePathClass}`);
     avail.addEventListener("click", handleMyClick);
   });
- 
+
   if (pieceId != 36) {
-    
-    if (board.a.length === 9){
+    if (board.a.length === 9) {
       const center = document.querySelector(`#e4`);
       const a0 = document.querySelector(`#a0`);
       const a8 = document.querySelector(`#a8`);
@@ -231,22 +229,23 @@ function logRowsWithSameArrayPosition(board, row, column, pieceId, parentId) {
       removeExemptJarl(a8);
       removeExemptJarl(i0);
       removeExemptJarl(i8);
- } else {
-    const center = document.querySelector(`#f5`);
-    const a0 = document.querySelector(`#a0`);
-    const a10 = document.querySelector(`#a10`);
-    const k0 = document.querySelector(`#k0`);
-    const k10 = document.querySelector(`#k10`);
-    const removeExemptJarl = (square) => {
-      square.classList.remove("highlight-attacker", "highlight-defender");
-      square.removeEventListener("click", handleMyClick);
-    };
-    removeExemptJarl(center);
-    removeExemptJarl(a0);
-    removeExemptJarl(a10);
-    removeExemptJarl(k0);
-    removeExemptJarl(k10);
-  }}
+    } else {
+      const center = document.querySelector(`#f5`);
+      const a0 = document.querySelector(`#a0`);
+      const a10 = document.querySelector(`#a10`);
+      const k0 = document.querySelector(`#k0`);
+      const k10 = document.querySelector(`#k10`);
+      const removeExemptJarl = (square) => {
+        square.classList.remove("highlight-attacker", "highlight-defender");
+        square.removeEventListener("click", handleMyClick);
+      };
+      removeExemptJarl(center);
+      removeExemptJarl(a0);
+      removeExemptJarl(a10);
+      removeExemptJarl(k0);
+      removeExemptJarl(k10);
+    }
+  }
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
