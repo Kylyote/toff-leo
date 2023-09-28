@@ -547,6 +547,58 @@ nav {
   }
 }
 
+#leave-game-modal {
+  display: none;
+  position: fixed;
+  background-color: #00000080;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+
+  & .card {
+    padding: 24px;
+    width: 360px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    & h2 {
+      margin-bottom: 4px;
+    }
+
+    & h4 {
+      margin-bottom: 16px;
+    }
+
+    & #leave-game-btn-div {
+      width: 100%;
+      display: flex;
+
+      & #confirm-leave-btn {
+        width: 100%;
+        margin-right: 16px;
+        background-color: var(--danger-700);
+        color: var(--neutral-100);
+
+        &:hover {
+          background-color: var(--danger-300);
+        }
+      }
+
+      & #cancel-leave-btn {
+        width: 100%;
+        background-color: var(--warning-700);
+        color: var(--neutral-100);
+
+        &:hover {
+          background-color: var(--warning-300);
+        }
+      }
+    }
+  }
+}
+
 /* MY GAMES */
 #game-area {
   width: 100%;

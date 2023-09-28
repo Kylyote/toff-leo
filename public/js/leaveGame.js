@@ -2,10 +2,9 @@
 
 import { renderGameArea } from "../gameEngine/index.js";
 
-import {socket} from "../gameEngine/index.js";
+import { socket } from "../gameEngine/index.js";
 
-
-const leaveGameBtn = document.querySelector("#leave-game-btn");
+// const leaveGameBtn = document.querySelector("#leave-game-btn");
 const forfeitGameBtn = document.querySelector("#forfeit-game-btn");
 
 async function forfeitGame(event) {
@@ -22,10 +21,10 @@ async function forfeitGame(event) {
   // const pathArray = window.location.pathname.split('/');
   // const gameId = pathArray[pathArray.length - 1];
   // console.log("This is the game ID: " + gameId);
-
+  const firstGameId = document.querySelector(".game-list-item").id;
   const dom = document.getElementById("gameboard-area");
-  const gameId = dom.parentNode.id;
-
+  const domId = dom.parentNode.id;
+  const gameId = domId == "" ? firstGameId : domId;
 
   const getMyGame = await fetch(`/api/games/${gameId}`, {
     method: "GET",
@@ -97,9 +96,7 @@ async function forfeitGame(event) {
 
     //Socket Emit to call game over screen
     if (updateGame.ok) {
-
-      socket.emit('game-updated', { gameId: gameId });
-
+      socket.emit("game-updated", { gameId: gameId });
     }
   }
 
@@ -165,12 +162,28 @@ async function forfeitGame(event) {
     }
     //Socket Emit to call game over screen
     if (updateGame.ok) {
-      socket.emit('game-updated', { gameId: gameId });
+      socket.emit("game-updated", { gameId: gameId });
     }
   }
-  renderGameArea()
-        
-
+  closeModal();
+  renderGameArea();
 }
 
-forfeitGameBtn.addEventListener("click", forfeitGame);
+const renderModal = () => {
+  const leaveModal = document.getElementById("leave-game-modal");
+  const confirmButton = document.getElementById("confirm-leave-btn");
+  const cancelButton = document.getElementById("cancel-leave-btn");
+
+  // displays the modal
+  leaveModal.style.display = "block";
+
+  confirmButton.addEventListener("click", forfeitGame);
+  cancelButton.addEventListener("click", closeModal);
+};
+
+const closeModal = () => {
+  const leaveModal = document.getElementById("leave-game-modal");
+  leaveModal.style.display = "none";
+};
+
+forfeitGameBtn.addEventListener("click", renderModal);

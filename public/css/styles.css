@@ -388,6 +388,41 @@ nav {
       #new-game-modal .card #submit-btn:hover {
         background-color: var(--success-700); }
 
+#leave-game-modal {
+  display: none;
+  position: fixed;
+  background-color: #00000080;
+  top: 0;
+  width: 100vw;
+  height: 100vh; }
+  #leave-game-modal .card {
+    padding: 24px;
+    width: 360px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); }
+    #leave-game-modal .card h2 {
+      margin-bottom: 4px; }
+    #leave-game-modal .card h4 {
+      margin-bottom: 16px; }
+    #leave-game-modal .card #leave-game-btn-div {
+      width: 100%;
+      display: flex; }
+      #leave-game-modal .card #leave-game-btn-div #confirm-leave-btn {
+        width: 100%;
+        margin-right: 16px;
+        background-color: var(--danger-700);
+        color: var(--neutral-100); }
+        #leave-game-modal .card #leave-game-btn-div #confirm-leave-btn:hover {
+          background-color: var(--danger-300); }
+      #leave-game-modal .card #leave-game-btn-div #cancel-leave-btn {
+        width: 100%;
+        background-color: var(--warning-700);
+        color: var(--neutral-100); }
+        #leave-game-modal .card #leave-game-btn-div #cancel-leave-btn:hover {
+          background-color: var(--warning-300); }
+
 /* MY GAMES */
 #game-area {
   width: 100%;
