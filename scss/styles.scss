@@ -237,6 +237,7 @@ nav {
     margin-right: 16px;
   }
 
+
   & .card {
     width: 100%;
 
@@ -1185,14 +1186,30 @@ nav {
     }
   }
 }
+#statsrender{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  max-width: 400px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+&
 
 #stat-section {
   display: flex;
-  margin-bottom: 24px;
-  width: 100%;
-  max-width: 60vh;
-  margin-left: 50%;
-  transform: translateX(-50%);
+flex-direction: column;
+
+& #stats-row{
+  display: flex;
+  justify-content: space-between;
+}
+
+}
+
+
 }
 .game-result {
   display: flex;
@@ -1216,4 +1233,10 @@ margin-top: 10px;
 .shield{
   max-height: 200px;
 }
+}
+
+.boat-line{
+  max-height: 150px;
+margin-bottom: 10px;
+
 }
