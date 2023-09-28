@@ -5,12 +5,11 @@ const { withAuth } = require("../../utils/auth");
 
 // Renders stat page
 router.get('/:id', async(req, res) => {
-  console.log("Got into my stats");
   try {
     const getMyStats = await User.findByPk(req.params.id);
     console.log("Stats: " + getMyStats);
-    const stats = getMyStats.map((stat) => stat.get({plain: true}));
-    //const stats = res.json(getMyStats);
+    // const stats = getMyStats.map((stat) => stat.get({plain: true}));
+    const stats = res.json(getMyStats);
     const statsObject = {};
     //const statsObject = {
      // win: stats.win,
@@ -21,7 +20,7 @@ router.get('/:id', async(req, res) => {
     // })
     console.log("More stats: " + stats);
 
-    router.render('my-stats', { stats, loggedIn: req.session.loggedIn });
+    //router.render('my-stats', { stats, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
