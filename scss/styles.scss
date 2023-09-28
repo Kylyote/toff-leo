@@ -981,3 +981,12 @@ nav {
     }
   }
 }
+
+#stat-section{
+  display: flex;
+  margin-bottom: 24px;
+  width: 100%;
+  max-width: 60vh;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}

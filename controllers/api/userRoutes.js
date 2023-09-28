@@ -1,4 +1,4 @@
- const router = require("express").Router();
+const router = require("express").Router();
 const { User, Game } = require("../../models");
 const withAuth = require("../../utils/auth");
 const sequelize = require("../../config/connection");
@@ -69,6 +69,7 @@ router.put("/update/:id", async (req, res) => {
 // LOGIN
 router.post("/login", async (req, res) => {
   try {
+    // Gives the user ID by handing off the email and storing the userId
     const getUser = await User.findOne({
       where: {
         email: req.body.email,
@@ -77,7 +78,7 @@ router.post("/login", async (req, res) => {
 
     if (!getUser) {
       res
-        .status(400)
+        .status(404)
         .json({ message: `Incorrect email or password. Please Try Again` });
       return;
     }
@@ -91,7 +92,7 @@ router.post("/login", async (req, res) => {
         .json({ message: `Incorrect email or password. Please Try Again` });
       return;
     }
-
+    // Makes and saves loggedIn and userId in the DOM session. 
     req.session.save(() => {
       req.session.loggedIn = true;
       req.session.userId = getUser.id; // stores users id in the session so we can gather which games they are involved with

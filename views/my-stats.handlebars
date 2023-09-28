@@ -1,0 +1,25 @@
+<div id="page-body">
+  {{> game-list}} 
+  <div id="root-div">
+    <div id="root-header">
+      <h2><i class="fa-solid fa-user"></i> {{myStats.username}}'s Current Statistics</h2>
+      <button id="create-game-btn"><i class="fa-solid fa-plus fa-sm"></i> Start New Game</button>
+    </div>
+
+<section id="statsrender" class="stat-page">
+  <!--
+  <div id="stat-header">
+    <h2>{{myStats.name}}'s Current Statistics</h2>
+  </div> 
+  --> 
+  <div id="stat-section" class="large-text">
+    <h3>Wins: {{myStats.win}}</h3>
+    <h3>Losses: {{myStats.loss}}</h3>
+    <h3>Draws: {{myStats.draw}}</h3>
+    <h3>Total games played: {{myStats.games_played}}</h3>
+  </div>
+</section>
+      
+  </div>
+  {{> chat}}
+</div>

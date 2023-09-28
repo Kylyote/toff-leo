@@ -85,5 +85,34 @@ router.get("/my-games/:id", async (req, res) => {
   }
 });
 
+router.get("/my-stats", withAuth, async (req, res) => {
+  try {
+    // Gets the userId from the session that is created in userRoutes in the login section
+    const getMyStats = await User.findByPk(req.session.userId);
+    const myStats = await getMyStats.get({ plain: true });
+
+    const getMyGames = await Game.findAll({
+      where: {
+        [Op.or]: [
+          { attacker_id: req.session.userId },
+          { defender_id: req.session.userId },
+        ],
+      },
+      include: [
+        { model: User, as: "Attacker" },
+        { model: User, as: "Defender" },
+      ],
+    });
+
+    const games = await getMyGames.map((game) => game.get({ plain: true }));
+
+    res.render("my-stats", { myStats, games, loggedIn: req.session.loggedIn });
+
+  } catch (err) {
+     console.log(err);
+    res.status(500).json(err);
+  }
+})
+
 // was throwing error without the Router() middleware being passed into server.js
 module.exports = router;
