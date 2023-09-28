@@ -97,14 +97,12 @@ const sendMessage = async () => {
   if (messageField.value.trim() !== "") {
     console.log("test");
     // gets the id from the dom
-    const domId = document
-      .getElementById("table-render")
-      .closest("div")
-      .closest("div");
     const firstGameId = document.querySelector(".game-list-item").id;
+    const dom = document.getElementById("gameboard-area");
+    const domId = dom.parentNode.id;
+    const thisGameId = domId == "" ? firstGameId : domId;
 
     //gets the game id to send as the game_id
-    const thisGameId = domId.id == "" ? firstGameId : domId.id;
     const messageContent = messageField.value;
 
     const sendMessage = await fetch("/api/chats/", {
@@ -140,10 +138,9 @@ sendBtn.addEventListener("click", sendMessage);
 
 const renderNewMessage = async (senderId, content) => {
   const firstGameId = document.querySelector(".game-list-item").id;
-  const domId = document
-    .getElementById("table-render")
-    .closest("div")
-    .closest("div");
+  const dom = document.getElementById("gameboard-area");
+  const domId = dom.parentNode.id;
+  const thisGameId = domId == "" ? firstGameId : domId;
 
   // gets my session id
   const getMyId = await fetch("/api/users/my-id", {
@@ -153,7 +150,6 @@ const renderNewMessage = async (senderId, content) => {
   const myId = await getMyId.json();
 
   //page load this checks to see if an id is stored in the dom. if not then it shows the first game in the list
-  const thisGameId = domId.id == "" ? firstGameId : domId.id;
 
   const getGame = await fetch(`/api/games/${thisGameId}`, {
     method: "GET",
