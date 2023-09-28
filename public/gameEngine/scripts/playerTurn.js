@@ -215,8 +215,25 @@ function logRowsWithSameArrayPosition(board, row, column, pieceId, parentId) {
     avail.classList.add(`${playerPiecePathClass}`);
     avail.addEventListener("click", handleMyClick);
   });
-
+ 
   if (pieceId != 36) {
+    
+    if (board.a.length === 9){
+      const center = document.querySelector(`#f5`);
+      const a0 = document.querySelector(`#a0`);
+      const a8 = document.querySelector(`#a8`);
+      const i0 = document.querySelector(`#i0`);
+      const i8 = document.querySelector(`#i8`);
+      const removeExemptJarl = (square) => {
+        square.classList.remove("highlight-attacker", "highlight-defender");
+        square.removeEventListener("click", handleMyClick);
+      };
+      removeExemptJarl(center);
+      removeExemptJarl(a0);
+      removeExemptJarl(a8);
+      removeExemptJarl(i0);
+      removeExemptJarl(i8);
+ } else {
     const center = document.querySelector(`#f5`);
     const a0 = document.querySelector(`#a0`);
     const a10 = document.querySelector(`#a10`);
@@ -231,7 +248,7 @@ function logRowsWithSameArrayPosition(board, row, column, pieceId, parentId) {
     removeExemptJarl(a10);
     removeExemptJarl(k0);
     removeExemptJarl(k10);
-  }
+  }}
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
