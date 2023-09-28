@@ -17,14 +17,14 @@ const loadChat = async () => {
 
     const myId = await getMyId.json();
 
-    const domId = document
-      .getElementById("table")
-      .closest("div")
-      .closest("div");
+
+    const dom = document.getElementById("gameboard-area");
+    const domId = dom.parentNode.id;
+    const thisGameId = domId == "" ? firstGameId : domId;
+
     const firstGameId = document.querySelector(".game-list-item").id;
 
     //page load this checks to see if an id is stored in the dom. if not then it shows the first game in the list
-    const thisGameId = domId.id == "" ? firstGameId : domId.id;
 
     const getGame = await fetch(`/api/games/${thisGameId}`, {
       method: "GET",
@@ -98,7 +98,7 @@ const sendMessage = async () => {
     console.log("test");
     // gets the id from the dom
     const domId = document
-      .getElementById("table")
+      .getElementById("table-render")
       .closest("div")
       .closest("div");
     const firstGameId = document.querySelector(".game-list-item").id;
@@ -122,7 +122,7 @@ const sendMessage = async () => {
     const myId = await getMyId.json();
 
     //Socket
-    if (sendMessage.ok){
+    if (sendMessage.ok) {
       socket.emit("chat-updated", {
         senderId: myId,
         messageContent: messageContent,
@@ -140,7 +140,10 @@ sendBtn.addEventListener("click", sendMessage);
 
 const renderNewMessage = async (senderId, content) => {
   const firstGameId = document.querySelector(".game-list-item").id;
-  const domId = document.getElementById("table").closest("div").closest("div");
+  const domId = document
+    .getElementById("table-render")
+    .closest("div")
+    .closest("div");
 
   // gets my session id
   const getMyId = await fetch("/api/users/my-id", {
@@ -215,7 +218,21 @@ const renderNewMessage = async (senderId, content) => {
   }
 };
 
-socket.on('chat-updated', (data) => {
+socket.on("chat-updated", (data) => {
   renderNewMessage(data.senderId, data.messageContent);
   messageContainer.scrollTop = messageContainer.scrollHeight;
+});
+
+// Table size hide chat functionality
+const showHideChatBtn = document.getElementById("show-chat");
+
+showHideChatBtn.addEventListener("click", () => {
+  let chatDrawer = document.getElementById("chat-div");
+  let chatDivState = chatDrawer.getAttribute("data-state");
+  let thisState = chatDivState == "hidden" ? true : false;
+
+  chatDrawer.style.transform = thisState
+    ? "translateY(0px)"
+    : "translateY(296px)";
+  chatDrawer.setAttribute("data-state", thisState ? "visable" : "hidden");
 });
