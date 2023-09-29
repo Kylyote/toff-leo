@@ -82,9 +82,11 @@ async function forfeitGame(event) {
     }
 
     // Update attacker game stats
-    let loss = attackerData.loss++;
+    let loss = attackerData.loss;
+    loss++;
     // This needs to be used since the database only accepts names that are used in the model
-    games = attackerData.games_played++;
+    games = attackerData.games_played;
+    games++;
     // push changes to the attacker database
     const updateAttacker = await fetch(`/api/users/update/${myId}`, {
       method: "PUT",
@@ -149,8 +151,10 @@ async function forfeitGame(event) {
     }
 
     // Update defender game stats
-    let loss = defenderData.loss++;
-    games = defenderData.games_played++;
+    let loss = defenderData.loss;
+    loss++;
+    games = defenderData.games_played;
+    games++;
     // This needs to be used since the database only accepts names that are used in the model
     const updateDefender = await fetch(`/api/users/update/${myId}`, {
       method: "PUT",
